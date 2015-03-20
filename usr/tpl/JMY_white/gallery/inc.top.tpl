@@ -1,0 +1,1 @@
+<article class="inform hentry">

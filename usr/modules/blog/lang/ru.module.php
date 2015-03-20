@@ -1,0 +1,125 @@
+<?php
+
+/**
+* @name        JMY CMS
+* @link        http://jmy.su/
+* @copyright   Copyright (C) 2012-2015 JMY LTD
+* @license     LICENSE.txt (see attached file)
+* @version     VERSION.txt (see attached file)
+* @author      Komarov Ivan
+*/
+
+define('_BLOGS', 'Блоги');
+define('_BLOG_POSTS', 'Записей');
+define('_BLOG_TITLE', 'Заголовок блога');
+define('_BLOG_URL_TITLE', 'Название блога для адресной строки');
+define('_BLOG_URL_TITLE2', 'Вводится латиницей! Например: http://вашсайт/blog/view/<strong>new_blog</strong> (при не заполнении, генерируется автоматически)');
+define('_BLOG_DESCRIPTION', 'Описание блога (кратко)');
+define('_BLOG_IMG_FORMAT', 'Допустимые форматы: jpg, gif, png. Картинка будет сжата до размеров 50х50px.');
+define('_BLOG_POST_TITLE', 'Заголовок записи');
+define('_BLOG_POST_MINI', 'Коротко о сути записи');
+define('_BLOG_TEXT', 'Текст');
+define('_BLOG_TAGS', 'Теги');
+define('_BLOG_TOPICS', 'Темы затронутые в записи через запятую');
+define('_BLOG_SELECT_BLOG', 'Выберите блог для публикации');
+define('_BLOG_AVATAR', 'Аватар блога');
+define('_BLOG_INDEX', 'Индекс');
+define('_BLOGS_LAST', 'Последние записи из блогов');
+define('_BLOG_LAST_POSTS', 'Последние записи');
+define('_BLOG_LAST_POST', 'Последняя запись оставлена');
+define('_BLOG_WRITE', 'Оставить запись в блоге');
+define('_BLOG_WRITE2', 'Оставить запись');
+define('_BLOG_CREATE', 'Создание блога');
+define('_BLOG_CREATE_OK', 'Блог успешно создан!');
+define('_BLOG_SAVE_OK', 'Блог успешно сохранён!');
+define('_BLOG_CREATE2', 'Создать блог');
+define('_BLOG_LIST', 'Список блогов');
+define('_BLOG_ALL', 'Все');
+define('_BLOG_SHOW', 'Показать все блоги');
+define('_BLOG_MY', 'Мой персональный блог');
+define('_BLOG_EDIT', 'Редактирование блога');
+define('_BLOG_PERSONAL', 'Персональный блог');
+define('_BLOG_EDIT_POST', 'Редактирование записи');
+define('_BLOG_ADD_POST', 'Добавить запись');
+define('_BLOG_ALL_POSTS', 'Все записи');
+define('_BLOG_DELETE_POST', 'Удалить запись');
+define('_BLOG_EMPTY', 'Блог пользователя пуст.');
+define('_BLOG_MOVE_TO_BLOG_VIEW', 'Перейти к просмотру блога');
+define('_BLOG_MOVE_TO_BLOG', 'Перейти в блог');
+define('_BLOG_READ_POST', 'Читать запись');
+define('_BLOG_POST_VOTE', 'Голос за запись');
+define('_BLOG_VIEW_COMMENTS', 'Просмотр комментариев');
+define('_BLOG_VIEW_PROFILE', 'Просмотр профиля');
+define('_BLOG_VIEW_POST', 'Просмотр записи');
+define('_BLOG_VIEW_POST2', 'Просмотреть запись');
+define('_BLOG_VIEW_BLOG', 'Просмотр блога');
+define('_BLOG_VIEW_BLOG2', 'Просмотреть блог');
+define('_BLOG_SUBSCRIBE', 'Подписка на блог');
+define('_BLOG_SUBSCRIBE_OK', 'Вы успешно подписаны на блог');
+define('_BLOG_UNSUBSCRIBE_OK', 'Вы успешно отписаны от блога');
+define('_BLOG_UNSUBSCRIBE', 'Отписаться от чтения блога');
+define('_BLOG_ON_SMODERATE', 'на модерации');
+define('_BLOG_DRAFT', 'Черновик');
+define('_BLOG_SDRAFT', 'черновик');
+define('_BLOG_DRAFT2', 'Черновик? (Запись будет доступна только для вас)');
+define('_BLOG_POST_STATUS', 'Статус записи');
+define('_BLOG_ACTIVE', 'Активна');
+define('_BLOG_ON_MODERATE', 'На модерации');
+define('_BLOG_NO_DESCRIPTION', 'Нет описания');
+define('_BLOG_NO_POSTS_IN_BLOGS', 'В блогах нет ни одной записи.');
+define('_BLOG_THEME_POSTS', 'Тематические записи');
+define('_BLOG_POSTS_FROM_PERSONAL_BLOGS', 'Записи из персональных блогов');
+define('_BLOG_NO_POSTS_IN_THEME_BLOGS', 'В тематических блогах нет доступных записей');
+define('_BLOG_NO_POSTS_IN_PERSONAL_BLOGS', 'В персональных блогах нет доступных записей');
+define('_BLOG_DELETE_AVATAR', 'Удалить аватар?');
+define('_BLOG_NO_AVATAR', 'Аватара блога нет');
+define('_BLOG_SHOW_THEME_BLOGS', 'Показать тематические блоги');
+define('_BLOG_THEME_BLOG', 'Тематические');
+define('_BLOG_SHOW_PERSONAL_BLOGS', 'Показать персональные блоги');
+define('_BLOG_PERSONAL_BLOG', 'Персональные');
+define('_BLOG_POST_OK', 'Запись успешно оставлена!');
+define('_BLOG_POST_DELETED', 'Запись успешно удалена');
+define('_BLOG_POST_REFRESHED', 'Запись успешно обновлена');
+define('_BLOG_POST_CREATE_ERROR', 'Произошла ошибка при создании записи');
+define('_BLOG_POST_ADD_OK', 'Спасибо! Ваша запись успешно добавлена в');
+define('_BLOG_SSELECTED_BLOG', 'выбранный блог');
+define('_BLOG_WANT_ADD_MORE', 'Хотите добавить ещё?');
+define('_BLOG_POST_DELETE_OK', 'Ваша запись успешно удалена.');
+define('_BLOG_TO_HOME', 'На главную блога');
+define('_BLOG_POST_REFRESH_OK', 'Спасибо! Ваша запись успешно обновлена.');
+define('_BLOG_BLOG_CREATE_OK', 'Спасибо! Ваш блог успешно создан!');
+define('_BLOG_BLOG_SAVE_OK', 'Спасибо! Блог успешно сохранён!');
+define('_BLOG_FROM', 'Блог пользователя: ');
+define('_BLOG_ALREADY_VOTED', 'Вы уже голосовали за данную запись!');
+define('_BLOG_YOURSELF_VOTED', 'Вы не можете голосовать за собственную запись!');
+define('_BLOG_AUTHORIZED_VOTING_ONLY', 'Вы должны зарегистрироваться и войти, чтобы голосовать за запись в блоге!');
+define('_BLOG_S_OR_NOW', 'или');
+define('_BLOG_SLEAVE_POST', 'оставить запись');
+define('_BLOG_IN_THIS', 'в нём?');
+define('_BLOG_CREATE_ERROR', 'Произошла ошибка при создании блога');
+define('_BLOG_SNEVER', 'никогда');
+define('_BLOG_TO_ADMIN_PAGE', 'На страницу администратора');
+define('_BLOG_TO_READER_PAGE', 'На страницу читателя');
+define('_BLOG_NO_READERS', 'Блог пока что никто не читает');
+define('_BLOG_TO_BE_READER', 'Стать читателем блога');
+define('_BLOG_ADD_MYSELF_POST', 'Добавить свою запись в данный блог');
+define('_BLOG_SDELETE', 'удалить');
+define('_BLOG_SHOW_PARTICIPANTS', 'Показать участников');
+define('_BLOG_READERS', 'Читатели');
+define('_BLOG_READERS2', 'Читателей');
+define('_BLOG_ADMINS', 'Администраторы');
+define('_BLOG_SEDIT', 'редактировать');
+define('_BLOG_NOTIFY1', 'Произошла ошибка! Для создания записи в блоге необходимо быть зарегистрированным пользователем портала!');
+define('_BLOG_NOTIFY2', 'Произошла ошибка! Одно из обязательных полей не заполнено. Пожалуйста вернитесь назад и заполните ВСЕ поля формы.');
+define('_BLOG_NOTIFY3', 'Данная запись уже присутствует в данном блоге!');
+define('_BLOG_NOTIFY4', 'Произошла ошибка! Для создания блога необходимо быть зарегистрированным пользователем портала!');
+define('_BLOG_NOTIFY5', 'Блог с таким именем уже существует, пожалуйста выберите другое название для Вашего блога.');
+define('_BLOG_NOTIFY6', 'Произошла ошибка! Одно из обязательных полей не заполнено. Пожалуйста вернитесь назад и заполните ВСЕ поля формы.');
+define('_BLOG_NOTIFY7', '<br /><strong>Внимание!</strong><br />После редактирование записи, она приобритёт статус "На модерации". Это означает, что она будет в ближайшее время рассмотрена администраторами портала и будет принято решение об одобрении и публикации поста.');
+define('_BLOG_NOTIFY8', 'Администратор блога не может являться его читателем!');
+define('_BLOG_TPL_ALERT1', 'Вы не заполнили заголовок блога!');
+define('_BLOG_TPL_ALERT2', 'Вы не заполнили описание блога!');
+define('_BLOG_TPL_ALERT3', 'Одно из обязательных полей не заполнено, проверьте правильность ввода данных!');
+define('_BLOG_TPL_ALERT4', 'Вы не заполнили заголовок записи!');
+define('_BLOG_TPL_ALERT5', 'Вы не заполнили текст записи!');
+define('_BLOG_TPL_ALERT6', 'Вы не заполнили теги!');

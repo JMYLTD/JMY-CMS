@@ -1,0 +1,1 @@
+<article class="hentry inform">{%TITLE%}</article>

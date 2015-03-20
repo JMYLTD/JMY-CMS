@@ -1,0 +1,750 @@
+table.forum a:link {	color: #666;font-weight: bold;text-decoration:none;}
+table.forum a:visited {color: #999999;font-weight:bold;text-decoration:none;}
+table.forum a:active,table.forum a:hover {	color: #bd5a35;	text-decoration:underline;}
+table.forum {font-family:Arial, Helvetica, sans-serif;color:#666;font-size:12px;text-shadow: 1px 1px 0px #fff;}
+table.forum th {padding:21px 25px 22px 25px;	border-top:1px solid #fafafa;	border-bottom:1px solid #e0e0e0;
+	background: #ededed;	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));background: -moz-linear-gradient(top,  #ededed,  #ebebeb);}
+table.forum th:first-child{text-align: left;padding-left:20px;}table.forum tr:first-child th:first-child{	-moz-border-radius-topleft:3px;	-webkit-border-top-left-radius:3px;	border-top-left-radius:3px;}
+table.forum tr:first-child th:last-child{	-moz-border-radius-topright:3px;-webkit-border-top-right-radius:3px;border-top-right-radius:3px;}
+
+table.forum tr{text-align: center;padding-left:20px;}table.forum tr td:first-child{	text-align: left;padding-left:20px;border-left: 0;}
+table.forum tr td {padding:18px;border-top: 1px solid #ffffff;border-bottom:1px solid #e0e0e0;border-left: 1px solid #e0e0e0;	background: #fafafa;background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);}
+table.forum tr.even td{background: #f6f6f6;	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);}
+table.forum tr:last-child td{	border-bottom:0;}
+table.forum tr:last-child td:first-child{-moz-border-radius-bottomleft:3px;-webkit-border-bottom-left-radius:3px;border-bottom-left-radius:3px;}
+table.forum tr:last-child td:last-child{-moz-border-radius-bottomright:3px;-webkit-border-bottom-right-radius:3px;border-bottom-right-radius:3px;}
+table.forum tr:hover td{background: #f2f2f2;background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);}
+
+table.forum tr.thTitle{text-align: center;padding-left:20px;}table.forum tr.thTitle td.thTitle:first-child{	text-align: left;padding-left:20px;border-left: 0;}
+table.forum tr.thTitle td.thTitle{padding:1px;border-top: 1px solid #ffffff;border-bottom:1px solid #e0e0e0;border-left: 1px solid #e0e0e0;	background: #fafafa;background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);}
+table.forum tr.thTitle:last-child td.thTitle{	border-bottom:0;}
+table.forum tr.thTitle:last-child td.thTitle:first-child{-moz-border-radius-bottomleft:3px;-webkit-border-bottom-left-radius:3px;border-bottom-left-radius:3px;}
+table.forum tr.thTitle:last-child td.thTitle:last-child{-moz-border-radius-bottomright:3px;-webkit-border-bottom-right-radius:3px;border-bottom-right-radius:3px;}
+
+table.forum tr.thNOanim{text-align: center;padding-left:20px;}
+table.forum tr.thNOanim td.thNOanim:first-child{	text-align: left;padding-left:20px;border-left: 0;}
+table.forum tr.thNOanim td.thNOanim{padding:18px;border-top: 1px solid #ffffff;border-bottom:1px solid #e0e0e0;border-left: 1px solid #e0e0e0;	background: #fafafa;background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);}
+table.forum tr.thNOanim:last-child td.thNOanim{	border-bottom:0;}
+table.forum tr.thNOanim:last-child td.thNOanim:first-child{-moz-border-radius-bottomleft:3px;-webkit-border-bottom-left-radius:3px;border-bottom-left-radius:3px;}
+table.forum tr.thNOanim:last-child td.thNOanim:last-child{-moz-border-radius-bottomright:3px;-webkit-border-bottom-right-radius:3px;border-bottom-right-radius:3px;}
+
+/*
+* Загрузочный бар
+*/
+.loading 
+{ 
+	width: 175px;
+	height: 50px;
+	vertical-align:middle;
+	overflow: visible;
+	padding: 10px;
+	border: 2px solid #333333;
+	background-color: #FFFFFF;
+	position: absolute;
+	left: 39%;
+	z-index: 999;
+	text-align:center;
+	padding-top:13px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+
+
+.comment_tree
+{
+	background:url(../images/engine/c_arrow.gif) no-repeat;
+}
+
+.rating_layer
+{
+	font-size:12px;
+	display:inline-block;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+.rating_layer span
+{
+	margin-left:1px;
+	margin-right:1px;
+}
+
+.rating_plus
+{
+	color:green;
+	vertical-align:middle;
+	font-weight:bold;
+}
+
+.rating_minus
+{
+	color:red;
+	vertical-align:middle;
+	font-weight:bold;
+}
+
+.related a
+{
+	font-size:110%;
+}
+.related a:hover
+{
+	font-size:110%;
+}
+.rating_zero
+{
+	vertical-align:middle;
+}
+
+/*
+* Другое
+*/
+img.icon 
+{
+	vertical-align: middle;
+	margin-right: 3px;
+}
+
+.in_conf_title 
+{
+	font-size:12px;
+	color:#333333;
+	background:#fafafa;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	font-weight:900;
+	padding-left:10px;
+	height:25px;
+	border-bottom:1px #ddd dashed;
+}
+
+.in_conf_input 
+{
+	padding:5px; 
+}
+
+.in_conf_input:hover 
+{
+	background:#FAFAFA;
+}
+
+.in_conf_desc 
+{
+
+	font-size:10px;
+	color: #555;
+
+	padding:5px;
+}
+
+.in_conf_desc h1 
+{
+	font-size:14px;
+	font-weight:900;
+	color:#666666;
+	margin:0;
+	padding:0;
+}
+
+.nodisp 
+{
+	line-height: 0px;
+	display: none;
+}
+
+.left 
+{
+	clear: both;
+	float: left;
+	margin:3px;
+}
+
+.right 
+{
+	float:right;
+	white-space: nowrap;
+	margin:3px;
+}
+
+/*
+* Регистрация
+*/
+.register {
+	clear:both;
+}
+
+.register .leftreg
+{
+	width:200px;
+	float:left;
+	text-align:right;
+	font-size:14px;
+	height:30px;
+	line-height:30px;
+}
+.register .rightreg
+{
+	display:inline-block;
+	float:left;
+	margin-left:10px;
+	
+}
+
+
+.register .inputreg
+{
+	padding:7px;
+	font-size:12px;
+	width:250px;
+}
+
+.register .descreg
+{
+	font-size:11px;
+	color:grey;
+	margin-bottom:10px;
+}
+
+td.frmnum { font-size:120%;font-weight:bold;width:32px;padding-right:10px;color:#DDDDDD;vertical-align:top;cursor:default;background:url(../images/engine/greenpao.gif) right top repeat-y; }
+span.signcomment { font-size:90%;color:gray;height:10px;display:block; }
+span.must { color:red;padding-left:3px;cursor:default; }
+td.point, div.point { height:9px;background:url(../images/engine/point001.gif) left 3px repeat-x; }
+span.group, span.mini { font-size:10px;font-family:verdana;padding:0px;margin:0px;color:gray; }
+
+.b {
+	border:1px solid #919191;
+	margin:0px;
+	background:url(../images/engine/button.gif) 0px 0px repeat-x #e6e5e6;
+	height:24px
+}
+
+/*
+* Комментарии
+*/
+.comment_box {
+
+}
+
+.comment_top {
+	background:#EEEEEE;
+	border:1px #CCCCCC solid;
+	padding:5px;
+}
+
+.comment_body {
+	padding:5px;
+}
+
+/*
+* Красиво грузим превью
+*/
+
+.preview .box {
+	list-style-type: none;
+	float: left;
+	width: 82px;
+	padding: 2px;
+	background: #ebebeb;
+	margin: 0 6px 12px 0;
+	color: #505050;
+	position: relative;
+	clear: none;
+}
+.preview .demo { position: relative; background: #ffffff; width:78px; float: left; cursor: pointer; border: 1px solid #e1e1e1; }
+.preview .description { clear: both; padding: 3px; text-align: center; }
+
+/*
+* Дроп-даун меню
+*/
+
+#dropmenudiv{
+	position:absolute;
+	border:2px solid #ddd;
+	line-height:18px;
+	z-index:100;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+}
+
+#dropmenudiv a{
+	display: block;
+	text-indent: 3px;
+	border-bottom: 1px solid #eee;
+	padding: 1px 0;
+	text-decoration: none;
+	color: #666;
+}
+
+#dropmenudiv a:hover{ /*hover background color*/
+	background-color: #ddd;
+	color: #555;
+	font-weight: bold;
+}
+
+/*
+* Сообщения
+*/
+.alert {
+	background: #fff6bf url(../images/engine/exclamation.png) center no-repeat;
+	background-position: 15px 50%; /* x-pos y-pos */
+	text-align: left;
+	padding: 5px 20px 5px 45px;
+	border-top: 2px solid #ffd324;
+	border-bottom: 2px solid #ffd324;
+}
+
+/*
+* Стили рейтинга
+*/
+.star-rating {
+	list-style:none;
+	margin: 0px;
+	padding:0px;
+	height: 19px;
+	position: relative;
+	background: url(../images/engine/rat.gif) top left no-repeat;
+}
+
+.star-rating li {
+	padding:0px;
+	margin:0px;
+	float: left;
+}
+
+.star-rating li a {
+	display:block;
+	width:19px;
+	height: 19px;
+	text-decoration: none;
+	text-indent: -9000px;
+	z-index: 20;
+	position: absolute;
+	padding: 0px;
+}
+
+.star-rating li a:hover {
+	background: url(../images/engine/rat.gif) left center;
+	z-index: 1;
+	left: 0px;
+	border:none;
+}
+.star-rating a.one-star {
+	left: 0px;
+}
+
+.star-rating a.one-star:hover {
+	width:19px;
+}
+
+.star-rating a.two-stars {
+	left:19px;
+}
+
+.star-rating a.two-stars:hover {
+	width:38px;
+}
+
+.star-rating a.three-stars {
+	left:38px;
+}
+
+.star-rating a.three-stars:hover {
+	width:57px;
+}
+
+.star-rating a.four-stars {
+	left:57px;
+}
+
+.star-rating a.four-stars:hover {
+	width:76px;
+}
+
+.star-rating a.five-stars {
+	left:76px;
+}
+
+.star-rating a.five-stars:hover {
+	width: 95px;
+}
+
+.star-rating li.choosen {
+	background: url(../images/engine/rat.gif) left bottom; 
+	position: absolute; 
+	height: 19px; 
+	display: block; 
+	text-indent: -9000px; 
+	z-index: 1;
+}
+/*
+* Быстрое редактирование
+*/
+.fast_edit {
+	width:98%;
+	margin: 5px;
+	border: 1px #999 dotted;
+}
+
+.fast_cancel {
+	width: 60px;
+	color: red;
+}
+
+.fast_write {
+	width: 60px;
+	color: blue;
+}
+
+/*
+* ББ Редактор
+*/
+.textarea 
+{
+	width:99%;
+}
+
+#bb_area {}
+
+ul._bb{list-style:none;padding:0;margin:0; display:block;margin-bottom:4px;}
+ul._bb li {float:left; display:block;	width:18px; height:20px; line-height:20px; margin-left:2px; margin-right:1px; margin-top:3px; }
+ul._bb li a {display:block; height:20px; background:url(../images/engine/bb_but.png) top no-repeat;text-align:center;}
+ul._bb li a:hover {background:url(../images/engine/bb_but.png) bottom no-repeat;}
+.bbLeft{float:left;}
+.bbRight{float:right;}
+.bb_smiles { border: 1px solid #cccccc; background-color: #f0f0f0; width: 120px; height:120px;padding:10px;visibility: inherit;overflow: auto;text-align:left;margin-top:2px;}
+.bb_smiles span { float: left; height: 42px; margin-left:5px; }
+.bb_boxed { border: 1px solid #cccccc; background-color: #f0f0f0; padding:10px;margin-top:2px;text-align:left;}
+.bb_smiles img {vertical-align:middle;margin-right:5px;margin-bottom:5px;}
+.quote {	border: 1px dotted #CCCCCC; background:#F4F3E9; color:#333333; padding:15px; margin-left:10px; padding-top:5px; padding-bottom:5px;}
+.spoiler {	border: 1px dotted #CCCCCC; background:#f7f7f7; color:#333333; padding:5px;}
+._pointer{cursor:pointer;}
+
+
+/*
+* Всплывающая посказка ToolTip
+*/
+#tooltip{
+	background:#FFFFFF;
+	border:1px solid #999;
+	color:#333333;
+	font:menu;
+	margin:0px;
+	padding:6px;
+	position:absolute;
+	visibility:hidden;
+	z-index:997;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+	-moz-opacity: 0.9;
+	-khtml-opacity: 0.9;
+	opacity: 0.9;
+}
+
+/*
+* Постраничная навигация
+*/
+
+.pages {
+	color:#666; 
+	border:0px;
+	clear:both;
+}
+
+.pages a:link,
+.pages a:visited,
+.pages a:hover,
+.pages a:active {
+	text-decoration:none;
+	color: #636363;
+	background:#F9F9F9;
+	border:1px solid #E6E6E6;
+	padding:3px 6px;
+	font-size:11px
+}
+
+.pages a:hover {
+	background:#799AE3;
+	color:#FFFFFF;
+	border-color:#E6E6E6;
+}
+
+.pages span {
+	text-decoration:none;
+	background:#d3d3d3;
+	padding:3px 6px;
+	border:1px solid #a4a4a4;
+	color:#717171;
+	font-size:11px;
+	margin-right:3px;
+}
+
+.hr1 {
+background-color: #ccc;
+border: 0;
+height: 1px;
+/* margin-bottom: 1.5em; */
+}
+/*
+* Поиск аджакс
+*/
+.results{width:200px; border:solid 1px #DEDEDE;background:#FFF; position:absolute; }
+.results ul, .results li{padding:0; margin:0; border:0; list-style:none;}
+.results li a{display:block; padding:1px; text-decoration:none; color:#000000; font-weight:bold;}
+.results li a small{display:block; text-decoration:none; color:#999999; font-weight:normal;}
+.results li a:hover{background:#FFFFCC;}
+.results ul {padding:6px;}
+
+/*
+* Модуль PM
+*/
+.pm_td
+{
+	border-top:1px solid #CCCCCC;
+	padding-top:2px;
+	margin-top:2px;
+}
+
+.pm_th
+{
+	height:22px;
+}
+
+/*
+* Опросы
+*/
+.bar1, .bar2, .bar3, .bar4, .bar5
+{
+	height: 10px;
+	border: 1px solid #888888;
+	margin:2px;
+	width:2px;
+	margin-left:5px;
+	
+}
+.bar1 {background: #0099FF;}
+.bar2{background: #6666CC;}
+.bar3{background: #FF9933;}
+.bar4{background: #9933FF;}
+.bar5{background: #33CC00;}
+.poll_check{padding-top:2px;}
+/*
+* Форум
+*/
+
+.forumBodyWrap {
+	background: #FFF;
+	border: 1px solid #E3E9F0;
+	padding: 0px; 
+	margin: 0px; 
+}
+
+.forumBodyWrap h3,
+.forumTitle {
+	background: url(../images/tile_cat.gif);
+	border: 1px solid #FFF;
+	border-bottom: 1px solid #404040;
+	font-size: 12px;
+	font-weight: bold; 
+	margin: 0px;
+	padding: 8px;
+}
+
+.forumTitle a
+{	
+	text-decoration:none;
+}
+
+.forumTitle a:hover
+{	
+	text-decoration:underline;
+}
+
+.forumTable { width:100% }
+
+table.forumTable,
+tr.forumTable,
+td.forumTable
+{ /* required for text in tables, because tables do not inherit from body */
+	background: transparent;	
+	font-size: 11px;
+	line-height: 135%;
+}
+
+.forumTable th
+{
+	background: url(../images/tile_cat.gif);
+	color:#FFFFFF;
+	padding:3px;
+}
+
+.forumTable td,
+.divpad{ /* gives all tables faux cellpadding of 5px */
+	padding: 5px;
+}
+
+td.nopad{ /* allows some tables to have no padding on the td */
+	padding: 0;
+}
+
+.row1
+{ 
+	background: #DFE6EF; 
+}
+
+.row2
+{ 
+	background: #E4EAF2; 
+}
+
+.row3
+{ 
+	background: #FAFAFA; 
+}
+
+.row4
+{ 
+	background: #EEEEEE; 
+}
+.forumBR
+{
+	border-right:1px solid #DFE6EF;
+}
+.catend
+{
+	background: #6a90b1;
+	color: #000;
+	font-size: 1px;
+	height: 5px;
+}
+.forumMessage
+{
+	font-size:12px;
+}
+
+
+
+.highlightSearch
+{
+	background-color:yellow;
+	color:red;
+}
+
+/*
+* Код
+*/
+.codeBox
+{
+	border: 1px dashed #CCCCCC;
+	background:#fff;
+	margin-top:4px;
+	margin-bottom:4px;
+}
+
+.codeTitle
+{
+	border-bottom: 1px dashed #CCCCCC;
+	padding:3px;
+	padding-left:5px;
+	background:#ffcccc;
+	color:#a31b1b;
+	font-weight:bold;
+	font-size:13px;
+}
+
+.codeContent
+{
+	padding:5px;
+}
+
+.infoBox
+{
+	border:1px solid #DEDEDE; 
+	padding:5px;
+	padding-left:60px;
+	clear:both;
+}
+
+.info
+{
+	background:url(../images/warning.png) no-repeat left;
+}
+
+.error
+{
+	background:url(../images/error.png) no-repeat left;
+}
+
+.infoTitl
+{
+	color:#222;
+	font-size:18px;
+	margin-bottom:3px;
+}
+
+.boardBlockTable
+{
+	background:#eeeeee;
+}
+
+.boardBlockTable tr
+{
+	background:#FFF;
+}
+
+.boardBlockTable th
+{
+	background:url(../images/thpic.png) #fafafa;
+	padding:5px;
+}
+
+.padding
+{
+	padding:3px;
+}
+
+.inputTitle
+{
+font-size:16px;
+}
+
+
+/*
+* BLOG MODULE
+*/
+.blogTop{font-size:22px;margin-bottom:5px;}
+.blogName a {color:#ccc;text-decoration:none; font-size:22px;}
+.blogName a:hover{text-decoration:underline;}
+.postTitle a {color:#4B8FC8;text-decoration:none; font-size:22px;}
+.postTitle a:hover {text-decoration:underline;}
+.blog_postBody {padding:10px;font-size:12px;}
+.blog_postText {padding-left:10px; font-size:12px; text-align:justify; color:#333333;}
+.blog_postTags {background:url('../images/engine/tags.png') left no-repeat; padding-left:20px; margin-left:10px; margin-top:15px;}
+.blog_postTags a {color:#999; text-decoration:underline; font-size:11px;}
+.blog_inform{border:1px solid #ccc; padding: 5px 15px 5px 15px; margin:3px; margin-left:10px;; margin-top:7px;display: inline-block;text-align:center; font-size:11px;}
+.blog_postAuthor{ background:url('../images/engine/user.gif') left no-repeat; padding-left:18px; margin-left:10px;}
+.blog_postComments { background:url('../images/engine/comments.png') left no-repeat; padding-left:20px; margin-left:10px;}
+.blog_editPost img { vertical-align:middle; margin-left:10px; }
+.blogListTitle, .blogListTitle a {font-size:18px;}
+
+.blogAvatar {border:1px solid #ccc;}
+.blog_postRating {margin-right:5px; font-size:12px; color:green;}
+.blog_postRatingimg { vertical-align:middle;}
+.blogRating { background:#52B0FF; padding:5px; padding-left:15px; padding-right:15px; color:#fff; font-size:14px;}
+.blogDescr {font-size:12px;}
+._blogLinks {font-size:16px; }
+._blogMenu a {font-size:12px; text-decoration:underline;}
+/*
+* BLOG MODULE
+*/
+
+._userfriends {background:url('../images/engine/user.gif') left no-repeat; padding-left:17px; margin-right:5px;}
+._bloglist {background:url('../images/engine/blogList.gif') left no-repeat; padding-left:18px; margin-right:5px;}
+._titleBack { font-size:12px; font-weight:bold;}
+
+._carmaProfileBox {float:right; display: inline-block; min-width:50px; height:50px; background:#fafafa; border:2px solid #eee;}
+._carmaProfileBox div a { font-size:28px; color:#555555; text-decoration:none;}
+._carmaProfileBox div a:hover { font-size:28px; color:#555555; text-decoration:underline;}
+._carmaProfileBox span a { font-size:14px; color:#555555; text-decoration:none;}
+._carmaProfileBox span a:hover { font-size:14px; color:#555555; text-decoration:underline;}

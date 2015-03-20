@@ -1,0 +1,1 @@
+<article class="hentry inform"><b>Предупреждение</b><br>{%TEXT%}</article>
