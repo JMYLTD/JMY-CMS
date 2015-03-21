@@ -6,12 +6,12 @@ if (!defined('ACCESS'))
 }
 
 
-$dbhost = '';
-$dbuser = '';
+$dbhost = 'localhost';
+$dbuser = 'root';
 $dbpass = '';
-$dbname = '';
+$dbname = 'jmy';
 
-$prefix = '';
-$user_prefix = '';
-$user_db = '';
+$prefix = 'JMY';
+$user_prefix = 'JMY';
+$user_db = 'jmy';
 
