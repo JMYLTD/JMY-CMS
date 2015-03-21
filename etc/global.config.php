@@ -30,7 +30,7 @@ $config['name'] = "Мой первый сайт на JMY CMS";
 $config['charset'] = "utf-8";
 $config['gzip'] = "1";
 $config['mod_rewrite'] = "1";
-$config['url'] = "http://jmy.com/JMY-CMS";
+$config['url'] = "http://jmy.com/";
 $config['uniqKey'] = "muq7brge4p";
 $config['support_mail'] = "test@test.ru";
 
