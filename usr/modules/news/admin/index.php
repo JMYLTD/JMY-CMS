@@ -63,7 +63,7 @@ global $adminTpl, $core, $db, $admin_conf, $url;
 	if($db->numRows($query) > 0) 
 	{
 	echo '<div class="panel-body no-padding">
-					<form id="tablesForm" style="margin:0; padding:0" method="POST" action="{ADMIN}/cats/action">
+					<form id="tablesForm" style="margin:0; padding:0" method="POST" action="{ADMIN}/news/action">
 						<table class="table no-margin">
 							<thead>
 								<tr>
