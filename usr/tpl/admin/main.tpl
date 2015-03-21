@@ -19,6 +19,8 @@
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<script src="usr/plugins/js/ajax_class.js" type="text/javascript"></script>
+		<script src="usr/plugins/js/adminPanel.js" type="text/javascript"></script>
 		<script src="{ADM_THEME}/assets/js/modernizr.js"></script>
 		
 	</head>

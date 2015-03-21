@@ -194,13 +194,11 @@ class admin extends template
 		}
 		$meta = "<title>" . (!empty($admtitle) && !empty($_REQUEST['url']) ? $admtitle : $config['slogan']) . " Панель управления</title>" . "\n";
 		$meta .= "<meta http-equiv=\"content-type\" content=\"text/html; charset=" . $config['charset'] . "\">" . "\n";
-		$meta .= "<base href=\"" . $config['url'] . "/\">" . "\n";	
-		$meta .= "<script src=\"usr/plugins/js/adminPanel.js\" type=\"text/javascript\"></script>" . "\n";	
+		$meta .= "<base href=\"" . $config['url'] . "/\">" . "\n";					
 		$meta .= "<script src=\"usr/plugins/js/ajax_admin.js\" type=\"text/javascript\"></script>" . "\n";	
 		$meta .= "<script src=\"usr/plugins/js/JMY_Ajax.js\" type=\"text/javascript\"></script>" . "\n";	
 		$meta .= "<script src=\"usr/plugins/js/engine.js\" type=\"text/javascript\"></script>" . "\n";
 		$meta .= "<script src=\"usr/plugins/js/bb_editor.js\" type=\"text/javascript\"></script>" . "\n";
-		$meta .= "<script src=\"usr/plugins/js/drop_down_menu.js\" type=\"text/javascript\"></script>" . "\n";	
 	
 		
 		foreach($this->headerIncludes as $metas)
