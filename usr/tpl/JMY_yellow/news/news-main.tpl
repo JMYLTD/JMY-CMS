@@ -1,6 +1,6 @@
 <article class="hentry">
 	<header class="entry-header">
-		<h1 class="entry-title">[more]{%TITLE:8%}[/more]</h1>
+		<h1 class="entry-title">[more]{%TITLE%}[/more]</h1>
 			<div class="entry-meta smallPart">
 				<span class="posted-on">
 					<i class="fa fa-calendar spaceRight" aria-hidden="true"></i>					

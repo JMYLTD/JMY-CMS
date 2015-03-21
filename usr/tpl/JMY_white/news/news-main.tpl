@@ -1,6 +1,6 @@
 <article class="hentry">
 	<header class="entry-header">
-		<h1 class="entry-title">[more]{%TITLE:10%}[/more]</h1>			
+		<h1 class="entry-title">[more]{%TITLE%}[/more]</h1>			
 	</header>		
 	<div class="entry-summary">					
 		<p>{%SHORT:100%}</p>				
