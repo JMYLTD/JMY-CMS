@@ -117,7 +117,7 @@ function license()
 	head();
 	echo 'Добро пожаловать в установку JMY CMS. Мы очень признательны, что Вы выбрали наш продукт!<br /><br />';
 	echo '
-	<iframe style="height:250px; overflow:auto; width:650px; margin:0 auto; border:1px dashed #ccc; padding:5px;"  src="http://cms.jmy.su/inc/gpl.htm" width="655" height="250" scrolling="auto" frameborder="0" allowtransparency="true" allowFullScreen="true" allowScriptAccess="always"></iframe>
+	<iframe style="height:250px; overflow:auto; width:650px; min-width: 650px; margin:0 auto; border:1px dashed #ccc; padding:5px;"  src="http://cms.jmy.su/inc/gpl.htm" width="655" height="250" scrolling="auto" frameborder="0" allowtransparency="true" allowFullScreen="true" allowScriptAccess="always"></iframe>
 	';
 	echo '<br /><br /><div align="center"><button type="button" class="btn btn-success" onclick="window.location = \'install.php?step=0\';" />Принимаю, перейти к процессу установке</button></div>';
 	foot();
