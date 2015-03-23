@@ -1,0 +1,30 @@
+
+.pagesalbum a:link,
+.pagesalbum a:visited,
+.pagesalbum a:hover,
+.pagesalbum a:active {
+	text-decoration:none;
+	color: #636363;
+	background:#F9F9F9;
+	border:1px solid #E6E6E6;
+	padding:3px 6px;
+	font-size:11px;
+	height:22px;
+	}
+
+.pagesalbum a:hover {
+	background:#799AE3;
+	color:#FFFFFF;
+	border-color:#E6E6E6;
+	height:22px;
+}
+
+.pagesalbum span {
+	text-decoration:none;
+	background:#d3d3d3;
+	padding:3px 6px;
+	border:1px solid #a4a4a4;
+	color:#717171;
+	font-size:11px;
+	height:22px;
+}

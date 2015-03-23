@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Aaargh';
+    src: url('aaargh_cyrillic.eot');
+    src: url('aaargh_cyrillic.eot?#iefix') format('embedded-opentype'),
+         url('aaargh_cyrillic.woff') format('woff'),
+         url('aaargh_cyrillic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aaargh';
+    src: url('aaargh_cyrillic_bold.eot');
+    src: url('aaargh_cyrillic_bold.eot?#iefix') format('embedded-opentype'),
+         url('aaargh_cyrillic_bold.woff') format('woff'),
+         url('aaargh_cyrillic_bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
