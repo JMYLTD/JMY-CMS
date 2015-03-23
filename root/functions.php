@@ -522,3 +522,76 @@ global $adminTpl, $url, $core;
 	$adminTpl->admin_foot();
 	}
 }
+
+function generateConfigBLOCK($configBox, $type, $link, $ok = false)
+{
+global $adminTpl, $url, $core;
+	require (ROOT.'etc/blocks/'.$type.'.config.php');
+	$parseConf = $configBox[$type];
+	$varName = $configBox[$type]['varName'];
+	$confArr = $$varName;	
+	if($ok)
+	{
+		$adminTpl->info(_SUCCESS_SAVE);		
+		$file = 'etc/blocks/'.$type.'.config.php';
+		$conf_arr_name = $_POST['conf_arr_name'];
+		$content = "global $$conf_arr_name;\n";
+		$content .= "\$$conf_arr_name = array();\n";
+		foreach($_POST as $k => $val) {
+			if($k != 'conf_arr_name' && $k != 'conf_file') {
+				if(!is_array($val)) {
+					if($k != 'illFormat')
+					{
+						$content .= "\$".$conf_arr_name."['".$k."'] = \"".htmlspecialchars(str_replace('"', '\"', stripslashes($val)), ENT_QUOTES)."\";\n";
+					}
+					else
+					{
+						$content .= "\$".$conf_arr_name."['".$k."'] = \"".str_replace('"', '\"', stripslashes($val))."\";\n";
+					}
+				} else {
+					foreach($val as $karr => $varr) {
+						$content .= "\$".$conf_arr_name."['".$k."']['".$karr."'] = \"".htmlspecialchars(stripslashes($varr), ENT_QUOTES)."\";\n";
+					}
+				}
+			}
+		}
+		save_conf($file, $content);
+
+		echo '<br />';
+		
+		require (ROOT.'etc/blocks/'.$type.'.config.php');
+		$confArr = $$varName;
+	}
+	else
+	{
+	echo '<div class="row">
+			<div class="col-lg-12">
+				<section class="panel">
+					<div class="panel-heading no-border">
+						<b>'. $parseConf['title'] .'</b>
+					</div>
+				<div class="panel-body">
+				<div class="switcher-content">
+					<form action="' . $link . '"  method="post"  role="form" class="form-horizontal parsley-form" data-parsley-validate>';	
+	foreach($parseConf['groups'] as $group)
+	{
+	  foreach($group['vars'] as $var => $varArr)
+	  {
+		echo '<div class="form-group">
+					<label class="col-sm-3 control-label">'. $varArr['title'] .':</label>
+					<div class="col-sm-4">
+					    ' . (isset($confArr[$var]) ? str_replace(array('{varName}', '{var}'), array($var, $confArr[$var]), $varArr['content']) : $varArr['content']) . '
+						<p class="help-block">'. $varArr['description'] .'</p>
+					</div>
+				</div>';
+		
+	
+	  }
+	}
+	
+	echo '<input type="hidden" size="20" name="conf_file" class="textinput" value="' . $type . '" maxlength="100" maxsize="100" />
+	<input type="hidden" size="20" name="conf_arr_name" class="textinput" value="' . $varName . '" maxlength="100" maxsize="100" />
+	<div align="right" style="padding-bottom:5px;"><input type="submit" class="btn btn-success" value="' . _SAVE . '" /></div>
+	</form>';
+	}
+}

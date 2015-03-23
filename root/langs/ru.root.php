@@ -171,6 +171,7 @@ define('_BLOCK_TYPE_TITLE', 'Заголовок типа');
 define('_BLOCK_TYPEF_TT', 'Тип для обработки в шаблонах');
 define('_BLOCK_TYPE_TITLE_TT', 'Заголовок типа отображаемый в АП');
 define('_BLOCK_ADD_TYPE', 'Добавить тип блока');
+define('_BLOCK_STANDART', 'Настройка стандартных блоков');
 
 define('_LOG_LOG', 'Логи системы');
 define('_LOG_OK_COM', 'Действие успешно выполнено');

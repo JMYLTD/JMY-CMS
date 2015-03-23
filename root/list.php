@@ -33,6 +33,7 @@ $component_array = array(
 			_AP_BLOCKS_ADD => 'add',
 			_AP_BLOCKS_TYPE => 'types',
 			_AP_BLOCKS_ATYPE => 'typeAdd',
+			_AP_BLOCKS_STAND => 'standard',
 			_AP_BLOCKS_SORT => 'resort',
 		),
 		'shown' => 1

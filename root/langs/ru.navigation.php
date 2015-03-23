@@ -7,7 +7,7 @@
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
-* @edit 	   03.02.2015
+* @edit 	   23.03.2015
 */
 
 
@@ -24,6 +24,7 @@ define('_AP_BLOCKS_ADD', 'Добавить блок');
 define('_AP_BLOCKS_TYPE', 'Типы блоков');
 define('_AP_BLOCKS_ATYPE', 'Добавить тип');
 define('_AP_BLOCKS_SORT', 'Отсортировать');
+define('_AP_BLOCKS_STAND', 'Стандартные');
 define('_AP_BLOCKS_DESC', 'Раздел управления PHP блоками, для организации динамического дизайна вашего сайта.');
 
 define('_AP_MODS', 'Модули');

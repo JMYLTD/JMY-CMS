@@ -14,7 +14,8 @@ if (!defined('ADMIN_ACCESS')) {
     header('Location: /');
     exit;
 }
-
+global $config;
+include(ROOT . 'usr/langs/'. $config[lang] . '.blocks.php');
 switch(isset($url[2]) ? $url[2] : null) {
 	default:
 		$adminTpl->admin_head(_AP_BLOCKS);
@@ -446,6 +447,66 @@ switch(isset($url[2]) ? $url[2] : null) {
 		delcache('plugins');
 		location(ADMIN . '/blocks');
 		break;
+		
+		
+	case 'standard':
+		$adminTpl->admin_head(_AP_BLOCKS.' | '._BLOCK_STANDART);
+		echo '
+		<div class="row">
+			<div class="col-lg-12">
+				<section class="panel">
+					<div class="panel-heading">
+						<b>' . _BLOCK_STANDART . '</b>						
+					</div>
+					<div class="panel-body">
+				<div class="switcher-content">
+';		
+		
+		 foreach(glob(ROOT.'usr/blocks/config/*.config.php') as $inFile)
+        {
+            $name = explode('usr/blocks/config/', $inFile);
+            $name = $name[1];
+            $subDir = explode('/', $name);
+            $inDirs[$subDir[0]][] = $inFile;
+        }
+		$zeroDirs = glob(ROOT.'usr/blocks/config/*.config.php');		
+		$_names['cats.config.php'] = _BLOCK_CATS;	
+		$_names['online.config.php'] = _BLOCK_ONLINE;	
+		if(!empty($zeroDirs))
+		{			
+			foreach($zeroDirs as $file) 
+			{
+				$name = explode('usr/blocks/config/', $file);
+				$name = end($name);
+				$_a = explode('usr/blocks/config/', $file);
+				$absolute = str_replace(array('/', '.config.php'), array('=', ''), end($_a));
+				echo '<div style="cursor:pointer" onclick="document.location.href = \'{ADMIN}/blocks/standard_edit/' . $absolute . '\';">
+					<label style="cursor:pointer" class="control-label">' . (isset($_names[$name]) ? $_names[$name] : $name) . '</label><br>
+					Настройки блока: ' . (isset($_names[$name]) ? $_names[$name] : $name) . '
+				<br>				
+				</div><br>';
+			}
+			
+		}
+		echo'</div></div></section></div></div>';	
+		
+		delcache('plugins');
+		$adminTpl->admin_foot();
+		break;
+		
+	case 'standard_edit':
+		$adminTpl->admin_head(_AP_BLOCKS.' | '._BLOCK_STANDART);
+		require (ROOT.'etc/blocks/'.$url[3].'.config.php');		
+		require (ROOT.'usr/blocks/config/'.$url[3].'.config.php');
+		$ok = false;		
+		if(isset($_POST['conf_file']))
+		{
+			$ok = true;
+		}
+		generateConfigBLOCK($configBox, $url[3], '{ADMIN}/blocks/standard_edit/'.$url[3], $ok);		
+		$adminTpl->admin_foot();
+		break;
+		
 		
 	case 'types':
 		$adminTpl->admin_head(_AP_BLOCKS.' | '._AP_BLOCKS_TYPE);
