@@ -1,0 +1,20 @@
+.textarea 
+{
+	width:100%;
+}
+
+#bb_area {}
+
+ul._bb{list-style:none;padding:0;margin:0; display:block;margin-bottom:4px;}
+ul._bb li {float:left; display:block;	width:18px; height:20px; line-height:20px; margin-left:2px; margin-right:1px; margin-top:3px; }
+ul._bb li a {display:block; height:20px; background:url(../assest/images/engine/bb_but.png) top no-repeat;text-align:center;}
+ul._bb li a:hover {background:url(../assest/images/engine/bb_but.png) bottom no-repeat;}
+.bbLeft{float:left;}
+.bbRight{float:right;}
+.bb_smiles { border: 1px solid #cccccc; background-color: #f0f0f0; width: 120px; height:120px;padding:10px;visibility: inherit;overflow: auto;text-align:left;margin-top:2px;}
+.bb_smiles span { float: left; height: 42px; margin-left:5px; }
+.bb_boxed { border: 1px solid #cccccc; background-color: #f0f0f0; padding:10px;margin-top:2px;text-align:left;}
+.bb_smiles img {vertical-align:middle;margin-right:5px;margin-bottom:5px;}
+.quote {	border: 1px dotted #CCCCCC; background:#F4F3E9; color:#333333; padding:15px; margin-left:10px; padding-top:5px; padding-bottom:5px;}
+.spoiler {	border: 1px dotted #CCCCCC; background:#f7f7f7; color:#333333; padding:5px;}
+._pointer{cursor:pointer;}
