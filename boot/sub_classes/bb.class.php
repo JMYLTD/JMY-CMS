@@ -406,7 +406,7 @@ class bb
 				
 				$mainCodeName = $lang;
 				$code = htmlspecialchars_decode($this->codeArr[$count]);
-				return '<!--code:' . $lang . '--><div class="codeBox"><div class="codeTitle">' . _CODE . ' - ' . strtoupper($mainCodeName) . '</div><div class="codeContent" style="overflow-x:auto;"><pre class="brush: ' . ($lang == 'html' || $lang == 'text' ? 'plain' : $lang) . ';">' . wordwrap(str_replace('&amp;#123;', '&#123;', htmlspecialchars($code, ENT_NOQUOTES)), 110, "\n", true) . '</pre></div></div><!--code:end-->';
+				return '<!--code:' . $lang . '--><div class="codeBox"><div class="codeTitle">' . _CODE . ' - ' . strtoupper($mainCodeName) . '</div><div class="codeContent" style="overflow-x:auto;"><pre class="brush: ' . ($lang == 'html' || $lang == 'text' ? 'plain' : $lang) . ';">' . wordwrap(str_replace('&amp;#123;', '&#123;', htmlspecialchars($code)), 110, "\n", true) . '</pre></div></div><!--code:end-->';
 			}
 	}
 	

@@ -191,13 +191,6 @@ var {
 	font: 15px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 }
 
-code {
-	display: block;
-	background: rgba(0,0,0,.05);
-	padding: 0.5em;
-	text-align: left;
-	border-radius: 2px;
-}
 
 abbr,
 acronym {
