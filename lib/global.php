@@ -1516,39 +1516,62 @@ function gencode($lenght)
 
 function captcha_image($button = true) 
 {
-    global $security;
-	session_start();
-	
-	$captcha = "<style type=\"text/css\">/* <![CDATA[ */.captcha{width: " . $security['captcha_width'] . "px; height: " . $security['captcha_height'] . "px; background: url('captcha') top left no-repeat;}/* ]]> */</style>"
-    ."<a href=\"javascript:reloadCaptcha();\" title=\"' . _REFRESH . '\"><div class=\"captcha\" id=\"captcha\"> </div></a>";
-
+    global $security;	
+	if ($security[recaptcha]==0) 
+	{
+		session_start();	
+		$captcha = "<style type=\"text/css\">/* <![CDATA[ */.captcha{width: " . $security['captcha_width'] . "px; height: " . $security['captcha_height'] . "px; background: url('captcha') top left no-repeat;}/* ]]> */</style><a href=\"javascript:reloadCaptcha();\" title=\"' . _REFRESH . '\"><div class=\"captcha\" id=\"captcha\"> </div></a>";
+	}
+	else
+	{
+		$publickey =$security[recaptcha_public];
+		$privatekey =$security[recaptcha_private];
+		$captcha ='<div class="g-recaptcha" data-sitekey="'.$publickey.'"></div><script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>'; 
+	}
     return $captcha;
 }
 
 function captcha_check($post_name) 
 {
-    global $core;
-    session_start();
-
-    if($core->auth->isUser) return true;
-
-    if(isset($_REQUEST[$post_name])) 
-    {
-        if(isset($_SESSION['securityCode']))
-        {
-            if($_SESSION['securityCode'] == mb_strtolower($_POST[$post_name]))
-            {
-                unset($_SESSION['securityCode']);
-				return true;
-            }
-        }
-		else
+    global $core, $security;
+	if ($security[recaptcha]==0) 
+	{
+		session_start();
+		if($core->auth->isUser) return true;
+		if(isset($_REQUEST[$post_name])) 
 		{
-			echo 'session failed';
+			if(isset($_SESSION['securityCode']))
+			{
+				if($_SESSION['securityCode'] == mb_strtolower($_POST[$post_name]))
+				{
+					unset($_SESSION['securityCode']);
+					return true;
+				}
+			}
+			else
+			{
+				echo 'session failed';
+			}
 		}
-    }
-
-    return false;
+	}
+	else
+	{
+		$publickey =$security[recaptcha_public];
+		$privatekey =$security[recaptcha_private];
+		$recaptcha = new recaptcha($privatekey);
+		 $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+		if ($resp->isSuccess()) 
+		{
+			return true;
+		} 
+		else 
+		{
+			$errors = $resp->getErrorCodes();
+			
+		}	
+	}
+	return false;
+    
 }
 
 function parse_req($value) 
@@ -1580,6 +1603,30 @@ global $config, $core;
 	if($config['multiLang'] && $config['lang'] != $core->lang && file_exists(ROOT.'etc/' . $core->lang . '.'.$file.'.config.php'))
 	{
 		require ROOT.'etc/' . $core->lang . '.'.$file.'.config.php';
+	}
+}
+
+function loadConfigBLOCK($file)
+{
+global $config, $core;	
+	$mainFile = ROOT.'etc/blocks/'.$file.'.config.php';
+	if (file_exists($mainFile))
+	{
+		require_once($mainFile);
+	}
+	if($config['multiLang'] && $config['lang'] != $core->lang && file_exists(ROOT.'etc/blocks/' . $core->lang . '.'.$file.'.config.php'))
+	{
+		require ROOT.'etc/blocks/' . $core->lang . '.'.$file.'.config.php';
+	}
+}
+
+function loadLang($file)
+{
+global $config, $core;
+	$mainFile = ROOT.'usr/langs/'.$core->lang.'.'.$file.'.php';
+	if (file_exists($mainFile)) 
+	{
+		require_once($mainFile);
 	}
 }
 
@@ -1722,6 +1769,15 @@ function checkGuest($content)
 {
 global $core;
 	if($core->auth->isUser == false)
+	{
+		return stripslashes($content);
+	}
+}
+
+function checkCaptcha($content)
+{
+  global $core, $security;
+	if ($security[recaptcha]==0) 
 	{
 		return stripslashes($content);
 	}

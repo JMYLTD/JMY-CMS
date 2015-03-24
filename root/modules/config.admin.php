@@ -279,6 +279,21 @@ $configBox = array(
 			'captcha' => array(
 				'title' => _SECURITY_CAPTCHA,
 				'vars' => array(
+					'recaptcha' => array(
+						'title' => _SECURITY_RECAPTHA,
+						'description' => _SECURITY_RECAPTHA_DESC,
+						'content' => conf_radio("recaptcha", $security['recaptcha']),
+					),	
+					'recaptcha_public' => array(
+						'title' => _SECURITY_RECAPTHA_PUBLIC,
+						'description' => _SECURITY_RECAPTHA_PUBLIC_DESC,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),		
+					'recaptcha_private' => array(
+						'title' => _SECURITY_RECAPTHA_PRIVATE,
+						'description' => _SECURITY_RECAPTHA_PRIVATE_DESC,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),	
 					'captcha_width' => array(
 						'title' => _SECURITY_CAPTCHA_CAPTCHA_WIDTHT,
 						'description' => _SECURITY_CAPTCHA_CAPTCHA_WIDTHD,

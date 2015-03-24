@@ -17,7 +17,7 @@ define('PLUGINS', dirname(__FILE__) . '/usr/plugins/');
 define('COOKIE_AUTH', 'auth_rc3');
 define('COOKIE_PAUSE', 'pause_rc3');
 define('PAUSE_TIME', 120);
-define('VERSION_ID', 1); //1 - RC3
+define('VERSION_ID', 1); 
 define('COOKIE_TIME', 2592000);
 define('ADMIN', 'administration');
 define('HACK_SQL', '/SELECT|INSERT|ALTER|DROP|UNION|OUTFILE|WHERE/i');

@@ -1,10 +1,10 @@
 <?php
+
 if (!defined('ACCESS')) 
 {
     header('Location: /');
     exit;
 }
-
 
 global $online_conf;
 $online_conf = array();

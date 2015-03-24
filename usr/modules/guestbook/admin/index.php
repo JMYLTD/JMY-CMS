@@ -35,7 +35,7 @@ global $adminTpl, $core, $db, $admin_conf;
 						<table class="table no-margin">
 							<thead>
 								<tr>
-									<th class="col-md-1"><span class="pd-l-sm"></span>ID</th>
+									<th><span class="pd-l-sm"></span>ID</th>
 									<th class="col-md-2">' . _G_COM . '</th>
 									<th class="col-md-2">' . _BASE_NAME . '</th>
 									<th class="col-md-1">' . _DATE . '</th>

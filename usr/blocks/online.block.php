@@ -8,27 +8,26 @@
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
 */
-require (ROOT.'etc/blocks/online.config.php');
+
+
 if (!defined('ACCESS')) {
     header('Location: /');
     exit;
 }
-global $user, $core;
-
-
+loadConfigBLOCK('online');
+loadLang('blocks');
+global $user, $core, $online_conf;
 
 foreach($core->auth->groups_array as $gid => $groups)
 {
 	$color[$gid] = $groups['color'];
 	$gname[$gid] = $groups['name'];
 }
-
 $on = $db->query("SELECT o.*, p.nick FROM " . DB_PREFIX . "_online AS o LEFT JOIN `" . USER_DB . "`.`" . USER_PREFIX . "_users` AS p ON (o.uid=p.id)");
 while($online = $db->getRow($on)) 
 {
 	$onn[] = array($online['nick'], $online['ip'], $online['url'], $online['uid'], $online['group']);
 }
-
 if(!empty($onn))
 {
 	$guests = 0;
@@ -42,30 +41,31 @@ if(!empty($onn))
 		elseif($group == $user['botGroup'])
 			$bots[] = $info;
 	}
-	if ($online_conf[user]=="1") {
-	if(!empty($users))
+	if ($online_conf[user]=="1") 
 	{
-		$nUs = count($users);
-		$perColU = ceil($nUs/2);
-		echo '<b>Пользователи онлайн:</b>';
-		echo '<table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td valign="top">';
-		$n = 0;
-		foreach($users as $uInfo)
+		if(!empty($users))
 		{
-			$n++;
-			echo '<a href="profile/' . $uInfo[0] . '" title="' . $uInfo[0] . ' - ' . $gname[$uInfo[4]] . '"><font color="' . $color[$uInfo[4]] . '">'.$uInfo[0] . '</font></a>';
-			
-			if($n == $perColU)
+			$nUs = count($users);
+			$perColU = ceil($nUs/2);
+			echo '<b>'._BLOCK_ONLINE_USER_ON.':</b>';
+			echo '<table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td valign="top">';
+			$n = 0;
+			foreach($users as $uInfo)
 			{
-				echo '</td><td valign="top">';
+				$n++;
+				echo '<a href="profile/' . $uInfo[0] . '" title="' . $uInfo[0] . ' - ' . $gname[$uInfo[4]] . '"><font color="' . $color[$uInfo[4]] . '">'.$uInfo[0] . '</font></a>';
+				
+				if($n == $perColU)
+				{
+					echo '</td><td valign="top">';
+				}
 			}
+			echo '</td></tr></table>';
 		}
-		echo '</td></tr></table>';
-	}
-	else
-	{
-	echo '<b>Пользователей на сайте нет.</b><br>';
-	}
+		else
+		{
+			echo '<b>'._BLOCK_ONLINE_USER_EMPTY.'</b><br>';
+		}
 	}
 	
 	
@@ -74,7 +74,7 @@ if(!empty($onn))
 	{
 		$perColB = ceil(count($bots)/2);
 		$b = 0;
-		echo '<b>Поисковые боты:</b>';
+		echo '<b>'._BLOCK_ONLINE_BOT.'</b>';
 		echo '<table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td valign="top">';
 		foreach($bots as $bInfo)
 		{
@@ -90,7 +90,7 @@ if(!empty($onn))
 	}
 	
 	if ($online_conf[guest]=="1") {
-	echo '<b>Гостей:</b> '.$guests;
+	echo '<b>'._BLOCK_ONLINE_GUEST_ON.':</b> '.$guests;
 	}
 }
 
@@ -99,7 +99,7 @@ if ($online_conf[top]=="1")
 	$usr = $db->query("SELECT `nick`, `group` FROM `" . USER_DB . "`.`" . USER_PREFIX . "_users` WHERE last_visit > " . (time()-86400) . " LIMIT ".$online_conf[top_numb]);
 	if($db->numRows($usr) > 0) 
 	{
-		echo '<br /><br /><b>'.$online_conf[top_numb].'-ка посетивших за последние сутки:</b>';
+		echo '<br /><br /><b>'.$online_conf[top_numb]._BLOCK_ONLINE_TOP_ON.':</b>';
 		echo '<table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td valign="top">';
 		$y = 0;
 		$perColY = ceil($db->numRows($usr)/2);

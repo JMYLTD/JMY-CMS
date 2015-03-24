@@ -29,7 +29,7 @@
 				<textarea id="comment" name="message" rows="8" aria-required="true" placeholder="Сообщения *"></textarea>
 			</p>
 			<p class="comment-form-comment">
-				<td valign="top" >Код безопасности <font color="red">*</font>:</td><td><br>{%CAPTCHA%}<br><input type="text" name="securityCode" id="securityCode" size="15" maxlength="6"> </td>
+				<td valign="top" >Код безопасности <font color="red">*</font>:</td><td><br>{%CAPTCHA%}<br>[captcha]<input type="text" name="securityCode" id="securityCode" size="15" maxlength="6">[/captcha]</td>
 			</p>		
 						
 			<p class="form-submit">

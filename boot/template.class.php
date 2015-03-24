@@ -263,6 +263,7 @@ class template
 			$in["#\\[lang:(.+?)]#ies"] =  "constant('\\1')";
 			$in["#\\[guest](.*?)\\[/guest]#ies"] =  "checkGuest('\\1')";
 			$in["#\\[user](.*?)\\[/user]#ies"] =  "checkUser('\\1')";
+			$in["#\\[captcha](.*?)\\[/captcha]#ies"] =  "checkCaptcha('\\1')";
 			$in["#\\[title:(.*?)]#ies"] =  "\$this->preTitle('\\1');";
 			$in["#\\[open](.*?)\\[/open]#ies"] =  "\$this->preOpen('\\1');";
 			$in["#\\[userinfo:(.*?)]#ies"] =  "\$this->ustinf('\\1')";
