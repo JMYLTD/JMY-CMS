@@ -256,7 +256,8 @@ class template
 	{
 	global $config, $url, $core;
 		if($url[0] != ADMIN)
-		{		
+		{	
+			$in["#\\[group=(.+?)](.*?)\\[/group]#ies"] = "Group('\\1', '\\2')";
 			$in["#\\[nogroup=(.+?)](.*?)\\[/nogroup]#ies"] = "noGroup('\\1', '\\2')";
 			$in["#\\[index:(.+?)\\](.*?)\\[/index\\]#ies"] = "indexShow('\\1', '\\2')";
 			$in["#\\[modules:(.+?):(.+?)](.*?)\\[/modules]#ies"] = "modulesShow('\\1', '\\2', '\\3')";

@@ -1748,6 +1748,25 @@ global $core;
 }
 
 /*
+* Ограничение групп для шаблонов
+* $group - группы для которым показывать ,
+* $content - то что прячем
+*/
+function Group($group, $content) 
+{
+global $core;
+	$gr_array = explode(',', $group);
+	if(!in_array($core->auth->group, $gr_array)) 
+	{
+		return false;
+	} 
+	else 
+	{
+		return stripslashes($content);
+	}
+}
+
+/*
 * Условия для шаблонов и не только ;)
 * $content - то что проверям
 * $data - то что выводим
