@@ -200,17 +200,10 @@ function commentPage()
 
 function captcha()
 {
-    if(isset($_REQUEST[session_name()]))
-    {
-        session_start();
-    }
-
+    session_start();    
     $captcha = new KCAPTCHA;
-
-    if($_REQUEST[session_name()])
-    {
-        $_SESSION['securityCode'] = $captcha->getKeyString();
-    }
+    $_SESSION['securityCode'] = $captcha->getKeyString();
+  
 }
 
 function comment_savea() 
