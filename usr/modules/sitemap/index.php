@@ -3,7 +3,7 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
@@ -16,14 +16,14 @@ if (!defined('ACCESS')) {
 
 loadConfig('sitemap'); 
 
-			if(!empty($sitemap_conf['keywords']))
-			{
-				$core->tpl->keywords =$sitemap_conf['keywords'];
-			}
-			if(!empty($sitemap_conf['description']))
-			{
-				$core->tpl->description = $sitemap_conf['description'];
-			}
+if(!empty($sitemap_conf['keywords']))
+{
+	$core->tpl->keywords =$sitemap_conf['keywords'];
+}
+if(!empty($sitemap_conf['description']))
+{
+	$core->tpl->description = $sitemap_conf['description'];
+}
 
 $query = $db->query("SELECT * FROM ".DB_PREFIX."_sitemap ORDER BY id ASC");
 if($db->numRows($query) > 0) 
@@ -40,5 +40,5 @@ if($db->numRows($query) > 0)
 	} 
 	else 
 	{
-		$core->tpl->info('Карта сайта не сгенерирована!');
+		$core->tpl->info(_SM_INFO);
 	}

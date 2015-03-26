@@ -3,7 +3,7 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
@@ -14,22 +14,20 @@ if (!defined('ACCESS')) {
 	exit;
 }
 
-
 $module_array['sitemap'] = array(
-		'name' => 'Карта сайта',
-		'desc' => 'Данный модуль предназначен для создания карт сайта для поисковых систем Google и Yandex.',
+		'name' => _SM_SITEMAP,
+		'desc' => _SM_SITEMAP_DESC,
 		'subAct' => array(
-			'Карта сайта' => '',
-			'Генерировать карту' => 'create',
-			'Уведомить поисковые системы' => 'update',						
-			'Конфигурация' => 'config',
+			_SM_SITEMAP => '',
+			_SM_SITEMAP_GEN => 'create',
+			_SM_SITEMAP_UPDATE => 'update',						
+			_CONFIG => 'config',
 		)
 );
 
-
 $toconfig['sitemap'] = array
 (
-'name' => 'Карта сайта',
-'link' => 'module/sitemap/config',
-'param' => 'sitemap_config'
+	'name' => _SM_SITEMAP,
+	'link' => 'module/sitemap/config',
+	'param' => 'sitemap_config'
 );

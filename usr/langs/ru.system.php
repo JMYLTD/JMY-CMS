@@ -137,7 +137,7 @@ define('_COMMUNSUBSCRIBE', 'Вы успешно отписаны от комме
 define('_CARMANOCHANGES', 'Изменений кармы нет.');
 define('_NO_RESULTS', 'Результатов нет');
 define('_FR_ERR1', '<font color="red">Пользователю уже было отправлено приглашение. Дождитесь подтверждения.</font>');
-define('_FR_ERR2', '<font color="red">Пользователь уже предложил вам дружбу. <a href="profile">Хотите добавить его?</aили вернутся?</font>');
+define('_FR_ERR2', '<font color="red">Пользователь уже предложил вам дружбу. <a href="profile">Хотите добавить его?</a> или вернутся?</font>');
 define('_FR_INF1', '<b><font color="blue">Пользователю отправлено приглашение. Ожидайте его подтверждения.</font></b>');
 define('_FR_INF2', '<b><font color="blue">Друг удалён.</font></b>');
 define('_FR_INF3', '<b><font color="green">Друг успешно добавлен.</font></b>');
@@ -202,12 +202,12 @@ define('_MESSAGE_DELETED', 'Сообщение удалено!');
 define('_MESSAGE_NOTDELETED', 'Сообщение не удалено, обнаружена ошибка!');
 define('_CAPTCHA_NOTVALID', 'Код каптчи введён не верно!');
 define('_EMAIL_BADFORMAT', 'E-Mail имеет неверный формат!');
-define('_USER_EXISTS', 'Пользователь с таким именем уже зарегистрирован в ситеме!');
+define('_USER_EXISTS', 'Пользователь с таким именем уже зарегистрирован в системе!');
 define('_USER_FREE', 'Пользователь с именем <b>{uname}</b> свободен.');
 define('_FILE_DELETED', 'Файл успешно удалён!');
-define('_ACCESS_ATTACH', 'Вам <b>запрещено</bкачать аттачи!');
+define('_ACCESS_ATTACH', 'Вам <b>запрещено</b> качать аттачи!');
 define('_CODE', 'Код');
-define('_COMMENT_ADDED', 'Коментарий успешно добавлен!');
+define('_COMMENT_ADDED', 'Комментарий успешно добавлен!');
 define('_NO_COMMENT', 'Комментариев нет, добавьте первый!');
 //Файловая система
 define('_FILE', 'Файл');

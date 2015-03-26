@@ -434,3 +434,7 @@ define('_GROUP_CONFIG_FRIENDS_DESC', 'Если у пользователя по�
 define('_GROUP_CONFIG_VOTE', 'Оценка публикаций');
 define('_GROUP_CONFIG_VOTE_DESC', 'Если пользователь оценил публикацию, то прибавляем баллы');
 
+define('_CONFIG_KEYWORDS', 'Keywords модуля');
+define('_CONFIG_SEO_DESC', 'Для SEO оптимизации сайта');
+define('_CONFIG_DESC', 'Description модуля');
+
