@@ -269,112 +269,56 @@ class bb
 			}
 		}
 	}
+	function LOADTPL($file)
+	{
+		global $core, $config;
+		$loadDefault = 'usr/tpl/default/' . $file . $core->tpl->ext;
+		$loadTheme = 'usr/tpl/'.$config['tpl'].'/' . $file . $core->tpl->ext;
+		if (isset($loadTheme)) 
+		{
+			$text = file_get_contents(ROOT . $loadDefault);		
+		}
+		else
+		{
+			$text = file_get_contents(ROOT . $loadTheme);		
+		}
+		return $text;
+	}
 
 	function parseAttach($text, $pubId)
 	{
 	global $core, $db;
 		$module = $core->getMod(true);
 		$pubId = intval($pubId);
-		$q = $db->query("SELECT * FROM `" . DB_PREFIX . "_attach` WHERE `pub_id`='" . $pubId . "' AND `mod`='" . $module . "'");
-
-		while($rows = $db->getRow($q))
+		$q = $db->query("SELECT * FROM `" . DB_PREFIX . "_attach` WHERE `pub_id`='" . $pubId . "' AND `mod`='" . $module . "'");		
+		if($db->numRows($q) > 0) 
 		{
-			if($core->auth->group_info['showAttach'] == 1)
-			{
-				
-				
-				$replace = '
-							<style>
-							#btn-wrap {
-								position:relative;
-								padding:5px;
-								margin:0 auto;
-								width:230px;
-								height:50px;
-								display:block;
-								text-decoration:none;
-								margin-bottom:30px;								
-							}
-
-							span.title12{
-								color: #fff;
-								font:30px/58px "BebasNeueRegular", Helvetica, Arial, sans-serif;
-								line-height:50px;
-								height:50px;
-								width:230px;
-								display:block;
-								position:relative;
-								-webkit-box-shadow: 0 -1px 0 #8d8d94, 0 1px 1px #0b0b0c;
-								-moz-box-shadow:  0 -1px 0 #8d8d94, 0 1px 1px #0b0b0c;
-								box-shadow:  0 -1px 0 #8d8d94, 0 1px 1px #0b0b0c;
-								background: #52525c;
-								background: -webkit-gradient(linear, 0 bottom, 0 top, from(#383840 ), to(#5a5a64));
-								background: -moz-linear-gradient(-90deg, #5a5a64, #383840 );
-								-webkit-border-radius: 50px;
-								-moz-border-radius: 50px;
-								border-radius: 50px;
-								z-index:5;
-								-webkit-transition:width .2s ease-out;
-								-moz-transition:width .2s ease-out;
-								-o-transition:width .2s ease-out;
-								text-align:center;
-								text-shadow: 0  -1px 0 #000;
-							}
-
-							#btn-wrap:hover span.title12 {
-								font-size:19px;
-								width:135px;
-							}
-
-							#info {
-								position:absolute;
-								height:50px;
-								width:215px;
-								top:5px;
-								right:4px;
-								-webkit-box-shadow: 0 -1px 0 #404042, 0 1px 1px #0b0b0c;
-								-moz-box-shadow:   0 -1px 0 #404042, 0 1px 1px #0b0b0c;
-								box-shadow:   0 -1px 0 #404042, 0 1px 1px #0b0b0c;
-								background: #2a2a2d;
-								background: -webkit-gradient(linear, 0 bottom, 0 top, from(#212124 ), to(#2a2a2d));
-								background: -moz-linear-gradient(-90deg, #2a2a2d, #212124 );
-								-webkit-border-radius: 50px;
-								-moz-border-radius: 50px;
-								border-radius: 50px;
-								z-index:4;
-							}
-
-							#info p {
-								width:65px;
-								margin:12px 17px 0 0;
-								position:absolute;
-								right:0;
-								color:#7c7c84;
-								font:11px/12px Helvetica, Arial, sans-serif;
-								text-align:left;
-							}
-							</style>
-							<div id="wrap">
-										<a href="?download=' . $rows['id'] . '" id="btn-wrap">
-										<span class="title12" href="?download=' . $rows['id'] . '" >' . $rows['name'] . '</span>
-							<div id="info">
-							<p>
-							<strong>Скачали: '.$rows['downloads'].'</strong>
-							<span>'. formatfilesize(@filesize($rows['url']), true) .'</span>
-							</p>
-							</div>
-										</a>
-							</div>';
-							
+			$first = $this->LOADTPL('attach');
+			$stat = $first;
+			$position=strpos($stat,'[static]');
+			$stat=substr($stat,$position);
+			$position=strpos($stat,'[/static]');
+			$stat=substr($stat,0,$position);
+			$stat = preg_replace( "#\\[static]#ies", '', $stat);				
+			$first = preg_replace( "#\\[static](.*?)\\[/static]#ies", '', $first);			
+			echo $stat;			
+			while($rows = $db->getRow($q))
+			{				
+				if($core->auth->group_info['showAttach'] == 1)
+				{	
+					$replace = $first;
+					$replace = str_replace('{%NUMB%}', $rows['downloads'], $replace);
+					$replace = str_replace('{%SIZE%}', formatfilesize(@filesize($rows['url']), true), $replace);
+					$replace = str_replace('{%ID%}', $rows['id'], $replace);
+					$replace = str_replace('{%NAME%}', $rows['name'], $replace);						
+				}
+				else
+				{
+					$replace = _ACCESS_ATTACH;
+				}				
+				$text = str_replace('[attach=' . $rows['id'] . ']', $replace, $text);
 			}
-			else
-			{
-				$replace = _ACCESS_ATTACH;
-			}
-			
-			$text = str_replace('[attach=' . $rows['id'] . ']', $replace, $text);
-		}
-		
+		}		
 		return stripslashes($text);
 	}
 
