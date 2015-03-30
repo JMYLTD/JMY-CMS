@@ -25,6 +25,7 @@ class template
 	var $sources = false;
 	var $vars = array();
 	var $vars_block = array();
+	var $vars_tpl = array();
 	var $file_dir = '';
 	var $file = false;
 	var $tplDir = false;
@@ -251,6 +252,11 @@ class template
 	{
 		$this->vars_block[$k] = $v;
 	}
+	
+	public function setVarTPL($k, $v) 
+	{
+		$this->vars_tpl[$k] = $v;
+	}
 
 	public function parse() 
 	{
@@ -258,7 +264,7 @@ class template
 		if($url[0] != ADMIN)
 		{	
 			$in["#\\[group=(.+?)](.*?)\\[/group]#ies"] = "Group('\\1', '\\2')";
-			$in["#\\[nogroup=(.+?)](.*?)\\[/nogroup]#ies"] = "noGroup('\\1', '\\2')";
+			$in["#\\[nogroup=(.+?)](.*?)\\[/nogroup]#ies"] = "noGroup('\\1', '\\2')";			
 			$in["#\\[index:(.+?)\\](.*?)\\[/index\\]#ies"] = "indexShow('\\1', '\\2')";
 			$in["#\\[modules:(.+?):(.+?)](.*?)\\[/modules]#ies"] = "modulesShow('\\1', '\\2', '\\3')";
 			$in["#\\[lang:(.+?)]#ies"] =  "constant('\\1')";
@@ -290,6 +296,14 @@ class template
 			}
 		}
 
+		if (count($this->vars_tpl)) 
+		{
+			foreach ($this->vars_tpl as $key => $val) 
+			{
+				$in["#\\{" . $this->sep . $key . $this->sep . "}#ies"] = $val;
+			}
+		}
+		
 		if(!empty($in))
 		{
 			$this->sources = preg_replace(array_keys($in), array_values($in), $this->sources);
@@ -375,15 +389,16 @@ class template
 	{
 		ob_start();
 	}
+	
+
+	
 		
 	public function foot($subContent = false) 
 	{
 	global $config, $url, $db, $core;
 	
-			
-	
 		$content = ob_get_contents();
-		ob_end_clean();
+		ob_end_clean();		
 		$cat_keyword = $this->keywords ? ', ' .$this->keywords : false;		
 		$desc = $this->description ? $this->description : $config['description'];
 		
@@ -455,52 +470,19 @@ class template
 				$this->sources = $fullAjax[1];
 			}
 		}
-		$full_lnk = $config['url'].(!empty($url[0]) ? '/' : '').$url[0].(!empty($url[1]) ? '/' : '').$url[1].(!empty($url[2]) ? '/' : '').$url[2].(!empty($url[3]) ? '/' : '').$url[3];
+		$full_lnk = $config['url'].(!empty($url[0]) ? '/' : '').$url[0].(!empty($url[1]) ? '/' : '').$url[1].(!empty($url[2]) ? '/' : '').$url[2].(!empty($url[3]) ? '/' : '').$url[3];	
 		
-		
-		$this->setVar('META', $meta);
-		$this->setVar('MODULE', $content);		
-		
-		$this->setVarBlock('BLOCKS:FILE:(.*?)', "\$this->blockParse('\\1', 'file')");
-		$this->setVarBlock('BLOCKS:TYPE:(.*?)', "\$this->blockParse('\\1', 'type')");
-		$this->setVarBlock('BLOCKS:ID:([0-9]*)', "\$this->blockParse('\\1', 'id')");
-		
-		$this->setVar('FULL_AJAX:start', '<div id="fullAjax">');
-		$this->setVar('FULL_AJAX:end', '</div>');
-		$this->setVar('GENERATE', mb_substr(microtime(1) - TIMER, 0, 5));
-		$this->setVar('GZIP', $config['gzip'] ? 'GZIP Включён' : 'GZIP Выключён');
-		$this->setVar('SITE_NAME', $config['name']);
-		$this->setVar('SITE_SLOGAN', $config['slogan']);
-		$this->setVar('TIME_ZONE', mb_substr($db->timeQueries, 0, 5));
-		$this->setVar('MOD_NAME', $url[0]);
-		$this->setVar('THEME', 'usr/tpl/'.$this->tplDir);
-		$this->setVar('URL', $config['url']);
-		$this->setVar('FULL_LNK', $full_lnk);
-		$this->setVar('LICENSE', 'Powered by <a target="_blank" href="http://cms.jmy.su/">JMY CMS</a>');
-		$this->setVar('D_YEAR', date("Y"));
-		$this->setVar('D_MOTH', date("M"));
-		$this->setVar('D_DAY',  date("d"));
-		$this->setVar('ADMINLOG', $core->auth->isAdmin ? ' <a href="' . ADMIN . '">[Панель управления]</a>' : '');
-		$this->setVar('USER_AVATAR', avatar($core->auth->user_id));
-		$this->setVar('QUERIES', $db->numQueries);
-		
-		$this->setVar('URL_LOGIN', 'profile/login');
-		$this->setVar('URL_REG', 'profile/register');
-		$this->setVar('URL_FORGOT', 'profile/forgot_pass');
-		$this->setVar('URL_LOGOUT', 'profile/logout');
-		$this->setVar('URL_PROFIL', 'profile');
-		$this->setVar('URL_PM', 'pm');
-		$this->setVar('URL_BLOG', 'blog');
-		$this->setVar('URL_FORUM', 'board');
-		$this->setVar('URL_NEWS', 'news');
-		$this->setVar('URL_GUEST', 'guestbook');
-		$this->setVar('URL_GALLERY', 'gallery');
-		$this->setVar('URL_SITEMAP', 'sitemap');
-		$this->setVar('URL_FEEDBACK', 'feedback');	
-		$this->setVar('SEARCH', 'search');	
-		
+		include(ROOT.'boot/vars.class.php');	
 		$this->end();
         unset($this->cacheTpl);
+	}
+	
+	public function loadTPL($file) 
+	{
+		global $config, $url, $db, $core;
+		$this->loadFile($file);
+		include(ROOT.'boot/vars.class.php');	
+		return $this->return_end();
 	}
 		
 	public function open($file = null) 
@@ -601,9 +583,7 @@ class template
 								$contetn_block = $core->bbDecode($array['content']);
 								$this->uniqTag = array($array['id'], $array['type']);
 							}
-							else $contetn_block = '<center><b>' . _EMPTY_CONTENT . '</b></center>';
-							
-							$edit = $core->auth->isAdmin ? '<a href="javascript:void(0)" onclick="userBlockStatus(\''.$array['id'].'\', 0);" title="' . _DEACTIVATE . '"><img src="media/edit/ok.png" alt="" border="0" class="icon"  /></a><a href="' . ADMIN . '/blocks/add/'.$array['id'].'"><img src="media/edit/edit.png" alt="" border="0" class="icon" /></a><a href="javascript:void(0)" onclick="userBlockDelete('.$array['id'].');" title="' . _DELETE . '"><img src="media/edit/cross.png" alt="" border="0" class="icon" /></a> <span id="blockOk'.$array['id'].'"></span>' : '';
+							else $contetn_block = '<center><b>' . _EMPTY_CONTENT . '</b></center>';						
 							ob_start();
 							$this->loadFile('block');
 							$this->setVar('TITLE', $array['title']);
