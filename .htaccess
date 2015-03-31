@@ -1,4 +1,3 @@
-php_flag register_globals on
 RewriteEngine on
 
 #RewriteBase /
