@@ -3,7 +3,7 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
@@ -13,8 +13,6 @@ if (!defined('ACCESS')) {
     header('Location: /');
     exit;
 }
-
-require_once ROOT . 'etc/news.config.php';
 
 switch(isset($url[1]) ? $url[1] : null) 
 {
@@ -43,7 +41,7 @@ switch(isset($url[1]) ? $url[1] : null)
 		}
 		else
 		{
-			$core->tpl->info('Не введён поисковой запрос или составляет меньше 3-х символов!', 'warning');
+			$core->tpl->info(_SEARCH_FAIL, 'warning');
 		}
 		break;
 }

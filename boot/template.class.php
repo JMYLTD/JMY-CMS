@@ -3,13 +3,12 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
+* @revision	   31.03.2015
 */
-
-//Редакцтя от 10.01.2015
 
 if (!defined('ACCESS')) 
 {
@@ -62,7 +61,14 @@ class template
         
 		if(empty($this->file_dir))
 		{
-			$this->file_dir = 'usr/tpl/'.$config['tpl'].'/';
+			if (($config['smartphone']=='1')&&($this->check_phone()==true))
+			{
+				$this->file_dir = 'usr/tpl/smartphone/';
+			}
+			else
+			{
+				$this->file_dir = 'usr/tpl/'.$config['tpl'].'/';
+			}
 		}
 		
 		$this->filesTpl = getcache('tplFiles');
@@ -193,6 +199,21 @@ class template
 		$this->tplDir = $lo[2];
 		$this->startCompile = microtime(1);
 		$this->sources = $this->cacheTpl[$loadUrl];
+	}
+	
+	function check_phone() 
+	{ 
+		$agent_now = strtolower( $_SERVER['HTTP_USER_AGENT'] );
+		$agent_array = array('opera mini', 'ipad', 'android', 'pocket', 'palm', 'windows ce', 'windowsce', 'cellphone', 'opera mobi', 'ipod', 'small', 'sharp', 'sonyericsson', 'symbian', 'iphone', 'nokia', 'htc_', 'samsung', 'motorola', 'smartphone', 'blackberry', 'playstation portable', 'tablet browser'); 
+		foreach ($agent_array as $agent) 
+		{ 
+			if ( strpos($agent_now, $agent) !== false )
+			{
+				return true;
+			}
+ 
+		}
+		return false; 
 	}
 	
 	

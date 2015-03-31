@@ -3,11 +3,11 @@ if (!defined('ACCESS')) {
     header('Location: /');
     exit;
 }
-
-$where = " AND title LIKE '%" . $db->safesql($query) . "%' OR short LIKE '%" . $db->safesql($query) . "%'  OR short LIKE '%" . $db->safesql($query) . "%'";
-$where .= ' AND c.lang = \'' . $core->InitLang() . '\'';
+loadConfig('news');
 $core->loadModLang('news');
 $core->tempModule = 'news';
+$where = " AND title LIKE '%" . $db->safesql($query) . "%' OR short LIKE '%" . $db->safesql($query) . "%'  OR short LIKE '%" . $db->safesql($query) . "%'";
+$where .= ' AND c.lang = \'' . $core->InitLang() . '\'';
 $page = init_page();
 $cut = ($page-1)*$news_conf['num'];
 $queryDB = $db->query("SELECT n.*, c.* FROM ".DB_PREFIX."_news as n LEFT JOIN ".DB_PREFIX."_langs as c on(c.postId=n.id and c.module='news') WHERE active!='0' " . $where . " ORDER BY fixed DESC, date DESC LIMIT " . $cut . ", " . $news_conf['num'] . "");

@@ -206,7 +206,24 @@ class bb
 					<script type="text/javascript">SyntaxHighlighter.all();</script>';
 			}
 		}
-		
+		if(eregStrt("!--audio:", $text))
+		{
+		$core->tpl->endJs = "
+							 <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js\"></script>
+							 <script src=\"http://progressionstudios.com/player/build/mediaelement-and-player.min.js\"></script>
+							 <script src=\"http://progressionstudios.com/player/build/mep-feature-playlist.js\"></script>
+							 <link rel=\"stylesheet\" href=\"http://progressionstudios.com/player/css/progression-player.css\" />
+							 <link href=\"http://progressionstudios.com/player/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+							 <link rel=\"stylesheet\" href=\"http://progressionstudios.com/player/css/skin-minimal-light.css\" />				
+							 <script>
+							 $('.progression-single').mediaelementplayer({
+								audioWidth: 400, 
+								audioHeight:40,
+								startVolume: 0.5, 
+								features: ['playpause','current','progress','duration','tracks','volume','fullscreen']
+								});
+							 </script>";
+		}
 		return preg_replace($in, $out, $text);
 	}
 	
@@ -474,6 +491,9 @@ class bb
             '%<!--flash-->.*?src="(.*?)".*?<!--flash:end-->%ius',
             '%<!--flash:([0-9]*)x([0-9]*)-->.*?src="(.*?)".*?<!--flash:end-->%ius',
             '%<!-- video:(.*?):(.*?) -->.*?value="(.*?)".*?<!-- video:(.*?):end -->%ius',
+			'%<!-- video:youtube:(.*?) -->.*?src="(.*?)".*?<!-- video:youtube:end -->%ius',
+			'%<!-- video:rutube:(.*?) -->.*?src="(.*?)".*?<!-- video:rutube:end -->%ius',
+			'%<!-- video:twitch:(.*?) -->.*?src="(.*?)".*?<!-- video:twitch:end -->%ius',
             '%<!--video:flv-->.*?&amp;file=(.*?)".*?<!--video:end-->%ius',
             '%<!--audio-->.*?&amp;file=(.*?)".*?<!--audio:end-->%ius',
             '%<!--spoiler--><div class="spoiler">.*?<span class="_spoilertitle">(.*?)</span>.*?style="display:none;">%ius',
@@ -515,7 +535,10 @@ class bb
 			"\$this->imgDecode('\\1', '\\2', '', 'thumb')",
 			"[flash]\\1[/flash]",
 			"[flash=\\1x\\2]\\3[/flash]",
-			"[video]\\3[/video]",
+			"[video]\\3[/video]",			
+			"[video]\\2[/video]",
+			"[video]http://rutube.ru/video/\\1[/video]",
+			"[video]http://www.twitch.tv/\\1[/video]",
 			"[video]\\1[/video]",
 			"[audio]\\1[/audio]",
 			"[spoiler=\\1]",
@@ -579,22 +602,76 @@ class bb
 			parse_str($parseUrl['query'], $query);
 		}
 		$host = getHost($url);
-		$type = getExt($url);	
-
+		$type = getExt($url);
 		if($host == 'youtube.com')
-		{
-			$id = eregStrt('/v/', $url) ? str_replace('http://www.youtube.com/v/', '', $url) : $query['v'];
-			if($id)
+		{	
+			if (eregStrt('/v/', $url))
 			{
-				return '<!-- video:youtube:' . $id . ' --><object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/' . $id . '"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' . $id . '" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object><!-- video:youtube:end -->';
+				$id = str_replace('http://www.youtube.com/v/', '', $url);
+			}
+			elseif (eregStrt('/embed/', $url))
+			{
+				$id = str_replace('http://www.youtube.com/embed/', '', $url);
+			}			
+			else
+			{
+				$id = $query['v'];
+			}			
+			if($id)
+			{			
+				return '<!-- video:youtube:' . $id . ' --><iframe width="640" height="385" src="http://www.youtube.com/embed/'.$id.'" frameborder="0" allowfullscreen></iframe><!-- video:youtube:end -->';
 			}
 		}
+		
 		elseif($host == 'rutube.ru')
-		{
-			$id = $query['v'];
-			if($id)
+		{			
+			if (eregStrt('/video/', $url))
 			{
-				return '<!-- video:rutube:' . $id . ' --><object width="470" height="353"><param name="movie" value="http://video.rutube.ru/' . $id . '"></param><param name="wmode" value="window"></param><param name="allowfullscreen" value="true"></param><embed src="http://video.rutube.ru/' . $id . '" type="application/x-shockwave-flash" wmode="window" width="470" height="353" allowfullscreen="true" ></embed></object><!-- video:rutube:end -->';
+				$id = str_replace('http://rutube.ru/video/', '', $url);
+				$position = strpos($id,'/');
+				if (!isset($position))
+				{
+					$id = substr($id,0,$position);
+				}
+			}
+			elseif (eregStrt('/play/embed/', $url))
+			{
+				$id = str_replace('http://rutube.ru/play/embed/', '', $url);
+				$position = strpos($id,'?');
+				if (!isset($position))
+				{
+					$id = substr($id,0,$position);
+				}
+			}			
+			else
+			{
+				$id = $query['v'];
+			}
+			if($id)
+			{			
+				return '<!-- video:rutube:' . $id . ' --><iframe width="640" height="385" src="http://rutube.ru/play/embed/'.$id.'?autoStart=false" frameborder="0" allowfullscreen></iframe><!-- video:rutube:end -->';
+			}
+			
+		}
+		elseif($host == 'twitch.tv')
+		{			
+			if (eregStrt('twitch.tv/', $url))
+			{
+				$id = str_replace('http://www.twitch.tv/', '', $url);				
+				$position = strpos($id,'/');
+				if (!isset($position))
+				{
+					$id = substr($id,0,$position);
+				}
+				
+			}		
+			else
+			{
+				$id = $query['v'];
+			}
+			if($id)
+			{			
+				return '<!-- video:twitch:' . $id . ' --><iframe width="640" height="385" src="http://www.twitch.tv/'.$id.'/embed?autoplay=false" frameborder="0" allowfullscreen></iframe><!-- video:twitch:end -->';
 			}
 		}	
 		elseif($host == 'smotri.com')
@@ -615,7 +692,7 @@ class bb
 		{
 			$code = rand(1, 100000);
 			$arr = explode('/', $url);
-			return '<!--audio--><object id="audioplayer' . $code . '" type="application/x-shockwave-flash" data="usr/plugins/uppod.swf" width="328" height="44"><param name="allowScriptAccess" value="always" /><param name="wmode" value="transparent" /><param name="movie" value="usr/plugins/uppod.swf" /><param name="flashvars" value="comment=' . end($arr) . '&amp;st=usr/plugins/audioSkin.txt&amp;file=' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '" /></object><!--audio:end-->';
+			return '<!--audio--><div class="progression-skin progression-minimal-light"><audio class="wp-audio-shortcode" id="audio-6-1" preload="none" style="width: 100%; visibility: hidden;" controls="controls"><source type="audio/mpeg" src="' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '" /><a href="' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '">' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '</a></audio></div><!--audio:end-->';
 		}
 	}
 	

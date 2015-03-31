@@ -3,10 +3,11 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
+* @revision	   28.03.2015
 */
 
 if (!defined('ADMIN_SWITCH')) {
@@ -14,7 +15,6 @@ if (!defined('ADMIN_SWITCH')) {
     exit;
 }
 
-//Список страниц (готовое)
 function content_main() 
 {
 global $adminTpl, $core, $db, $admin_conf;
@@ -34,13 +34,13 @@ global $adminTpl, $core, $db, $admin_conf;
 						<table class="table no-margin">
 							<thead>
 								<tr>
-									<th class="col-md-1"><span class="pd-l-sm"></span>ID</th>
-									<th class="col-md-2">' . _TITLE . '</th>
-									<th class="col-md-2">' . _N_LINK . '</th>
-									<th class="col-md-1">' . _DATE . '</th>
-									<th class="col-md-3">' . _N_WORD .'</th>
-									<th class="col-md-3">' . _ACTIONS . '</th>
-									<th class="col-md-4"><input type="checkbox" name="all" onclick="setCheckboxes(\'tablesForm\', true); return false;"></th>
+									<th><span class="pd-l-sm"></span>ID</th>
+									<th class="col-md-3">' . _TITLE . '</th>
+									<th class="col-md-1">' . _N_LINK . '</th>
+									<th class="col-md-2">' . _DATE . '</th>
+									<th class="col-md-4">' . _N_WORD .'</th>
+									<th class="col-md-2">' . _ACTIONS . '</th>
+									<th class="col-md-1"><input type="checkbox" name="all" onclick="setCheckboxes(\'tablesForm\', true); return false;"></th>
 								</tr>
 							</thead>
 							<tbody>';
@@ -52,7 +52,7 @@ global $adminTpl, $core, $db, $admin_conf;
 				<tr '.(($content['active'] == 0) ? 'class="danger"' : '' ).'>
 				<td><span class="pd-l-sm"></span>' . $content['id'] . '</td>
 				<td>' . $content['title'] . '</td>
-				<td><a href="' . $contentLink . $content['translate'] . '.html">перейти</a></td>
+				<td><a target="_blank" href="' . $contentLink . $content['translate'] . '.html">'._N_REFER.'</a></td>
 				<td>' . formatDate($content['date'], true) . '</td>
 				<td>' . (!empty($content['keywords']) ? str($content['keywords'], 20) : _NO) . '</td>
 				<td>
@@ -101,7 +101,6 @@ global $adminTpl, $core, $db, $admin_conf;
 	$adminTpl->admin_foot();
 } 
 
-//Добавить страницу (готовое)
 function content_add($nid = null) 
 {
 global $adminTpl, $core, $db, $core, $config;
@@ -143,7 +142,7 @@ global $adminTpl, $core, $db, $core, $config;
 		$lln = _N_ADDPAGE;
 		$dosave = _ADD;		
 	}	
-	if (empty($theme)) {  $placeholder = 'placeholder="По умолчанию"';}
+	if (empty($theme)) {  $placeholder = 'placeholder="'._N_DEFAULT.'"';}
 	$cats_arr = $core->aCatList('content');	
 	$adminTpl->admin_head(_MODULES . ' | ' . $lln);
 	require ROOT . 'usr/plugins/ajax_upload/init.php';
@@ -169,7 +168,7 @@ global $adminTpl, $core, $db, $core, $config;
 										<div class="form-group">
 					<label class="col-sm-3 control-label">'. _N_ADDTITLE .'</label>
 					<div class="col-sm-4">
-						<input type="text" name="title" onchange="getTranslit(gid(\'title\').value, \'translit\'); caa(this);" value="' . (isset($title[$config['lang']]) ? $title[$config['lang']] : '') . '" class="form-control" id="title"  data-parsley-required="true" data-parsley-trigger="change">
+						<input type="text" name="title" '. (!isset($nid) ? 'onchange="getTranslit(gid(\'title\').value, \'translit\'); caa(this);"' : '').'  value="' . (isset($title[$config['lang']]) ? $title[$config['lang']] : '') . '" class="form-control" id="title"  data-parsley-required="true" data-parsley-trigger="change">
 					</div>
 				</div>
 				<div class="form-group">
@@ -249,7 +248,6 @@ echo'								</div>
 	$adminTpl->admin_foot();
 } 
 
-//сохранение страницы (готовое)
 function content_save() 
 {
 global $adminTpl, $core, $db, $cats, $groupss, $config;
@@ -455,8 +453,7 @@ switch(isset($url[3]) ? $url[3] : null) {
 		if(isset($_POST['conf_file']))
 		{
 			$ok = true;
-		}
-		
+		}		
 		generateConfig($configBox, 'content', '{MOD_LINK}/config', $ok);
 		break;
 }

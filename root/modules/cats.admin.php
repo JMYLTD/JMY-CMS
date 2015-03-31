@@ -83,7 +83,7 @@ global $adminTpl, $config, $core, $admin_conf, $db;
 	} 	
 	else 
 	{
-	echo '<div class="panel-heading">'  . _NO_CATS . '</div>';		
+	echo '<div class="panel-heading">'  . _CAT_NO_CATS . '</div>';		
 	}
 	echo'</section></div></div>';
 	$adminTpl->admin_foot();

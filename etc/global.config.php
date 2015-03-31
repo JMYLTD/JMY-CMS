@@ -19,6 +19,7 @@ $config['lang'] = "ru";
 $config['uniqKey'] = "muq7brge4p";
 $config['timezone'] = "Europe/Kaliningrad";
 $config['tpl'] = "JMY_yellow";
+$config['smartphone'] = "1";
 $config['dbType'] = "mysql";
 $config['imageEffect'] = "shadowbox";
 $config['support_mail'] = "test@test.ru";

@@ -3,14 +3,17 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
+* @revision	   28.03.2015
 */
 
 
 define('_N_PAGE', 'Страницы');
+define('_N_REFER', 'перейти');
+define('_N_DEFAULT', 'По умолчанию');
 define('_N_LINK', 'Ссылка');
 define('_N_DATE', 'Дата');
 define('_N_WORD', 'Ключевые слова');

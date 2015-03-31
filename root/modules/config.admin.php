@@ -7,7 +7,7 @@
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
-* @revision	   06.03.2015
+* @revision	   31.03.2015
 */
 
 if (!defined('ADMIN_ACCESS')) {
@@ -100,9 +100,13 @@ $configBox = array(
 					'tpl' => array(
 						'title' => _GLOBAL_OTHER_TPLT,
 						'description' => _GLOBAL_OTHER_TPLD,
-						'content' => changeTpl(),
-						'multilang' => true
-					),						
+						'content' => changeTpl(),						
+					),
+					'tpl' => array(
+						'title' => _GLOBAL_OTHER_TPL_MOBI,
+						'description' => _GLOBAL_OTHER_TPL_MOBI_DESC,
+						'content' => conf_radio("smartphone", $config['smartphone']),
+					),
 					'dbType' => array(
 						'title' => _GLOBAL_OTHER_DBTYPET,
 						'description' => _GLOBAL_OTHER_DBTYPED,
@@ -138,18 +142,7 @@ $configBox = array(
 						'description' => _GLOBAL_GLOBALFUNC_OFF_TEXTD,
 						'content' => "<textarea cols=\"30\" rows=\"5\" name=\"{varName}\" class=\"form-control\" id=\"off_text\">{var}</textarea>",
 						'multilang' => true
-					),
-					'fullajax' => array(
-						'title' => _GLOBAL_GLOBALFUNC_FULLAJAXT,
-						'description' => _GLOBAL_GLOBALFUNC_FULLAJAXD,
-						'content' => conf_radio("fullajax", $config['fullajax']),
-						'help' => ADMIN . '/help/fullajax'
-					),
-					'reffer' => array(
-						'title' => _GLOBAL_GLOBALFUNC_REFFERT,
-						'description' => _GLOBAL_GLOBALFUNC_REFFERD,
-						'content' => conf_radio("reffer", $config['reffer']),
-					),
+					),								
 					'cache' => array(
 						'title' => _GLOBAL_GLOBALFUNC_CACHET,
 						'description' => _GLOBAL_GLOBALFUNC_CACHED,

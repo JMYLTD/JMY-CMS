@@ -17,7 +17,6 @@ if (!defined('ACCESS')) {
 }
 
 loadConfig('news');
-require_once ROOT . 'usr/modules/news/feed/index.php';
 
 function main($cat = null) 
 {
@@ -325,7 +324,7 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag, $cache;
 		$core->tpl->setVar('DATE', formatDate($news['date']));
 		$core->tpl->setVar('ID', $news['id']);
 		$core->tpl->setVar('RATING', $news['allow_rating'] ? draw_rating($news['id'], 'news', $news['score'], $news['votes']) : '');
-		$core->tpl->setVar('EDIT', $core->auth->isAdmin ? "<a onclick=\"return dropdownmenu(this, event, menu_news, '150px', '" . $news['id'] . "', '" . (!empty($news['full']) ? 'full' : 'short') . "')\" onmouseout=\"delayhidemenu()\" href=\"javascript:void(0);\"><img src=\"media/edit/plus.png\" border=\"0\" class=\"icon\" alt=\"\" /></a>" : '');
+		$core->tpl->setVar('EDIT', ($core->auth->isModer||$core->auth->isAdmin) ? "<a onclick=\"return dropdownmenu(this, event, menu_news, '150px', '" . $news['id'] . "', '" . (!empty($news['full']) ? 'full' : 'short') . "')\" onmouseout=\"delayhidemenu()\" href=\"javascript:void(0);\"><img src=\"media/edit/plus.png\" border=\"0\" class=\"icon\" alt=\"\" /></a>" : '');
 		$related_cache = $cache->do_get('related_'.$news['id']);
 		if(empty($related_cache) && $news_conf['related_news'] > 0)
 		{
