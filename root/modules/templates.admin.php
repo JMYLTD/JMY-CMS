@@ -373,6 +373,8 @@ echo '
 		$file = (isset($url[3]) && file_exists('usr/tpl/' . $config['tpl'] . '/'.str_replace(array('=', '_css'), array('/', '.css'), $url[3]))) ? str_replace(array('=', '_css'), array('/', '.css'), $url[3]) : 'assest/css/engine.css';
 		$text = htmlspecialchars(file_get_contents(ROOT . 'usr/tpl/' . $config['tpl'] . '/'.$file), ENT_QUOTES);
 		$count_rows = count(explode("\n", $text))*16;
+		if (file_exists($file))
+		{
 		echo '<div class="row">
 						<div class="col-lg-12">
 							<section class="panel">
@@ -382,17 +384,23 @@ echo '
 								<div class="panel-body">
 									<div class="switcher-content">';		
 		echo '<div class="_edit_right">';
+							
+			echo '<form action="{ADMIN}/templates/savecss/' .  str_replace(array('/', '.css'), array('=', '_css'), $file) . '"  method="post" style="margin:0; padding:0;"><div class="_code"><textarea name="usr/tpl/' . $config['tpl'] . '/'. $file . '" class="textarea" id="_code">' .$text . '</textarea><br /><div class="_save_me"><input name="submit" type="submit" class="btn btn-success" value="'._SAVE.'" /> </div></div></form>';
 		
-		echo '<form action="{ADMIN}/templates/savecss/' .  str_replace(array('/', '.css'), array('=', '_css'), $file) . '"  method="post" style="margin:0; padding:0;"><div class="_code"><textarea name="usr/tpl/' . $config['tpl'] . '/'. $file . '" class="textarea" id="_code">' .$text . '</textarea><br /><div class="_save_me"><input name="submit" type="submit" class="btn btn-success" value="'._SAVE.'" /> </div></div></form>';
 		echo '</div><br style="clear:both" />';
 		echo '<script src="' . $config['url'] . '/usr/plugins/highlight_code/codemirror.js" type="text/javascript"></script><script type="text/javascript">var editor = CodeMirror.fromTextArea(\'_code\', {height: "dynamic",parserfile: ["parsecss.js"],stylesheet: ["' . $config['url'] . '/usr/plugins/highlight_code/csscolors.css"], path: "' . $config['url'] . '/usr/plugins/highlight_code/", lineNumbers: true});
 </script>';
-echo '										
+		echo '										
 							</div>
 						</div>
 					</section>
 				</div>
 			</div>';
+			}
+		else
+		{
+			$adminTpl->info(_TPL_NO_CSS);	
+		}
 		$adminTpl->close();
 		$adminTpl->admin_foot();
 		break;

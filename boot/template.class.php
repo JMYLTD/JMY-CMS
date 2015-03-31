@@ -429,7 +429,6 @@ class template
 		$meta .= "<meta name=\"description\" content=\"" . $desc . "\" />" . "\n";
 		$meta .= "<meta name=\"author\" content=\"JMY CMS\" />" . "\n";
 		$meta .= "<base href=\"" . $config['url'] . "/\" />" . "\n";
-		$meta .= "<meta name=\"revisit-after\" content=\"1 days\" />" . "\n";
 		$meta .= "<meta name=\"robots\" content=\"index, follow\" />" . "\n";
 		$meta .= "<meta name=\"generator\" content=\"JMY CMS\" />" . "\n";		
 		$meta .= "<link rel=\"alternate\" href=\"" . $config['url'] . "/feed/rss/" . $this->feed_link . "\" type=\"application/rss+xml\" title=\"Rss 2.0\" />" . "\n";

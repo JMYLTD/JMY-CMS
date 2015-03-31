@@ -349,6 +349,7 @@ define('_TPL_LOAD', 'Скачать шаблон');
 define('_TPL_DEL', 'Удалить шаблон');
 define('_TPL_EDET', 'Редактировать шаблон');
 define('_TPL_EDET_CSS', 'Редактировать стили');
+define('_TPL_NO_CSS', 'Выберите css файл для редактирования!');
 define('_TPL_EDET_CH', 'Выбор файла tpl');
 define('_TPL_EDET_CSS_CH', 'Выбор файла css');
 define('_TPL_FOLD_MAIN', 'Главное');
