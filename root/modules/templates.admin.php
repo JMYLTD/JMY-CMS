@@ -66,16 +66,19 @@ switch(isset($url[2]) ? $url[2] : null)
 				</div>
 			</div>';	
 		$adminTpl->close();		
-		echo '<div class="row">
-				<div class="col-lg-12">			
-					<div class="row">';
-		$adminTpl->open();		
+		$ni=0;
 		foreach(glob(ROOT.'usr/tpl/*') as $dir)
 		{
+			
 			$_name = basename($dir);
-			if(is_dir($dir) && $_name != 'admin' && $_name != 'default')
+			if(is_dir($dir) && $_name != 'admin' && $_name != 'default' && $_name != 'smartphone')
 			{
-				if (($_name<>'JMY_yellow')and($_name<>'JMY_white')){
+				$ni++;				
+				if (($ni % 5 == 0)||($ni==1))
+				{
+					echo '<div class="row">';
+				}				
+				if (($_name<>'JMY_yellow')and($_name<>'JMY_white')and($_name<>'JMY_blue')){
 				$stand=_TPL_OUT;
 				}
 				else 
@@ -98,16 +101,22 @@ switch(isset($url[2]) ? $url[2] : null)
 								</ul>
 							</div>
 							<div class="panel-footer text-center">
-								<button '. ($config['tpl'] == $_name ? 'class="btn btn-default btn-block" >'._CHOOSED : 'class="btn btn-success btn-block" onclick="location.href=\'{ADMIN}/templates/choose/' . $_name . '\';">'._CHOOSE.'</div>') .'</button>
+								<button '. ($config['tpl'] == $_name ? 'class="btn btn-default btn-block" >'._CHOOSED : 'class="btn btn-success btn-block" onclick="location.href=\'{ADMIN}/templates/choose/' . $_name . '\';">'._CHOOSE) .'</button>
 							</div>
 						</div>
 					</div>';
+				if (($ni % 4 == 0))
+				{
+					echo '</div>';
+				}
+				
 			}
+			
 		}
-		echo '</div>
-			</div>
-		</div>';
-		$adminTpl->close();
+		if (($ni % 4 != 0)&&($ni!=0))
+		{
+			echo '</div>';
+		}
 		$adminTpl->admin_foot();
 		break;
 		
