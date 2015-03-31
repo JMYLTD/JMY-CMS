@@ -172,47 +172,6 @@ $configBox = array(
 			)
 		),
 	),
-	'fullajax' => array(
-		'varName' => 'fullajax',
-		'title' => _FULLAJAX,
-		'groups' => array(
-			'main' => array(
-				'title' => _FULLAJAX_MAIN,
-				'vars' => array(
-					'loader' => array(
-						'title' => _FULLAJAX_MAIN_LOADERT,
-						'description' => _FULLAJAX_MAIN_LOADERD,
-						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
-					),							
-					'loaderStatic' => array(
-						'title' => _FULLAJAX_MAIN_LOADERSTATICT,
-						'description' => _FULLAJAX_MAIN_LOADERSTATICD,
-						'content' => conf_radio("loaderStatic", $fullajax['loaderStatic']),
-					),						
-					'replace' => array(
-						'title' => _FULLAJAX_MAIN_REPLACET,
-						'description' => _FULLAJAX_MAIN_REPLACED,
-						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
-					),							
-					'blockLinks' => array(
-						'title' => _FULLAJAX_MAIN_BLOCKLINKST,
-						'description' => _FULLAJAX_MAIN_BLOCKLINKSD,
-						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
-					),						
-					'storage' => array(
-						'title' => _FULLAJAX_MAIN_STORAGET,
-						'description' => _FULLAJAX_MAIN_STORAGED,
-						'content' => conf_radio("storage", $fullajax['storage']),
-					),							
-					'freeCode' => array(
-						'title' => _FULLAJAX_MAIN_FREECODET,
-						'description' => _FULLAJAX_MAIN_FREECODED,
-						'content' => '<textarea cols="30" rows="3" name="{varName}" class="form-control">{var}</textarea>',
-					),					
-				)
-			),					
-		)
-	),	
 	'security' => array(
 		'varName' => 'security',
 		'title' => _SECURITY,
@@ -635,7 +594,6 @@ $configBox = array(
 			),
 		)
 	),	
-
 	'log' => array(
 		'varName' => 'log_conf',
 		'title' => _LOG,
@@ -828,7 +786,7 @@ global $adminTpl, $config;
 	$c=0;
 	while ($file = readdir($dh)) 
 	{
-		if(is_dir($path.$file) && $file != '.' && $file != '..' && $file != 'admin' && $file != 'default') 
+		if(is_dir($path.$file) && $file != '.' && $file != '..' && $file != 'admin' && $file != 'default'&& $file != 'smartphone') 
 		{
 			$select = ($file == $config['tpl']) ? ' selected' : '';
 			$content .= "<option value=\"$file\"$select>$file</option>";
@@ -1013,6 +971,10 @@ switch(isset($url[2]) ? $url[2] : null) {
 			$adminTpl->close();
 			foreach(glob(ROOT.'usr/modules/*/admin/list.php') as $listed) 
 			{
+				$file = $listed;
+				$file = str_replace(ROOT.'usr/modules/', '', $file);
+				$file = str_replace('/admin/list.php', '', $file);				
+				$core->loadLangFile('usr/modules/'.$file.'/admin/lang/{lang}.admin.php');
 				include($listed);
 			}
 			

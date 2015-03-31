@@ -165,10 +165,7 @@
 									</li>
 									<li>
 										<a href="administration/blocks"><span>[alang:_PANEL_MENU_EXP_BLOCKS]</span></a>
-									</li>
-									<li>
-										<a href="administration/lang"><span>[alang:_PANEL_MENU_EXP_LANG]</span></a>
-									</li>
+									</li>									
 									<li>
 										<a href="administration/templates"><span>[alang:_PANEL_MENU_EXP_TPL]</span></a>
 									</li>									

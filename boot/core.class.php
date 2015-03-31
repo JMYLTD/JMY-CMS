@@ -117,7 +117,10 @@ class core
 		}
 		else
 		{
-			require_once(ROOT . str_replace('{lang}', 'ru', $str));
+			if(file_exists(ROOT . str_replace('{lang}', 'ru', $str))) 
+			{
+				require_once(ROOT . str_replace('{lang}', 'ru', $str));
+			}
 		}
 	}
 	
