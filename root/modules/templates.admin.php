@@ -382,7 +382,7 @@ echo '
 		$file = (isset($url[3]) && file_exists('usr/tpl/' . $config['tpl'] . '/'.str_replace(array('=', '_css'), array('/', '.css'), $url[3]))) ? str_replace(array('=', '_css'), array('/', '.css'), $url[3]) : 'assest/css/engine.css';
 		$text = htmlspecialchars(file_get_contents(ROOT . 'usr/tpl/' . $config['tpl'] . '/'.$file), ENT_QUOTES);
 		$count_rows = count(explode("\n", $text))*16;
-		if (file_exists($file))
+		if (file_exists(ROOT.'usr/tpl/' . $config['tpl'] . '/'.$file))
 		{
 		echo '<div class="row">
 						<div class="col-lg-12">
