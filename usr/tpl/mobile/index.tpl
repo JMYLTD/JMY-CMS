@@ -19,6 +19,7 @@
 <link href="{%THEME%}/styles/swipebox.css"		 rel="stylesheet" type="text/css">
 <link href="{%THEME%}/styles/font-awesome.css"	 rel="stylesheet" type="text/css">
 <link href="{%THEME%}/styles/animate.css"			 rel="stylesheet" type="text/css">
+<link href="{%THEME%}/styles/engine.css"            rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{%THEME%}/scripts/jquery.js"></script>
 <script type="text/javascript" src="{%THEME%}/scripts/jqueryui.js"></script>
 <script type="text/javascript" src="{%THEME%}/scripts/framework.plugins.js"></script>
@@ -51,6 +52,7 @@
 <div class="blog-search-btn"><input type="submit" class="button button-green" value="Найти"></div>
 </form>
 </div>
+<div class="decoration"></div>
 [/index]
 [/modules]
 [modules:news,profile:0]{%MODULE%}[/modules]        

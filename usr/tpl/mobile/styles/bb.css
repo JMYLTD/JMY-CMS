@@ -1,6 +1,13 @@
 .textarea 
 {
-	width:100%;
+	width: 100%;
+	background-color:rgba(255,255,255,0.4);
+	font-size:12px;
+	border:solid 1px #cacaca;
+	color: #666;
+}
+.textarea:focus{
+    border:solid 1px #27ae60;
 }
 
 #bb_area {}
