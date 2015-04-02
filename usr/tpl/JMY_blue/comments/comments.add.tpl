@@ -40,6 +40,7 @@
 <input type="hidden" name="mod" value="{%MOD%}" id="mod" />
 <button type="submit" name="submit" id="sub" onclick="comment_post('commentBox'); return false;" class="btn btn-ar pull-right btn-primary">Добавить комментарий</button>
 </form>
+<div class="section-title"></div>
 </section>
 [/open]
 <script type="text/javascript">
