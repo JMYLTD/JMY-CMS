@@ -1,0 +1,133 @@
+.rating_layer
+{
+	font-size:12px;
+	display:inline-block;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+.rating_layer span
+{
+	margin-left:1px;
+	margin-right:1px;
+}
+
+.rating_plus
+{
+	color:green;
+	vertical-align:middle;
+	font-weight:bold;
+}
+
+.rating_minus
+{
+	color:red;
+	vertical-align:middle;
+	font-weight:bold;
+}
+
+.star-rating {
+	list-style:none;
+	margin: 0px;
+	padding:0px;
+	height: 19px;
+	position: relative;
+	background: url(../../assest/images/engine/rat.gif) top left no-repeat;
+}
+
+.star-rating li {
+	padding:0px;
+	margin:0px;
+	float: left;
+}
+
+.star-rating li a {
+	display:block;
+	width:19px;
+	height: 19px;
+	text-decoration: none;
+	text-indent: -9000px;
+	z-index: 20;
+	position: absolute;
+	padding: 0px;
+}
+
+.star-rating li a:hover {
+	background: url(../../assest/images/engine/rat.gif) left center;
+	z-index: 1;
+	left: 0px;
+	border:none;
+}
+.star-rating a.one-star {
+	left: 0px;
+}
+
+.star-rating a.one-star:hover {
+	width:19px;
+}
+
+.star-rating a.two-stars {
+	left:19px;
+}
+
+.star-rating a.two-stars:hover {
+	width:38px;
+}
+
+.star-rating a.three-stars {
+	left:38px;
+}
+
+.star-rating a.three-stars:hover {
+	width:57px;
+}
+
+.star-rating a.four-stars {
+	left:57px;
+}
+
+.star-rating a.four-stars:hover {
+	width:76px;
+}
+
+.star-rating a.five-stars {
+	left:76px;
+}
+
+.star-rating a.five-stars:hover {
+	width: 95px;
+}
+
+.star-rating li.choosen {
+	background: url(../../assest/images/engine/rat.gif) left bottom; 
+	position: absolute; 
+	height: 19px; 
+	display: block; 
+	text-indent: -9000px; 
+	z-index: 1;
+}
+
+.title_quote {
+  text-align: left;
+  display: inline-block;
+  background: #fbe9d9;
+  font-style: italic;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-left: solid 2px #f0b37e;
+}
+.quote {
+  font-style: italic;
+  background: #fbe9d9;
+  padding: 10px;
+  text-align: left;
+  margin: 0 0 10px 0;
+  border-left: solid 2px #f0b37e;
+}
+
+.spoiler {
+  background: #e7f2fa;
+  color: #2980b9;
+  padding: 5px;
+  border-left: solid 2px #53D6BA;
+}

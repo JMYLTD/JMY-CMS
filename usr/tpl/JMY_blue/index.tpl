@@ -20,6 +20,7 @@
     <link href="{%THEME%}/assets/css/style-blue.css" rel="stylesheet" media="screen" title="default">
     <link href="{%THEME%}/assets/css/width-boxed.css" rel="stylesheet" media="screen" title="default">
     <link href="{%THEME%}/assets/css/buttons.css" rel="stylesheet" media="screen">
+    <link href="{%THEME%}/assets/css/engine.css" rel="stylesheet" media="screen">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
