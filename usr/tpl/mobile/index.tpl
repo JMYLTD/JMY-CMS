@@ -57,9 +57,6 @@
 [/modules]
 [modules:news,profile:0]{%MODULE%}[/modules]        
 [modules:news:1]<div class="blog-posts">{%MODULE%}</div>[/modules] 
-<div class="blog-sidebar">
-[index:1]{%TPL:category%}[/index] 
-</div>
 <div class="decoration"></div>
 {%TPL:footer%}        
 </div>
