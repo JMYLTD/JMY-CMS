@@ -15,6 +15,6 @@ ul._bb li a:hover {background:url(../../assest/images/engine/bb_but.png) bottom 
 .bb_smiles span { float: left; height: 42px; margin-left:5px; }
 .bb_boxed { border: 1px solid #cccccc; background-color: #f0f0f0; padding:10px;margin-top:2px;text-align:left;}
 .bb_smiles img {vertical-align:middle;margin-right:5px;margin-bottom:5px;}
-.quote {	border: 1px dotted #CCCCCC; background:#F4F3E9; color:#333333; padding:15px; margin-left:10px; padding-top:5px; padding-bottom:5px;}
-.spoiler {	border: 1px dotted #CCCCCC; background:#f7f7f7; color:#333333; padding:5px;}
+.bb_quote {	border: 1px dotted #CCCCCC; background:#F4F3E9; color:#333333; padding:15px; margin-left:10px; padding-top:5px; padding-bottom:5px;}
+.bb_spoiler {	border: 1px dotted #CCCCCC; background:#f7f7f7; color:#333333; padding:5px;}
 ._pointer{cursor:pointer;}
