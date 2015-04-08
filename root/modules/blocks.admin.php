@@ -472,6 +472,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 		$zeroDirs = glob(ROOT.'usr/blocks/config/*.config.php');		
 		$_names['cats.config.php'] = _BLOCK_CATS;	
 		$_names['online.config.php'] = _BLOCK_ONLINE;	
+		$_names['poll.config.php'] = _BLOCK_POLL;
 		if(!empty($zeroDirs))
 		{			
 			foreach($zeroDirs as $file) 

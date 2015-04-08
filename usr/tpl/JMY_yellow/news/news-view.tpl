@@ -42,7 +42,7 @@
 	<footer class="entry-footer smallPart">
 		<span class="tags-links"><i class="fa fa-tags spaceRight" aria-hidden="true"></i> {%TAGS%} </span><br /><br />
 		[related]<span class="tags-links"><i class="fa fa-tags spaceRight" aria-hidden="true"></i>[open]<b>[lang:_RELATED_NEWS]:</b><ul class="related">{%RELATED%}</ul>[/open]</span><br />[/related]
-		
+		{%EDIT%}
 	</footer>	
 </article>
 

@@ -65,14 +65,6 @@ $configs['admin'] = array
 'file' => 'admin'
 );
 
-$configs['fullajax'] = array
-(
-'name' => 'Настройки системы FullAjax',
-'description' => 'Настройка компонентов системы и их функционирования.',
-'param' => 'fullajax',
-'file' => 'fullajax'
-);
-
 $configs['log'] = array
 (
 'name' => 'Настройка логов',

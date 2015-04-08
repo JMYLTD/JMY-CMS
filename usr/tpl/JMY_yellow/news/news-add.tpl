@@ -6,10 +6,10 @@
 <div class="padding" style="padding-bottom:10px;"><input name="title" type="text" id="title" value="" size="35" />
 <br /><sup>Название вашей новости (не более 35 символов)</sup><div id="titleErr"></div></div>
 <div class="padding inputTitle">Выберите категорию для публикации:</div>
-<div class="padding" style="padding-bottom:10px;"><select name="category[]" ><option value="0">Без категории</option>{%CATS%}</select>
+<div class="padding" style="padding-bottom:10px;"><select name="category[]" ><option value="0">Без категории</option> {%CATS_ONE%}</select>
 </div>
 <div class="padding inputTitle">Связанные категории:</div>
-<div class="padding" style="padding-bottom:10px;"><select name="category[]" style="min-width:150px; height:120px;" multiple >{%CATS%}</select>
+<div class="padding" style="padding-bottom:10px;"><select name="category[]" style="min-width:150px; height:120px;" multiple > {%CATS_MORE%}</select>
 </div>
 
 <div class="padding inputTitle">Краткая новость:</div>
@@ -28,8 +28,17 @@
 {%FILE_UPLOAD%}
 </div>
 [/fileupload]
+[status]
+						  <div class="form-group">
+                            <label for="select">Статус новости</label>
+                              <select class="form-control" name="status">                                
+                                {%STATUS%}
+                              </select>
+                          </div>
+						  [/status]
 </div>
-<div class="padding"><input name="" type="submit" value="Отправить новость" /> 
+<div class="padding"><input name="" type="submit" value="{%DO_IT%}" /> 
+<input type="hidden" name="edit_id" id="comment_parent" value="{%ID%}">
 </div>
 </form>
 </article>

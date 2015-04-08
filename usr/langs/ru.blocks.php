@@ -26,3 +26,10 @@ define('_BLOCK_ONLINE_TOP_ON', '-ка посетивших за последни
 define('_BLOCK_ONLINE_TOP_DESC', 'Выводить топ лучших пользователей?');
 define('_BLOCK_ONLINE_TOP_NUMB', 'Количество в топе');
 define('_BLOCK_ONLINE_TOP_NUMB_DESC', 'Количество пользователей в топе');
+define('_BLOCK_POLL', 'Опросы');
+define('_BLOCK_POLLS_EMPTY', 'Нет опросов');
+define('_BLOCK_POLL_EMPTY', 'Опрос не найден');
+define('_BLOCK_POLL_ID', 'ID опроса');
+define('_BLOCK_POLL_ID_DESC', 'Укажите id опроса, который вы хотите вывести на вашем сайте.');
+define('_BLOCK_POLL_RANDOM', 'Случайный опрос');
+define('_BLOCK_POLL_RANDOM_DESC', 'При включении этого параметра опросы на сайте будут выводиться в случайном порядке.');

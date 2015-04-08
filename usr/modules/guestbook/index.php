@@ -85,7 +85,7 @@ switch(isset($url[1]) ? $url[1] : null)
 		break;
 		
 	case "send":
-	set_title(array(_FEEDBACK, _SENDINGMESS));
+	set_title(array(_G_GUESTBOOK, _SENDINGMESS));
 		if(captcha_check('securityCode')) 
 		{
 			$site = isset($_POST['site']) ? filter($_POST['site']) : '';

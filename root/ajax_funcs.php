@@ -108,6 +108,12 @@ global $adminTpl, $core, $db;
 	}
 }
 
+function version_check()
+{
+global $core, $db;
+		echo VERSION_ID;
+}
+
 function setCommentStatus()
 {
 global $adminTpl, $core, $db;

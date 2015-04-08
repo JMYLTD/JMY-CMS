@@ -3,7 +3,7 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
@@ -17,7 +17,7 @@ define('PLUGINS', dirname(__FILE__) . '/usr/plugins/');
 define('COOKIE_AUTH', 'auth_rc3');
 define('COOKIE_PAUSE', 'pause_rc3');
 define('PAUSE_TIME', 120);
-define('VERSION_ID', 1); 
+define('VERSION_ID', '1.6'); 
 define('COOKIE_TIME', 2592000);
 define('ADMIN', 'administration');
 define('HACK_SQL', '/SELECT|INSERT|ALTER|DROP|UNION|OUTFILE|WHERE/i');

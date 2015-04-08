@@ -1,5 +1,6 @@
 <?php
 define('ACCESS', true);
+define('VERSION_ID', '1.6'); 
 define('TIMER', microtime(1));
 define('ROOT', dirname(__FILE__) . '/');
 define('PLUGINS', dirname(__FILE__) . '/usr/plugins/');
@@ -83,6 +84,10 @@ switch(isset($url[1]) ? $url[1] : null)
 	
 	case 'calendar':
 		cal($op);
+		break;
+		
+	case 'version':
+		version_check();
 		break;
 	
 	case 'captcha_reload':

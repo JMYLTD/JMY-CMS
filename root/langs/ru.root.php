@@ -224,6 +224,23 @@ define('_USER_ADD_INFO_2', 'Пользователь успешно добавл
 
 define('_POLL_POLLS', 'Опросы');
 define('_POLL_POLL', 'Опрос');
+define('_POLL_LIST', 'Список опросов');
+define('_POLL_VOTE', 'Тема опроса:');
+define('_POLL_VAR', 'Вариантов');
+define('_POLL_ANS', 'Ответов');
+define('_POLL_MAX', 'Максимально');
+define('_POLL_DEL', 'Удалить опрос');
+define('_POLL_EMPTY', 'Опросов нет!');
+define('_POLL_ADD', 'Добавить опрос');
+define('_POLL_EDIT', 'Редактировать опрос');
+define('_POLL_NAME', 'Название опроса');
+define('_POLL_VARS', 'Варианты ответов');
+define('_POLL_VARS_DESC', 'На каждую строку новый вариант ответа');
+define('_POLL_VARS_DESC_E', 'Название варианта|Количество голосов');
+define('_POLL_MAXS', 'Максимально ответов');
+define('_POLL_MAXS_DESC', 'Если не 0 то пользователи смогут выбирать несколько вариантов.');
+define('_POLL_INFO_0', 'Опрос добавлен. <a href="{ADMIN}/voting">К опросам</a>');
+define('_POLL_INFO_1', 'Опрос обновлен. <a href="{ADMIN}/voting">К опросам</a>');
 
 define('_DB_DB', 'База данных');
 define('_DB_TABLE', 'Таблица');

@@ -5,19 +5,19 @@
 <form role="form" action="news/savePost" method="post" onsubmit="return checkAddPost();">
                           <div class="form-group">
                             <label for="exampleInputTitle">Заголовок новости</label>
-                            <input name="title" type="text" id="title" class="form-control" placeholder="Название вашей новости (не более 35 символов)">
+                            <input name="title" type="text" id="title" class="form-control" value="{%TITLE%}" placeholder="Название вашей новости (не более 35 символов)">
                           </div>
                           <div class="form-group">
                             <label for="select">Выберите категорию для публикации</label>
                               <select class="form-control" name="category[]">
                                 <option value="0">Без категории</option>
-                                {%CATS%}
+                                {%CATS_ONE%}
                               </select>
                           </div>
                           <div class="form-group">
                             <label for="multiple-select">Связанные категории</label>
                               <select multiple class="form-control" name="category[]">
-                                {%CATS%}
+                                {%CATS_MORE%}
                               </select>
                           </div>
                           <div class="form-group">
@@ -27,14 +27,23 @@
                           <div class="form-group">
                             <label for="exampleInputnews2">Полная новость</label>
                             {%BB_FULL%}
-                          </div>
+                          </div>						  					  
                           {%XFILEDS%}
                           [fileupload]
                           <div class="form-group">
                             <label for="exampleInputnews1" onclick="uploaderStart(); showhide('file_upload', true);" style="text-decoration:underline; cursor:pointer;">Файловый редактор</label>
                             <div style="display:none;" id="file_upload">{%FILE_UPLOAD%}</div>
                           [/fileupload]
-                          <button type="submit" class="btn btn-ar btn-primary">[lang:_ADD_NEWS]</button>
+						  [status]
+						  <div class="form-group">
+                            <label for="select">Статус новости</label>
+                              <select class="form-control" name="status">                                
+                                {%STATUS%}
+                              </select>
+                          </div>
+						  [/status]
+                          <button type="submit" class="btn btn-ar btn-primary">{%DO_IT%}</button>
+						  <input type="hidden" name="edit_id" id="comment_parent" value="{%ID%}">
                         </form>
                     </div>
                 </div>

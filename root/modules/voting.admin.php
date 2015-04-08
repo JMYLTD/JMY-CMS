@@ -17,7 +17,7 @@ if (!defined('ADMIN_ACCESS')) {
 
 switch(isset($url[2]) ? $url[2] : null) {
 	default:
-		$adminTpl->admin_head(_POLLS);
+		$adminTpl->admin_head(_POLL_POLLS);
 		$query = $db->query("SELECT id as ppid, title, votes, max, (SELECT COUNT(id) FROM ".DB_PREFIX."_poll_questions WHERE ppid = pid) as variants FROM ".DB_PREFIX."_polls ORDER BY title");	
 		echo '
 		<div class="row">
@@ -81,7 +81,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 		} 
 		else 
 		{
-		echo '<div class="panel-heading">'  . _NO_CATS . '</div>';		
+		echo '<div class="panel-heading">'  . _POLL_EMPTY . '</div>';		
 		}
 		echo'</section></div></div>';		
 		$adminTpl->admin_foot();
@@ -114,7 +114,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 													<label class="col-sm-3 control-label">'._POLL_MAXS.'</label>
 													<div class="col-sm-4">
 														<div id="ex-spinner" class="spinner input-group">
-															<input type="text" value="20" name="max" class="form-control spinner-input">
+															<input type="text" value="0" name="max" class="form-control spinner-input">
 															<div class="spinner-buttons input-group-btn  btn-group btn-group-vertical">
 																<button type="button" class="btn btn-default spinner-up">
 																<i class="fa fa-angle-up"></i></button>
@@ -122,6 +122,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 																<i class="fa fa-angle-down"></i></button>
 															</div>
 														</div>
+														<p class="help-block">'._POLL_MAXS_DESC.'</p>
 													</div>
 												</div>
 												<div class="form-group">
@@ -210,6 +211,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 																<button type="button" class="btn btn-default spinner-down">
 																<i class="fa fa-angle-down"></i></button>
 															</div>
+															<p class="help-block">'._POLL_MAXS_DESC.'</p>
 														</div>
 													</div>
 												</div>
@@ -229,7 +231,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 		break;
 		
 	case 'save_edit':
-		$adminTpl->admin_head('Добавить опрос');
+		$adminTpl->admin_head(_POLL_EDIT);
 		$id = intval($_POST['id']);
 		$title = filter($_POST['title']);
 		$vars = filter($_POST['vars']);
@@ -253,7 +255,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 			$db->query("UPDATE `" . DB_PREFIX . "_polls` SET `title` = '" . $title . "', `votes` = '0', `max` = '" . $max . "' WHERE `id` = '" . $id . "' LIMIT 1 ;");
 
 			
-			$adminTpl->info(_POLL_INFO_0);
+			$adminTpl->info(_POLL_INFO_1);
 		}
 		else
 		{

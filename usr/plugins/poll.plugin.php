@@ -137,6 +137,6 @@ global $db, $core, $list, $core;
 	}
 	else
 	{
-		echo 'Опросов не найдено';
+		echo _BLOCK_POLL_EMPTY;
 	}
 }

@@ -750,7 +750,8 @@ if(!file_exists('install/lock.install'))
 			</center><br />	
 			
 			';
-			delcache('plugins');			
+			delcache('plugins');		
+			@fopen(ROOT . 'install/lock.install', 'w');	
 			if (!empty($n_p))
 	{
 	foot($n_p);

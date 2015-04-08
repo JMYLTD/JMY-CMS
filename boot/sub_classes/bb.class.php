@@ -195,7 +195,7 @@ class bb
 		{
 			if(empty($core->tpl->headerIncludes['hightlightCode']))
 			{
-				$core->tpl->endJs = '
+				$core->tpl->endJs= '
 					<script type="text/javascript" src="usr/plugins/highlight_code/scripts/shCore.js"></script>
 					<script type="text/javascript" src="usr/plugins/highlight_code/scripts/shBrushCss.js"></script>
 					<script type="text/javascript" src="usr/plugins/highlight_code/scripts/shBrushJScript.js"></script>
@@ -206,23 +206,25 @@ class bb
 					<script type="text/javascript">SyntaxHighlighter.all();</script>';
 			}
 		}
-		if(eregStrt("!--audio:", $text))
-		{
-		$core->tpl->endJs = "
-							 <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js\"></script>
-							 <script src=\"http://progressionstudios.com/player/build/mediaelement-and-player.min.js\"></script>
-							 <script src=\"http://progressionstudios.com/player/build/mep-feature-playlist.js\"></script>
-							 <link rel=\"stylesheet\" href=\"http://progressionstudios.com/player/css/progression-player.css\" />
-							 <link href=\"http://progressionstudios.com/player/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\" />
-							 <link rel=\"stylesheet\" href=\"http://progressionstudios.com/player/css/skin-minimal-light.css\" />				
-							 <script>
-							 $('.progression-single').mediaelementplayer({
-								audioWidth: 400, 
-								audioHeight:40,
-								startVolume: 0.5, 
-								features: ['playpause','current','progress','duration','tracks','volume','fullscreen']
-								});
-							 </script>";
+		if(eregStrt("!--audio:", $text)||"!--video:player")
+		{		
+		$core->tpl->players = "
+		<link rel=\"stylesheet\" href=\"usr/plugins/player/skin/mediaelementplayer.css\" />
+		<script src='usr/plugins/player/lib/mediaelement.js'></script>
+		<script src='usr/plugins/player/lib/mediaelementplayer.js'></script>
+		<script>
+		/* <![CDATA[ */
+			jQuery(document).ready(function($) {
+				$('audio,video').mediaelementplayer({
+					videoWidth: '100%',
+					videoHeight: '100%',
+					audioWidth: '100%',
+					features: ['playpause','progress','tracks','volume','fullscreen'],
+					videoVolume: 'horizontal'
+				});
+			});
+		/* ]]> */
+		</script>";
 		}
 		return preg_replace($in, $out, $text);
 	}
@@ -401,7 +403,7 @@ class bb
 		}
 		
 		$count++;
-		$this->codeArr[] = $content;
+		$this->codeArr[] = stripslashes($content);
 		
 		return '<<code::' . $count . '::' . $php . '::code>>';
 	}
@@ -494,8 +496,8 @@ class bb
 			'%<!-- video:youtube:(.*?) -->.*?src="(.*?)".*?<!-- video:youtube:end -->%ius',
 			'%<!-- video:rutube:(.*?) -->.*?src="(.*?)".*?<!-- video:rutube:end -->%ius',
 			'%<!-- video:twitch:(.*?) -->.*?src="(.*?)".*?<!-- video:twitch:end -->%ius',
-            '%<!--video:flv-->.*?&amp;file=(.*?)".*?<!--video:end-->%ius',
-            '%<!--audio-->.*?&amp;file=(.*?)".*?<!--audio:end-->%ius',
+            '%<!-- video:player:(.*?) -->.*?src="(.*?)".*?<!-- video:end -->%ius',
+            '%<!-- audio:(.*?) -->.*?src="(.*?)".*?<!-- audio:end -->%ius',
             '%<!--spoiler--><div class="spoiler">.*?<span class="_spoilertitle">(.*?)</span>.*?style="display:none;">%ius',
 			'%<!--spoiler--><div class="spoiler">.*?style="display:none;">%ius',
             '%</div></div><!--spoiler:end-->%ius',
@@ -539,8 +541,8 @@ class bb
 			"[video]\\2[/video]",
 			"[video]http://rutube.ru/video/\\1[/video]",
 			"[video]http://www.twitch.tv/\\1[/video]",
-			"[video]\\1[/video]",
-			"[audio]\\1[/audio]",
+			"[video]\\2[/video]",
+			"[audio]\\2[/audio]",
 			"[spoiler=\\1]",
 			"[spoiler]",
 			"[/spoiler]",
@@ -682,17 +684,18 @@ class bb
 				return '<!-- video:smotri:' . $id . ' --><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="400" height="330"><param name="movie" value="http://pics.smotri.com/scrubber_custom8.swf?file=' . $id . '&amp;bufferTime=3&autoStart=false&str_lang=eng&amp;xmlsource=http%3A%2F%2Fpics.smotri.com%2Fcskins%2Fblue%2Fskin_color_lightaqua.xml&xmldatasource=http%3A%2F%2Fpics.smotri.com%2Fskin_ng.xml" /><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="true" /><param name="bgcolor" value="#ffffff" /><embed src="http://pics.smotri.com/scrubber_custom8.swf?file=' . $id . '&amp;bufferTime=3&amp;autoStart=false&str_lang=eng&amp;xmlsource=http%3A%2F%2Fpics.smotri.com%2Fcskins%2Fblue%2Fskin_color_lightaqua.xml&xmldatasource=http%3A%2F%2Fpics.smotri.com%2Fskin_ng.xml" quality="high" allowscriptaccess="always" allowfullscreen="true" wmode="window" width="400" height="330" type="application/x-shockwave-flash"></embed></object><!-- video:smotri:end -->';
 			}
 		}
-		elseif($type == 'flv' || $type == 'mp4' || $type == '3gp')
+		elseif($type == 'flv' || $type == 'mp4' || $type == '3gp' || $type == 'webm' || $type == 'm4v')
 		{
 			$code = rand(1, 100000);
 			
-			return '<!--video:flv--><object id="videoplayer' . $code . '" type="application/x-shockwave-flash" data="usr/plugins/uppod.swf" width="500" height="375"><param name="wmode" value="transparent" /><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="movie" value="usr/plugins/uppod.swf" /><param name="flashvars" value="comment=' . end(explode('/', $url)) . '&amp;m=video&amp;file=' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '" /></object><!--video:end-->';
+			return '<!-- video:player:'.$code.' --><div id="video-container"><video controls="controls" width="640" height="360" poster=""><source src="'. ($host == 'files' ? $config['url'].'/'.$url : $url) .'" type="video/'.$type.'" /><object width="640" height="360" type="application/x-shockwave-flash" data="usr/plugins/player/lib/flashmediaelement.swf" />
+				<param name="movie" value="usr/plugins/player/lib/flashmediaelement.swf" /><param name="flashvars" value="controls=true&amp;file='. ($host == 'files' ? $config['url'].'/'.$url : $url) .'" /></object></video></div><!-- video:end -->';
 		}
 		elseif($type == 'mp3')
 		{
 			$code = rand(1, 100000);
 			$arr = explode('/', $url);
-			return '<!--audio--><div class="progression-skin progression-minimal-light"><audio class="wp-audio-shortcode" id="audio-6-1" preload="none" style="width: 100%; visibility: hidden;" controls="controls"><source type="audio/mpeg" src="' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '" /><a href="' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '">' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '</a></audio></div><!--audio:end-->';
+			return '<!-- audio:'.$code.' --><div id="audio-container"><audio controls="" preload="none" width="640" height="30" src="' . ($host == 'files' ? $config['url'].'/'.$url : $url) . '"></audio></div><!-- audio:end -->';
 		}
 	}
 	

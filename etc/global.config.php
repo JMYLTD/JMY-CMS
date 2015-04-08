@@ -26,7 +26,6 @@ $config['support_mail'] = "test@test.ru";
 $config['gzip'] = "1";
 $config['off'] = "0";
 $config['off_text'] = "Сайт закрыт.<br /> Ведутся профилактические работы.";
-$config['fullajax'] = "0";
 $config['reffer'] = "0";
 $config['cache'] = "1";
 $config['dbCache'] = "0";

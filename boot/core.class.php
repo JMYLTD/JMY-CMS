@@ -21,7 +21,7 @@ class core
 	public $db;
 	public $parse;
 	public $isAdmin;
-	public $langsLang = array('ru' => 'Русский' , 'en' => 'English', 'ua' => 'Українська', 'pt' => 'Português');
+	public $langsLang = array('ru' => 'Русский');
 	public $deniedHTML = array('#</?(script|javascript|iframe|meta|body|form)[^>]*>#si' => '',	/*'#<img.*?src=("|\')?() #si' => '', */ '#(javascript|onmouseover|expression)#si' => '',);
 	public $module;
 	public $initModule;

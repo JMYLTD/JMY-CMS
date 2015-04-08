@@ -3,7 +3,7 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
@@ -20,7 +20,7 @@ echo '<div align="center"><select id="_themeselect">';
 foreach(glob(ROOT.'usr/tpl/*/index.tpl') as $file)
 {
 
-	if(is_file($file) && !eregStrt('/admin', $file) && !eregStrt('/default', $file))
+	if(is_file($file) && !eregStrt('/admin', $file) && !eregStrt('/default', $file) && !eregStrt('/smartphone', $file))
 	{
 		$file = explode('/', $file);
 		$file = $file[count($file)-2];

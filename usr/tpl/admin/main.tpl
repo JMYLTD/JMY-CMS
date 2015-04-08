@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
-<html class="js canvas no-touch csstransforms csstransforms3d csstransitions video audio localstorage sessionstorage svg inlinesvg">
+<html class="js canvas csstransforms csstransforms3d csstransitions video audio localstorage sessionstorage svg inlinesvg">
 	<head>	
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+		<meta name="theme-color" content="#535a6c">
 		{META}
 		<link rel="stylesheet" href="{ADM_THEME}/assets/css/bootstrap.min.css">
 		<link rel="stylesheet" href="{ADM_THEME}/assets/css/main.css">
@@ -11,10 +13,9 @@
 		<link rel="stylesheet" href="{ADM_THEME}/assets/css/datepicker.css">		
 		<link rel="stylesheet" href="{ADM_THEME}/assets/css/slider.css">
 		<link rel="stylesheet" href="{ADM_THEME}/assets/css/dropzone.css">
-		<link rel="stylesheet" href="{ADM_THEME}/assets/css/bootstrap-select.css">
-		
+		<link rel="stylesheet" href="{ADM_THEME}/assets/css/bootstrap-select.css">		
 		<link rel="shortcut icon" href="{ADM_THEME}/assets/images/favicon.ico" />
-		
+		<link rel="icon" sizes="192x192" href="{ADM_THEME}/assets/images/favicon.ico">		
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>

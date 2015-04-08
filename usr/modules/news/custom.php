@@ -72,8 +72,8 @@ if($db->numRows($queryDB) > 0)
 		$core->tpl->sources = preg_replace("#\\[category\\](.*?)\\[/category\\]#ies","if_set('".$cat."', '\\1')", $core->tpl->sources);
 		$core->tpl->sources = preg_replace("#\\{%MYDATE:(.*?)%\\}#ies","date('\\1', '" . $news['date'] . "')", $core->tpl->sources);
 		$core->tpl->sources = preg_replace("#\\{%TITLE:(.*?)%\\}#ies", "short('\\1', '" . $news['title'] . "')", $core->tpl->sources);
-		$core->tpl->sources = preg_replace("#\\{%SHORT:(.*?)%\\}#ies", "short('\\1', '" . $short . "')", $core->tpl->sources);
-		$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#ies",  "img_numb('\\1', '" . $short . "')", $core->tpl->sources);
+		$core->tpl->sources = preg_replace("#\\{%SHORT:(.*?)%\\}#ies", "short('\\1', '" . processText($short) . "')", $core->tpl->sources);
+		$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#ies",  "img_numb('\\1', '" . processText($short) . "')", $core->tpl->sources);
 		$core->tpl->setVar('DATE', formatDate($news['date']));
 		$core->tpl->setVar('ID', $news['id']);
 		

@@ -1,0 +1,299 @@
+/*Testimonials
+------------------------------------*/
+/*Testimonials*/
+.testimonials {
+  margin-bottom: 10px;
+}
+
+.testimonials .testimonial-info {
+  color: #72c02c;
+  font-size: 16px;
+  padding: 0 15px;
+  margin-top: 18px;
+}
+
+.testimonials .testimonial-info span {
+  top: 3px;
+  position: relative;
+}
+
+.testimonials .testimonial-info em {
+  color: #777;
+  display: block;
+  font-size: 13px;
+}
+
+.testimonials .testimonial-info img {
+  width: 60px;
+  float: left;
+  height: 60px;
+  padding: 2px;
+  margin-right: 15px;
+  border: solid 1px #ccc;
+}
+
+.testimonials .testimonial-author {
+  overflow: hidden;
+}
+
+.testimonials .carousel-arrow {
+  top: -65px;
+  position: relative;
+}
+
+.testimonials .carousel-arrow i {
+  color: #777;
+  padding: 2px;
+  min-width: 25px;
+  font-size: 20px;
+  text-align: center; 
+  background: #f5f5f5;
+}
+
+.testimonials .carousel-arrow i:hover {
+  color: #fff;
+  background: #72c02c;
+}
+
+.testimonials .carousel-control {
+  opacity: 1;
+  width: 100%;
+  text-align: right;
+  text-shadow: none;
+  position: absolute;
+  filter: Alpha(opacity = 100); /*For IE*/
+}
+
+.testimonials .carousel-control.left {
+  right: 27px;
+  left: auto;
+}
+.testimonials .carousel-control.right {
+  right: 0px;
+}
+
+/*Testimonials v1*/
+.testimonials.testimonials-v1 .item p {
+  position: relative;
+}
+
+.testimonials.testimonials-v1 .item p:after,
+.testimonials.testimonials-v1 .item p:before {
+  left: 80px;
+  bottom: -20px;
+}
+
+.testimonials.testimonials-v1 .item p:after {
+  border-top: 22px solid; 
+  border-left: 0 solid transparent;
+  border-right: 22px solid transparent;
+}
+
+/*Testimonials v2*/
+.testimonials.testimonials-v2 .testimonial-info {
+  padding: 0 20px;
+}
+
+.testimonials.testimonials-v2 p {
+  padding-bottom: 15px;
+}
+
+.testimonials.testimonials-v2 .carousel-arrow {
+  top: -55px; 
+}
+
+.testimonials.testimonials-v2 .item p:after,
+.testimonials.testimonials-v2 .item p:before {
+  left: 8%;
+  bottom: 45px;
+}
+
+.testimonials.testimonials-v2 .item p:after {
+  border-top: 20px solid; 
+  border-left: 25px solid transparent;
+  border-right: 0px solid transparent;
+}
+
+/*General Testimonials v1/v2*/
+.testimonials.testimonials-v1 p,
+.testimonials.testimonials-v2 p {
+  padding: 15px;
+  font-size: 14px;
+  font-style: italic; 
+  background: #f5f5f5;
+}
+
+.testimonials.testimonials-v1 .item p:after,
+.testimonials.testimonials-v2 .item p:after {
+  width: 0; 
+  height: 0;
+  content: " ";
+  display: block; 
+  position: absolute; 
+  border-top-color: #f5f5f5;
+  border-left-style: inset; /*FF fixes*/
+  border-right-style: inset; /*FF fixes*/ 
+}
+
+/*Testimonials Backgrounds*/
+.testimonials-bg-dark .item p,
+.testimonials-bg-default .item p {
+  color: #fff;
+  font-weight: 200;
+}
+
+.testimonials-bg-dark .carousel-arrow i,
+.testimonials-bg-default .carousel-arrow i {
+  color: #fff;
+}
+
+/*Testimonials Default*/
+.testimonials-bg-default .item p {
+  background: #72c02c;
+}
+
+.testimonials.testimonials-bg-default .item p:after,
+.testimonials.testimonials-bg-default .item p:after {
+  border-top-color: #72c02c;
+}
+
+.testimonials-bg-default .carousel-arrow i {
+  background: #72c02c;
+}
+
+.testimonials.testimonials-bg-default .carousel-arrow i:hover {
+  background: #5fb611;
+}
+
+/*Testimonials Dark*/
+.testimonials-bg-dark .item p {
+  background: #555;
+}
+
+.testimonials.testimonials-bg-dark .item p:after,
+.testimonials.testimonials-bg-dark .item p:after {
+  border-top-color: #555;
+}
+
+.testimonials-bg-dark .carousel-arrow i {
+  color: #fff;
+  background: #555;
+}
+
+.testimonials.testimonials-bg-dark .carousel-arrow i:hover {
+  background: #333;
+}
+
+.testimonials.testimonials-bg-dark .testimonial-info {
+  color: #555;
+}
+/*Rounded and Circle Classes
+------------------------------------*/
+.no-rounded { border-radius: 0 !important;}
+.rounded { border-radius: 4px !important;}
+.rounded-x { border-radius: 50% !important;}
+.rounded-2x { border-radius: 10px !important;}
+.rounded-3x { border-radius: 15px !important;}
+.rounded-4x { border-radius: 20px !important;}
+.rounded-sm { border-radius: 2px !important;}
+.rounded-md { border-radius: 3px !important;}
+.rounded-top { border-radius: 4px 4px 0 0 !important;}
+.rounded-left { border-radius: 4px 0 0 4px !important;}
+.rounded-right { border-radius: 0 4px 4px 0 !important;}
+.rounded-bottom { border-radius: 0 0 4px 4px !important;}
+
+/* Вложения */
+span.attachment {
+  display:block;
+  margin: 10px 0;
+  padding: 5px 5px 5px 52px;
+  border: 1px solid #DCE7E7;
+  background: #F9FAFA url('../assest/images/engine/download2.png') 10px 50% no-repeat;
+}
+span.attachment a {
+  display:block;
+  text-decoration:none;
+}
+span.attachment a:hover {text-decoration:underline;}
+
+.quote {
+  margin: 5px auto;
+  position: relative;
+  padding: 10px 10px 10px 45px;
+  line-height: 23px;
+  color: #6A5F49;
+  text-shadow: 0 1px 1px white;
+  font: 0.95em/23px "Bender", "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+ 
+  border: 1px solid #C3BAAA;
+  border-color: rgba(195, 186, 170, 0.9);
+ 
+  background-color: #F2F6C1;
+}
+
+.spoiler {
+ overflow: hidden;
+ margin-bottom: 20px;
+ margin-top: 20px;
+ padding-left:15px;
+ border: 1px solid #20B2AA; /* цвет рамки */
+ border-left: 2px solid #20B2AA; /* цвет границы слева */
+ box-shadow: 0 0 9px #dddddd inset;
+}
+  
+.title_h3 {
+ cursor:pointer;
+ font-size: 16px;
+ background: rgb(231, 242, 255); /* фон заголовка. одновременно нужно изменять и в скрипте */
+ margin: 0 -10px 0 -10px;
+ padding: 10px;
+ padding-left: 30px;
+ -moz-box-shadow: 0 0 9px #dddddd inset;
+ box-shadow: 0 0 9px #dddddd inset;
+}
+  
+.closed .contents { display:none; }
+.closed h3 { background: #CBEBFB; /* фон заголовка */}
+.contents { padding: 10px; }
+
+.pages {
+  color:#666; 
+  border:0px;
+  clear:both;
+}
+
+.pages a:link,
+.pages a:visited,
+.pages a:hover,
+.pages a:active {
+  text-decoration:none;
+  color: #2F92D0;
+  background:#F9F9F9;
+  border:1px solid #E6E6E6;
+  padding:3px 6px;
+  font-size:20px;
+   -moz-border-radius: 10px; /* закругление для старых Mozilla Firefox */
+ -webkit-border-radius: 10px; /* закругление для старых Chrome и Safari */
+ -khtml-border-radius:10px; /* закругл. для браузера Konquerer системы Linux */
+ border-radius: 10px; /* закругление углов для всех, кто понимает */
+}
+
+.pages a:hover {
+  background:#2cb2bc;
+  color:#FFFFFF;
+  border-color:#E6E6E6;
+}
+
+.pages span {
+  text-decoration:none;
+  background:#2cb2bc;
+  padding:3px 6px;
+  border:1px solid #a4a4a4;
+  color:#717171;
+  font-size:20px;
+  margin-right:3px;
+   -moz-border-radius: 10px; /* закругление для старых Mozilla Firefox */
+ -webkit-border-radius: 10px; /* закругление для старых Chrome и Safari */
+ -khtml-border-radius:10px; /* закругл. для браузера Konquerer системы Linux */
+ border-radius: 10px; /* закругление углов для всех, кто понимает */
+}

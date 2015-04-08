@@ -48,6 +48,7 @@ class template
 	var $moduleArray = '';
 	var $adminBar = '';
 	var $endJs = '';
+	var $players = '';
 	
 	function __construct()
 	{
@@ -435,7 +436,11 @@ class template
 		$meta .= "<link rel=\"search\" type=\"application/opensearchdescription+xml\" href=\"" . $config['url'] . "/feed/opensearch/\"  title=\"" . $config['name'] . "\" />" . "\n";	
 		$meta .= "<script src=\"usr/plugins/js/JMY_Ajax.js\" type=\"text/javascript\"></script>" . "\n";
 		$meta .= "<script src=\"usr/plugins/js/engine.js\" type=\"text/javascript\"></script>" . "\n";
-
+		$meta .= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\"></script>" . "\n";
+		if(!empty($this->players))
+		{
+			$meta .= $this->players;
+		}
 		array_unique($this->headerIncludes);
 		
 		foreach($this->headerIncludes as $metas)
@@ -445,20 +450,6 @@ class template
 				$meta .= $metas;
 			}		
 		}
-		
-		if($config['fullajax'])
-		{
-			require ROOT . 'etc/fullajax.config.php';
-			$meta .= "<script src=\"usr/js/fullajax.js\" type=\"text/javascript\"></script>" . "\n";
-			$meta .= "<script src=\"usr/js/obf.srax.fx.js\" type=\"text/javascript\"></script>" . "\n";
-			$meta .= "<script src=\"usr/js/srax.anchor.js\" type=\"text/javascript\"></script>" . "\n";
-			$meta .= "<script src=\"ajax.php?do=fullAjax\" type=\"text/javascript\"></script>" . "\n";			
-			if($fullajax['storage'] == 1)
-			{
-				$meta .= "<script src=\"usr/js/srax.storage.js\" type=\"text/javascript\"></script>" . "\n";
-			}
-		}
-		
 		if (strpos($this->sources, "<body") !== false) 
 		{
 			$this->sources = preg_replace('#<body(.*)[^>]#i', '<body\\1<div id="loading" class="loading" style="display:none;top:0;"><img src="media/showloading.gif" alt="Загрузка..." /><br />Загрузка...</div>'.$this->bodyIncludes, $this->sources);

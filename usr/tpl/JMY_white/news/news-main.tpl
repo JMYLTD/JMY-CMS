@@ -3,7 +3,7 @@
 		<h1 class="entry-title">[more]{%TITLE%}[/more]</h1>			
 	</header>		
 	<div class="entry-summary">					
-		<p>{%SHORT:100%}</p>				
+		<p>{%SHORT%}</p>				
 	</div>
 	<footer class="entry-footer smallPart">
 			<div class="entry-meta smallPart">

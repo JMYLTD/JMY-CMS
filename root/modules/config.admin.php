@@ -979,6 +979,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 			}
 			
 			$toconfig['_smiles'] = array('name' => _SMILES,'link' => 'smiles','param'=>'smiles');
+			$toconfig['_blocks'] = array('name' => _BLOCK_STANDART,'link' => 'blocks/standard','param'=>'blocks/standard');
 			if(!empty($toconfig))
 			{
 			$adminTpl->open();

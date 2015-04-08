@@ -233,6 +233,8 @@ define('_CONFIG', 'Конфигурация');
 define('_LOGOUT', 'Выйти');
 define('_GENERATION', 'Генерация');
 define('_ACTIVE', 'Активно');
+define('_NO_ACTIVE', 'Не активно');
+define('_ON_MODER', 'На модерации');
 define('_UNACTIVE', 'Выключено');
 define('_ATTETION', 'Внимание');
 define('_CACHE', 'Кэширование');
