@@ -102,7 +102,7 @@ $configBox = array(
 						'description' => _GLOBAL_OTHER_TPLD,
 						'content' => changeTpl(),						
 					),
-					'tpl' => array(
+					'smartphone' => array(
 						'title' => _GLOBAL_OTHER_TPL_MOBI,
 						'description' => _GLOBAL_OTHER_TPL_MOBI_DESC,
 						'content' => conf_radio("smartphone", $config['smartphone']),
