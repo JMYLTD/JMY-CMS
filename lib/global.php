@@ -1517,6 +1517,8 @@ function gencode($lenght)
 function captcha_image($button = true) 
 {
     global $security;	
+	if ($security[switch_cp]!=0) 
+	{
 	if ($security[recaptcha]==0) 
 	{
 		session_start();	
@@ -1528,12 +1530,15 @@ function captcha_image($button = true)
 		$privatekey =$security[recaptcha_private];
 		$captcha ='<div class="g-recaptcha" data-sitekey="'.$publickey.'"></div><script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>'; 
 	}
+	}
     return $captcha;
 }
 
 function captcha_check($post_name) 
 {
     global $core, $security;
+	if ($security[switch_cp]!=0) 
+	{
 	if ($security[recaptcha]==0) 
 	{
 		session_start();
@@ -1569,6 +1574,11 @@ function captcha_check($post_name)
 			$errors = $resp->getErrorCodes();
 			
 		}	
+	}
+	}
+	else
+	{
+		return true;
 	}
 	return false;
     

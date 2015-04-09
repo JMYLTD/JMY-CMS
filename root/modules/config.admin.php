@@ -231,6 +231,11 @@ $configBox = array(
 			'captcha' => array(
 				'title' => _SECURITY_CAPTCHA,
 				'vars' => array(
+					'switch_cp' => array(
+						'title' => _SECURITY_SWITCH,
+						'description' => _SECURITY_SWITCH_DESC,
+						'content' => conf_radio("switch_cp", $security['switch_cp']),
+					),	
 					'recaptcha' => array(
 						'title' => _SECURITY_RECAPTHA,
 						'description' => _SECURITY_RECAPTHA_DESC,

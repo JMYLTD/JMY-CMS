@@ -17,6 +17,7 @@ $security['banIp'] = "192.15.*.%
 127.1.*.*
 23.2332.2323.3";
 $security['banIpMessage'] = "Ваш ip-адрес находится в черном списке!";
+$security['switch_cp'] = "1";
 $security['recaptcha'] = "0";
 $security['recaptcha_public'] = "6Leh_wMTAAAAAMngQ8VhP1KpyMotKxFEVxrWo9dC";
 $security['recaptcha_private'] = "6Leh_wMTAAAAAKPatqZNtX1UqPuWSZdpKRejILLC";

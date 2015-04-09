@@ -94,6 +94,8 @@ define('_SECURITY_IPS_BANIPT', 'Заблокированные IP');
 define('_SECURITY_IPS_BANIPD', 'Если при заходе на сайт обнаружится, что IP пользователя находится в данном списке, то доступ к сайту ему, будет ограничен.');
 define('_SECURITY_IPS_BANIPMESSAGET', 'Сообщение при блокировке');
 define('_SECURITY_IPS_BANIPMESSAGED', 'Сообщение которое будет отображено при конфликте IP.');
+define('_SECURITY_SWITCH', 'Включить капчу?');
+define('_SECURITY_SWITCH_DESC', 'Активировать проверку спам-ботов?');
 define('_SECURITY_CAPTCHA', 'Настройка Каптчи(Captcha)');
 define('_SECURITY_RECAPTHA', 'Использовать ReCaptcha?');
 define('_SECURITY_RECAPTHA_DESC', 'Использовать ReCaptcha?');

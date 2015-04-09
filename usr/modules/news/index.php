@@ -333,7 +333,7 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag, $cache;
 
 function news_add($nid = null) 
 {
-	global $core, $db, $core, $config, $news_conf;
+	global $core, $db, $core, $config, $news_conf, $user;
 	if(($core->auth->isUser && $core->auth->group_info['addPost'] == 1)||($core->auth->isModer||$core->auth->isAdmin))
 		{
 			if(isset($nid)) 
@@ -398,13 +398,13 @@ function news_add($nid = null)
 			}
 			set_title(array(_NEWS, $lln));	
 			$query = $db->query("SELECT * FROM `".DB_PREFIX."_news` WHERE `active`=2");
-			if(($db->numRows($query) > $news_conf['preModer'])&&(!isset($nid))) 
+			if(($db->numRows($query) > $news_conf['preModer'])&&(!isset($nid))&&($core->auth->user_info['group']!=$news_conf['noModer'])) 
 			{
 				$core->tpl->info(_NEWS_ADD_INFO_0);
 			}
 			else
 			{
-				if (!isset($nid)) 
+				if (!isset($nid)&&($core->auth->user_info['group'] != $news_conf['noModer'])) 
 				{
 					$core->tpl->info(_NEWS_ADD_INFO_1);
 				}
@@ -586,14 +586,14 @@ switch(isset($url[1]) ? $url[1] : null)
 			{
 				
 				
-				$insert = $db->query("INSERT INTO `" . DB_PREFIX . "_news` ( `id` , `author` , `date` , `tags` , `cat` , `altname` , `allow_comments` , `allow_rating` , `allow_index` , `score` , `votes` , `views` , `comments` , `fields` , `groups` , `fixed` , `active` ) VALUES (NULL, '" . $core->auth->user_info['nick'] . "', '" . time() . "', '', '" . $cats . "', '" . $translit . "', '1', '1', '1', '0', '0', '0', '0', '" . $fieldsSer . "', ',0,', '0', '2');");
+				$insert = $db->query("INSERT INTO `" . DB_PREFIX . "_news` ( `id` , `author` , `date` , `tags` , `cat` , `altname` , `allow_comments` , `allow_rating` , `allow_index` , `score` , `votes` , `views` , `comments` , `fields` , `groups` , `fixed` , `active` ) VALUES (NULL, '" . $core->auth->user_info['nick'] . "', '" . time() . "', '', '" . $cats . "', '" . $translit . "', '1', '1', '1', '0', '0', '0', '0', '" . $fieldsSer . "', ',0,', '0', '". (($core->auth->user_info['group'] == $news_conf['noModer']) ? '1' : '2')."');");
 				$query = $db->query("SELECT * FROM ".DB_PREFIX."_news WHERE altname = '" . $db->safesql($translit) . "'");
 				$news = $db->getRow($query);
 				$short = fileInit('news', $news['id'], 'content', parseBB(processText(filter($_POST['short'], 'html')), $news['id']), 'user_temp'.$core->auth->user_id);
 				$full = fileInit('news', $news['id'], 'content', parseBB(processText(filter($_POST['full'], 'html')), $news['id']), 'user_temp'.$core->auth->user_id);
 				$db->query("INSERT INTO `" . DB_PREFIX . "_langs` ( `postId` , `module` , `title` , `short` , `full` , `lang` ) VALUES ('" . $news['id'] . "', 'news', '" . $db->safesql(processText($title)) . "', '" . $db->safesql($short) . "', '" . $db->safesql($full) . "' , '" . $config['lang'] . "');");
 				fileInit('news', $news['id'], 'dir', '', 'user_temp'.$core->auth->user_id);
-				$core->tpl->info("Ваша новость успешно добавлена. Ожидайте модерации, если все поля заполнены верно ваша новость благополучно попадёт в новостную ленту нашего портала.");
+				$core->tpl->info("Ваша новость успешно добавлена. ".(($core->auth->user_info['group'] == $news_conf['noModer']) ? '' : 'Ожидайте модерации, если все поля заполнены верно ваша новость благополучно попадёт в новостную ленту нашего портала.'));
 			}
 			else
 			{

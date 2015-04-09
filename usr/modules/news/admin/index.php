@@ -768,6 +768,20 @@ global $db;
 	}
 }
 
+function changeuGroup($var)
+{
+global $adminTpl, $db, $news_conf;
+    $content = '<select name="{varName}">';
+	$query2 = $db->query("SELECT * FROM `" . USER_DB . "`.`" . USER_PREFIX . "_groups`");
+	while($rows2 = $db->getRow($query2)) 
+	{
+		$sel = ($news_conf[$var] == $rows2['id']) ? 'selected' : '';
+		$content .= '<option value="' . $rows2['id'] . '" ' . $sel . '>' . $rows2['name'] . '</option>';
+	}
+	$content .= '</select>';
+	return $content;
+}
+
 switch(isset($url[3]) ? $url[3] : null) {
 	default:
 		news_main();
@@ -1021,7 +1035,12 @@ switch(isset($url[3]) ? $url[3] : null) {
 								'title' => _APNEWS_MAIN_FULLLINKT,
 								'description' => _APNEWS_MAIN_FULLLINKD,
 								'content' => radio("fullLink", $news_conf['fullLink']),
-							),							
+							),	
+							'noModer' => array(
+								'title' => _APNEWS_NOMODER,
+								'description' => _APNEWS_NOMODER_DESC,
+								'content' => changeuGroup('noModer'),
+							),	
 							'preModer' => array(
 								'title' => _APNEWS_PREMODERT,
 								'description' => _APNEWS_PREMODERD,
@@ -1146,7 +1165,8 @@ switch(isset($url[3]) ? $url[3] : null) {
 					),
 				),
 			),
-		);	
+		);
+		
 		$ok = false;
 		
 		if(isset($_POST['conf_file']))
