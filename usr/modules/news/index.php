@@ -615,16 +615,16 @@ switch(isset($url[1]) ? $url[1] : null)
 		break;
 		
 	case 'edit':
-	/*
+	
 		if($core->auth->isAdmin)
 		{
 			location(ADMIN.'/module/news/edit/'.$url[2]);
 		}
 		elseif($core->auth->isModer)
-		{	*/	
+		{		
 			$id = intval($url[2]);
 			news_add($id);
-		//}
+		}
 		break;
 		
 	case 'delete':

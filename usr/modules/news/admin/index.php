@@ -3,7 +3,7 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
@@ -268,20 +268,7 @@ global $adminTpl, $core, $db, $core, $config;
 											<div class="col-sm-4">
 												<input type="text" name="tags"  value="' . $tags . '" class="form-control" id="tags"  data-parsley-trigger="change">
 											</div>
-										</div>
-										<div class="form-group">
-<label class="col-sm-2 control-label">Datepicker</label>
-<div class="col-sm-3">
-<div class="input-group mg-b-md input-append date datepicker" data-date="12-02-2013" data-date-format="dd-mm-yyyy">
-<input type="text" class="form-control" value="12-02-2013">
-<span class="input-group-btn">
-<button class="btn btn-white add-on" type="button">
-<i class="fa fa-calendar"></i>
-</button>
-</span>
-</div>
-</div>
-</div>
+										</div>										
 										<div class="form-group">
 											<label class="col-sm-3 control-label">'. _NEWS_DATE_PUB .'</label>
 											<div class="col-sm-4">

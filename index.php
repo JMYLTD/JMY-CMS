@@ -30,7 +30,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modifie
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Pragma: no-cache"); // HTTP/1.0'
 
- 
+error_reporting(DEBUG ? -1 : 1);
 mb_internal_encoding("UTF-8");
 
 
