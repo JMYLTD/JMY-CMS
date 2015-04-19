@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-{%META%}
+	{%META%}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="shortcut icon" href="{%THEME%}/assets/img/favicon.png">
-    <!-- CSS -->
+    <link rel="shortcut icon" href="{%THEME%}/assets/img/favicon.png">   
     <link href="{%THEME%}/assets/css/preload.css" rel="stylesheet" media="screen">
     <link href="{%THEME%}/assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="{%THEME%}/assets/css/yamm.css" rel="stylesheet" media="screen">
@@ -20,66 +18,65 @@
     <link href="{%THEME%}/assets/css/style-blue.css" rel="stylesheet" media="screen" title="default">
     <link href="{%THEME%}/assets/css/width-boxed.css" rel="stylesheet" media="screen" title="default">
     <link href="{%THEME%}/assets/css/buttons.css" rel="stylesheet" media="screen">
-    <link href="{%THEME%}/assets/css/engine.css" rel="stylesheet" media="screen">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link href="{%THEME%}/assets/css/engine.css" rel="stylesheet" media="screen">   
     <!--[if lt IE 9]>
         <script src="{%THEME%}/assets/js/html5shiv.min.js"></script>
         <script src="{%THEME%}/assets/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<!-- Preloader -->
-<div id="preloader"><div id="status">&nbsp;</div></div>
-<body>
-<div id="sb-site">
-<div class="boxed">
-<header id="header-full-top" class="hidden-xs header-full">
-<div class="container">
-<div class="header-full-title">
-<h1 class="animated fadeInRight"><a href="{%URL%}"><span>{%SITE_NAME%}</span></a></h1>
-<p class="animated fadeInRight">{%SITE_SLOGAN%}</p>
-</div>
-<nav class="top-nav">            
-[guest]
-<div class="dropdown animated fadeInDown animation-delay-11">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Войти</a>
-<div class="dropdown-menu dropdown-menu-right dropdown-login-box animated fadeInUp">
-<form role="form" action="profile/login" method="post"><h4>Форма входа</h4>
-<div class="form-group">
-<div class="input-group login-input">
-<span class="input-group-addon"><i class="fa fa-user"></i></span>
-<input type="text" name="nick" class="form-control" placeholder="Логин" onblur="if(this.value=='') this.value='Логин';" onfocus="if(this.value=='Логин') this.value='';">
-</div><br>
-<div class="input-group login-input">
-<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-<input type="password" name="password" class="form-control" placeholder="Пароль" onfocus="if(this.value=='Пароль') this.value='';" onblur="if(this.value=='') this.value='Пароль';">
-</div>
-<div class="pull-left"><a href="{%URL_FORGOT%}">Забыли пароль?</a></div>
-<button type="submit" class="btn btn-ar btn-primary pull-right">Войти</button>
-<div class="clearfix"></div>
-</div>
-</form>
-</div>
-</div>
-<div class="dropdown animated fadeInDown animation-delay-13">
-<a href="{%URL_REG%}" class="dropdown-toggle"><i class="fa fa-plus"></i> Регистрация</a>
-</div> <!-- dropdown -->
-[/guest]
-[user]
-<div class="dropdown animated fadeInDown animation-delay-13">
-<a href="{%URL_PROFIL%}" class="dropdown-toggle"><i class="fa fa-user"></i> Профиль</a>
-</div>
-<div class="dropdown animated fadeInDown animation-delay-13">
-<a href="/news/addPost" class="dropdown-toggle"><i class="fa fa-plus"></i> Опубликовать</a>
-</div>
-<div class="dropdown animated fadeInDown animation-delay-13">
-<a href="{%URL_PM%}" class="dropdown-toggle"><i class="fa fa-envelope-o"></i> Почта</a>
-</div>
-<div class="dropdown animated fadeInDown animation-delay-13">
-<a href="{%URL_LOGOUT%}" class="dropdown-toggle"><i class="fa fa-share"></i> Выйти</a>
-</div> <!-- dropdown -->
-[/user]
-</nav>
+<body>	
+	<div id="sb-site">
+		<div class="boxed">
+			<header id="header-full-top" class="hidden-xs header-full">
+				<div class="container">
+					<div class="header-full-title">
+						<h1 class="fadeInRight">
+							<a href="{%URL%}"><span>{%SITE_NAME%}</span></a>
+						</h1>
+						<p class="fadeInRight">{%SITE_SLOGAN%}</p>
+					</div>
+					<nav class="top-nav">            
+						[guest]
+						<div class="dropdown fadeInDown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Войти</a>
+							<div class="dropdown-menu dropdown-menu-right dropdown-login-box animated fadeInUp">
+								<form role="form" action="{%URL_LOGIN%}" method="post"><h4>Форма входа</h4>
+									<div class="form-group">
+										<div class="input-group login-input">
+											<span class="input-group-addon"><i class="fa fa-user"></i></span>
+											<input type="text" name="nick" class="form-control" placeholder="Логин" onblur="if(this.value=='') this.value='Логин';" onfocus="if(this.value=='Логин') this.value='';">
+										</div>
+										<br>
+										<div class="input-group login-input">
+											<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+											<input type="password" name="password" class="form-control" placeholder="Пароль" onfocus="if(this.value=='Пароль') this.value='';" onblur="if(this.value=='') this.value='Пароль';">
+										</div>
+										<div class="pull-left"><a href="{%URL_FORGOT%}">Забыли пароль?</a></div>
+										<button type="submit" class="btn btn-ar btn-primary pull-right">Войти</button>
+										<div class="clearfix"></div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="dropdown fadeInDown">
+							<a href="{%URL_REG%}" class="dropdown-toggle"><i class="fa fa-plus"></i> Регистрация</a>
+						</div> 
+						[/guest]
+						[user]
+						<div class="dropdown fadeInDown">
+							<a href="{%URL_PROFIL%}" class="dropdown-toggle"><i class="fa fa-user"></i> Профиль</a>
+						</div>
+						<div class="dropdown fadeInDown">
+							<a href="/news/addPost" class="dropdown-toggle"><i class="fa fa-plus"></i>Опубликовать</a>
+						</div>
+						<div class="dropdown fadeInDown">
+							<a href="{%URL_PM%}" class="dropdown-toggle"><i class="fa fa-envelope-o"></i>Почта</a>
+						</div>
+						<div class="dropdown fadeInDown">
+							<a href="{%URL_LOGOUT%}" class="dropdown-toggle"><i class="fa fa-share"></i>Выйти</a>
+						</div>
+						[/user]
+					</nav>
 </div> <!-- container -->
 </header> <!-- header-full -->
 <nav class="navbar navbar-static-top navbar-default navbar-header-full navbar-dark" role="navigation" id="header">
@@ -151,7 +148,7 @@
 </div> <!-- col-md-8 -->
 <div class="col-md-4">
 <aside class="sidebar">
-<div class="block animated fadeInDown animation-delay-12">
+<div class="block  fadeInDown ">
 <form role="search" method="post" name="search_form" action="search">
 <div class="input-group">
 <input type="text" placeholder="Поиск..." class="form-control" name="query">
@@ -161,7 +158,7 @@
 </div><!-- /input-group -->
 </form>                    
 </div>
-<div class="block animated fadeInDown animation-delay-10">
+<div class="block  fadeInDown ">
 <ul class="nav nav-tabs nav-tabs-ar" id="myTab2">
 <li><a href="#fav" data-toggle="tab">Топ новости</a></li>
 <li class="active"><a href="#categories" data-toggle="tab">Категории</a></li>
@@ -177,25 +174,25 @@
 </div>
 </div> <!-- tab-content -->
 </div>
-<div class="panel panel-primary animated fadeInDown animation-delay-4">
+<div class="panel panel-primary  fadeInDown ">
 <div class="panel-heading"><i class="fa fa-user"></i> Кто онлайн</div>
 <div class="panel-body">
 {%BLOCKS:FILE:online%}
 </div>
 </div>                
-<div class="panel panel-primary animated fadeInDown animation-delay-4">
+<div class="panel panel-primary  fadeInDown ">
 <div class="panel-heading"><i class="fa fa-tags"></i> Теги</div>
 <div class="panel-body">
 {%BLOCKS:FILE:tags%}
 </div>
 </div>                
-<div class="panel panel-primary animated fadeInDown animation-delay-4">
+<div class="panel panel-primary  fadeInDown ">
 <div class="panel-heading"><i class="fa fa-align-left"></i> Опросы</div>
 <div class="panel-body">
 {%BLOCKS:FILE:poll%}
 </div>
 </div>
-<div class="panel panel-default animated fadeInDown animation-delay-4">
+<div class="panel panel-default  fadeInDown ">
 <div class="panel-heading"><i class="fa fa-eye"></i> Тема оформления</div>
 <div class="panel-body">
 {%BLOCKS:FILE:themes%}
@@ -221,15 +218,10 @@
 <script src="{%THEME%}/assets/js/styleswitcher.js"></script>
 <script src="{%THEME%}/assets/js/jquery.mixitup.min.js"></script>
 <script src="{%THEME%}/assets/js/circles.min.js"></script>
-
-<!-- Syntaxhighlighter -->
 <script src="{%THEME%}/assets/js/syntaxhighlighter/shCore.js"></script>
 <script src="{%THEME%}/assets/js/syntaxhighlighter/shBrushXml.js"></script>
 <script src="{%THEME%}/assets/js/syntaxhighlighter/shBrushJScript.js"></script>
-
 <script src="{%THEME%}/assets/js/app.js"></script>
 <script src="{%THEME%}/assets/js/index.js"></script>
-
 </body>
-
 </html>

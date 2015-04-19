@@ -26,6 +26,7 @@ class auth
 	var $banUser = false;
 	var $groups_array = false;
 	var $newPms = false;
+	var $newPmsNumb = 0;
 	
 	function __construct($hash = '') 
 	{
@@ -162,7 +163,10 @@ class auth
 							if($db->numRows($result) > 0) 
 							{
 								while($message = $db->getRow($result))
+								{
 									$this->newPms[] = $message;
+									$this->newPmsNumb++;
+								}
 								setcookie('PMLASTCHECK', time(), time() + 86400, '/');
 							}
 						}

@@ -72,14 +72,15 @@ if($db->numRows($queryDB) > 0)
 		$core->tpl->sources = preg_replace("#\\[category\\](.*?)\\[/category\\]#ies","if_set('".$cat."', '\\1')", $core->tpl->sources);
 		$core->tpl->sources = preg_replace("#\\{%MYDATE:(.*?)%\\}#ies","date('\\1', '" . $news['date'] . "')", $core->tpl->sources);
 		$core->tpl->sources = preg_replace("#\\{%TITLE:(.*?)%\\}#ies", "short('\\1', '" . $news['title'] . "')", $core->tpl->sources);
-		$core->tpl->sources = preg_replace("#\\{%SHORT:(.*?)%\\}#ies", "short('\\1', '" . processText($short) . "')", $core->tpl->sources);
-		$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#ies",  "img_numb('\\1', '" . processText($short) . "')", $core->tpl->sources);
+		$core->tpl->sources = preg_replace("#\\{%SHORT:(.*?)%\\}#ies", "short('\\1', '" . processText($short) . "')", $core->tpl->sources);		
+		$core->tpl->sources = preg_replace("#\\{%IMG:(.*?):(.*?)%\\}#is", (!empty($miniImg[(int)${1}]) ? $miniImg[(int)${1}] : "\${2}") , $core->tpl->sources);
+		$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#is",  $miniImg[(int)${1}], $core->tpl->sources);
 		$core->tpl->setVar('DATE', formatDate($news['date']));
 		$core->tpl->setVar('ID', $news['id']);
 		
 		
 		$core->tpl->setVar('RATING', $news['allow_rating'] ? draw_rating($news['id'], 'news', $news['score'], $news['votes']) : '');
-		if(!empty($news['fields']))
+		if(!empty($news['fields']) && $news['fields'] != 'N;')
 			{
 				$fields = unserialize($news['fields']);
 				foreach($fields as $xId => $xData)
@@ -99,10 +100,3 @@ if($db->numRows($queryDB) > 0)
 
 	}
 }
-
-function img_numb($numb, $short)
-		{
-			$miniImg = _getCustomImg($short);
-			return $miniImg[$numb];
-		}
-

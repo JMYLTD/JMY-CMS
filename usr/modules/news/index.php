@@ -129,10 +129,11 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag;
 				"#\\[tags\\](.*?)\\[/tags\\]#ies" => "if_set('" . $news['tags'] . "', '\\1')",
 				"#\\[more\\](.*?)\\[/more\\]#ies" => "format_link('\\1', '" . $news_link . $news['altname'] . ".html')",
 				"#\\[category\\](.*?)\\[/category\\]#ies" => "if_set('".$cat."', '\\1')",
+				"#\\[edit\\](.*?)\\[/edit\\]#is" => (($core->auth->isModer||$core->auth->isAdmin)  ? "\${1}" : ''),
 				"#\\{%MYDATE:(.*?)%\\}#ies" => "date('\\1', '" . $news['date'] . "')",
 				"#\\{%TITLE:(.*?)%\\}#ies" => "short('\\1', '" . $news['title'] . "')",
 				"#\\{%SHORT:(.*?)%\\}#ies" => "short('\\1', '" . $short . "')",
-				"#\\[img:([0-9]*?)\\]#is" => (!empty($miniImg[0]) ? $miniImg[0] : ''),
+				"#\\[img:([0-9]*?)\\]#is" => (!empty($miniImg[0]) ? '<img src="' . $miniImg[0] . '" border="0" width="\\1" />' : ''),
 				"#\\[mini_img\\](.*?)\\[/mini_img\\]#ies" => "if_set('" . (!empty($miniImg[0]) ? true : '') . "', '\\1')",				
 			);
 			if(!empty($news['fields']) && $news['fields'] != 'N;')
@@ -265,37 +266,43 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag, $cache;
 		$core->tpl->setVar('BREAKNAV', $breakNav);
 		$core->tpl->setVar('FULL_LINK', $news_link . $news['altname'] . ".html");
 		$core->tpl->setVar('TAGS', mb_substr($tags, 0, -2));
-		$array_replace = array(
-			"#\\[tags\\](.*?)\\[/tags\\]#ies" => "if_set('" . $news['tags'] . "', '\\1')",
-			"#\\[more\\](.*?)\\[/more\\]#ies" => "format_link('\\1', '" . $news_link . $news['altname'] . ".html')",
-			"#\\[category\\](.*?)\\[/category\\]#ies" => "if_set('".$cat."', '\\1')",
-			"#\\{%MYDATE:(.*?)%\\}#ies" => "date('\\1', '" . $news['date'] . "')",
-			"#\\{%TITLE:(.*?)%\\}#ies" => "short('\\1', '" . $news['title'] . "')",
-			"#\\{%SHORT:(.*?)%\\}#ies" => "short('\\1', '" . $short . "')",
-			"#\\[img:([0-9]*?)\\]#is" => (!empty($miniImg[0]) ? $miniImg[0] : ''),
-			"#\\[mini_img\\](.*?)\\[/mini_img\\]#ies" => "if_set('" . (!empty($miniImg[0]) ? true : '') . "', '\\1')",
-			"#\\[xfield:([0-9]*?)\\](.*?)\\[/xfield:([0-9]*?)\\]#ies" => "ifFields('" . $news['fields'] . "', '\\1', '\\2')",
-		);
-		if(!empty($news['fields']) && $news['fields'] != 'N;')
-		{
-			$fields = unserialize($news['fields']);
-			foreach($fields as $xId => $xData)
+		$miniImg = _getCustomImg($short);
+			$array_replace = array(
+				"#\\[tags\\](.*?)\\[/tags\\]#ies" => "if_set('" . $news['tags'] . "', '\\1')",
+				"#\\[more\\](.*?)\\[/more\\]#ies" => "format_link('\\1', '" . $news_link . $news['altname'] . ".html')",
+				"#\\[category\\](.*?)\\[/category\\]#ies" => "if_set('".$cat."', '\\1')",
+				"#\\[edit\\](.*?)\\[/edit\\]#is" => (($core->auth->isModer||$core->auth->isAdmin)  ? "\${1}" : ''),
+				"#\\{%MYDATE:(.*?)%\\}#ies" => "date('\\1', '" . $news['date'] . "')",
+				"#\\{%TITLE:(.*?)%\\}#ies" => "short('\\1', '" . $news['title'] . "')",
+				"#\\{%SHORT:(.*?)%\\}#ies" => "short('\\1', '" . $short . "')",
+				"#\\[img:([0-9]*?)\\]#is" => (!empty($miniImg[0]) ? '<img src="' . $miniImg[0] . '" border="0" width="\\1" />' : ''),
+				"#\\[mini_img\\](.*?)\\[/mini_img\\]#ies" => "if_set('" . (!empty($miniImg[0]) ? true : '') . "', '\\1')",				
+			);
+			if(!empty($news['fields']) && $news['fields'] != 'N;')
 			{
-				if(!empty($xData[1]))
+				$fields = unserialize($news['fields']);
+				foreach($fields as $xId => $xData)
 				{
-					$array_replace["#\\[xfield_value:" . $xId . "\\]#is"] = $xData[1];
+					if(!empty($xData[1]))
+					{
+						$array_replace["#\\[xfield_value:" . $xId . "\\]#is"] = $xData[1];
+					}
 				}
 			}
-		}
-		if($news_conf['showBreadcumb'] == '1')
-		{
-			$catId = explode(',', $news['cat']);
-			$core->tpl->setVar('BREADCUMB', $core->getCat('news', ($catId[1] != 0) ? $catId[1] : '', 'breadcrumb', 1));
-		}
-		$core->tpl->setVar('DATE', formatDate($news['date']));
-		$core->tpl->setVar('ID', $news['id']);
-		$core->tpl->setVar('RATING', $news['allow_rating'] ? draw_rating($news['id'], 'news', $news['score'], $news['votes']) : '');
-		$core->tpl->setVar('EDIT', ($core->auth->isModer||$core->auth->isAdmin)  ? '<a href="news/edit/'.$news['id'].'">'._EDIT.'</a>' : '');
+			$array_replace["#\\[xfield:([0-9]*?)\\](.*?)\\[/xfield:([0-9]*?)\\]#ies"] = "ifFields('" . $news['fields'] . "', '\\1', '\\2')";
+			if($news_conf['showBreadcumb'] == '1')
+			{
+				$catId = explode(',', $news['cat']);
+				$core->tpl->setVar('BREADCUMB', $core->getCat('news', ($catId[1] != 0) ? $catId[1] : '', 'breadcrumb', 1));
+			}			
+			$core->tpl->sources = preg_replace(array_keys($array_replace), array_values($array_replace), $core->tpl->sources);
+			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?):(.*?)%\\}#is", (!empty($miniImg[(int)${1}]) ? $miniImg[(int)${1}] : "\${2}") , $core->tpl->sources);
+			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#is",  $miniImg[(int)${1}], $core->tpl->sources);
+			$core->tpl->setVar('DATE', formatDate($news['date']));
+			$core->tpl->setVar('ID', $news['id']);
+			$core->tpl->setVar('RATING', $news['allow_rating'] ? draw_rating($news['id'], 'news', $news['score'], $news['votes']) : '');
+			$core->tpl->setVar('EDIT', ($core->auth->isModer||$core->auth->isAdmin)  ? '<a href="news/edit/'.$news['id'].'">'._EDIT.'</a>' : '');
+			
 		$related_cache = $cache->do_get('related_'.$news['id']);
 		if(empty($related_cache) && $news_conf['related_news'] > 0)
 		{

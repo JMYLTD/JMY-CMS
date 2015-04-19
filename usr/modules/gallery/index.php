@@ -5,7 +5,6 @@ if (!defined('ACCESS')) {
 }
 
 $module_name = $url[0];
-//require ROOT . 'etc/gallery.config.php'; // подключаем конфиг
 loadConfig('gallery');
 
 
@@ -75,7 +74,7 @@ switch(isset($url[1]) ? $url[1] : null)
 			$core->tpl->end();
 			$core->tpl->close();
 			
-			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"10\" align=\"center\"><tr>";
+			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"10\" ><tr>";
 			$cont = 0;
 			while($result = $db->getRow($q)) 
 			{
@@ -181,7 +180,7 @@ switch(isset($url[1]) ? $url[1] : null)
 			$core->tpl->close();
 			
 			
-			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"10\" align=\"center\"><tr>";
+			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"10\" ><tr>";
 			$limg = "{%THEME%}/gallery/images/no_photo.gif";
 			$c = 0;
 			$cont = 0;
@@ -451,7 +450,7 @@ switch(isset($url[1]) ? $url[1] : null)
 			$core->tpl->end();
 			$core->tpl->close();
 			
-			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"10\" align=\"center\"><tr>";
+			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"10\"><tr>";
 			while($photo = $db->getRow($photo_q)) 
 			{
 				if($photo['sizes'] !== '') 

@@ -12,8 +12,7 @@
 class cache_lib
 {
 	var $identifier;
-	var $crashed		= 0;
-	
+	var $crashed = 0;	
 	
 	function cache_lib( $identifier='' )
 	{
@@ -30,61 +29,47 @@ class cache_lib
 		else
 		{
 			$this->identifier = $identifier;
-		}
-		
+		}		
 		unset( $identifier );
 		
-	}
-	
+	}	
 	
 	function disconnect()
 	{
 		return TRUE;
-	}
-		
+	}		
 	
 	function do_put( $key, $value, $ttl=0 )
 	{
 			
-		$fh = fopen( ROOT.'tmp/cache/'.$this->identifier . md5( $key ).'.cache', 'wb' );
-		
+		$fh = fopen( ROOT.'tmp/cache/'.$this->identifier . md5( $key ).'.cache', 'wb' );		
 		if( !$fh )
 		{
 			return FALSE;
-		}
-		
-		$extra_flag = "";
-		
+		}		
+		$extra_flag = "";		
 		if( is_array( $value ) )
 		{
 			$value = serialize($value);
 			$extra_flag = "\n".'$is_array = 1;'."\n\n";
-		}
-		
-		$extra_flag .= "\n".'$ttl = '.$ttl.";\n\n";
-		
-		$value = '"'.addslashes( $value ).'"';
-		
-		$file_content = "<?"."php\n\n".'$value = '.$value.";\n".$extra_flag."\n?".'>';
-		
+		}		
+		$extra_flag .= "\n".'$ttl = '.$ttl.";\n\n";		
+		$value = '"'.addslashes( $value ).'"';		
+		$file_content = "<?"."php\n\n".'$value = '.$value.";\n".$extra_flag."\n?".'>';		
 		flock( $fh, LOCK_EX );
 		fwrite( $fh, $file_content );
 		flock( $fh, LOCK_UN );
-		fclose( $fh );
-		
+		fclose( $fh );		
 		@chmod( ROOT.'tmp/cache/'.$this->identifier . md5( $key ).'.cache', 0777 );
 	}
 	
 	function do_get( $key )
 	{
-		$return_val = "";
-		
+		$return_val = "";		
 		if( file_exists( ROOT.'tmp/cache/'.$this->identifier . md5( $key ).'.cache' ) )
 		{
-			require ROOT.'tmp/cache/'.$this->identifier . md5( $key ).'.cache';
-			
+			require ROOT.'tmp/cache/'.$this->identifier . md5( $key ).'.cache';			
 			$return_val = stripslashes($value);
-
 			if( isset($is_array) AND $is_array == 1 )
 			{
 				$return_val = unserialize($return_val);

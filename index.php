@@ -14,10 +14,10 @@ define('ACCESS', true);
 define('TIMER', microtime(1));
 define('ROOT', dirname(__FILE__) . '/');
 define('PLUGINS', dirname(__FILE__) . '/usr/plugins/');
-define('COOKIE_AUTH', 'auth_rc3');
-define('COOKIE_PAUSE', 'pause_rc3');
+define('COOKIE_AUTH', 'auth_jmy');
+define('COOKIE_PAUSE', 'pause_jmy');
 define('PAUSE_TIME', 120);
-define('VERSION_ID', '1.6'); 
+define('VERSION_ID', '1.6.1'); 
 define('COOKIE_TIME', 2592000);
 define('ADMIN', 'administration');
 define('HACK_SQL', '/SELECT|INSERT|ALTER|DROP|UNION|OUTFILE|WHERE/i');
@@ -30,10 +30,9 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modifie
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Pragma: no-cache"); // HTTP/1.0'
 
-error_reporting(DEBUG ? -1 : 1);
 mb_internal_encoding("UTF-8");
 
-
+error_reporting(DEBUG ? -1 : 1);
 require ROOT . 'etc/global.config.php';
 require ROOT . 'etc/admin.config.php';
 require ROOT . 'etc/security.config.php';
@@ -52,8 +51,8 @@ if(isset($_COOKIE['theme']))
 		$config['tpl'] = filter($_COOKIE['theme']);
 	else
 		setcookie('theme', false, time(), '/');
+		
 }
-
 
 if($config['timezone'] !== "")
 {

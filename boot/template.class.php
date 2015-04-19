@@ -60,9 +60,14 @@ class template
             $this->sep = '';
         }
         
+		if(!isset($_COOKIE['smartphone']))
+		{
+			setcookie('smartphone', 1);		
+		}
+		
 		if(empty($this->file_dir))
 		{
-			if (($config['smartphone']=='1')&&($this->check_phone()==true))
+			if (($config['smartphone']=='1')&&($this->check_phone()==true)&&$_COOKIE['smartphone'] == 1)
 			{
 				$this->file_dir = 'usr/tpl/smartphone/';
 			}
@@ -285,14 +290,19 @@ class template
 	global $config, $url, $core;
 		if($url[0] != ADMIN)
 		{	
+			$in["#\\{%NOWDATE:(.*?)%\\}#ies"] = "date('\\1', '" . time() . "')";
 			$in["#\\[group=(.+?)](.*?)\\[/group]#ies"] = "Group('\\1', '\\2')";
 			$in["#\\[nogroup=(.+?)](.*?)\\[/nogroup]#ies"] = "noGroup('\\1', '\\2')";			
 			$in["#\\[index:(.+?)\\](.*?)\\[/index\\]#ies"] = "indexShow('\\1', '\\2')";
 			$in["#\\[modules:(.+?):(.+?)](.*?)\\[/modules]#ies"] = "modulesShow('\\1', '\\2', '\\3')";
+			$in["#\\[category:(.+?):(.+?)](.*?)\\[/category]#ies"] = "categoryShow('\\1', '\\2', '\\3')";
+			$in["#\\[news:(.+?):(.+?)](.*?)\\[/news]#ies"] = "newsShow('\\1', '\\2', '\\3')";
 			$in["#\\[lang:(.+?)]#ies"] =  "constant('\\1')";
 			$in["#\\[guest](.*?)\\[/guest]#ies"] =  "checkGuest('\\1')";
 			$in["#\\[user](.*?)\\[/user]#ies"] =  "checkUser('\\1')";
+			$in["#\\[admin](.*?)\\[/admin]#ies"] =  "checkAdmin('\\1')";
 			$in["#\\[captcha](.*?)\\[/captcha]#ies"] =  "checkCaptcha('\\1')";
+			$in["#\\[recaptcha](.*?)\\[/recaptcha]#ies"] =  "checkReCaptcha('\\1')";
 			$in["#\\[title:(.*?)]#ies"] =  "\$this->preTitle('\\1');";
 			$in["#\\[open](.*?)\\[/open]#ies"] =  "\$this->preOpen('\\1');";
 			$in["#\\[userinfo:(.*?)]#ies"] =  "\$this->ustinf('\\1')";
@@ -458,6 +468,7 @@ class template
 		{
 			$meta .= '<div id="loading" class="loading" style="display:none;top:0;"><img src="media/showloading.gif" alt="Загрузка..." /><br />Загрузка...</div>' . "\n";
 		}		
+		
 	
 		$this->loadFile('index');		
 			

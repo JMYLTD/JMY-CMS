@@ -41,11 +41,15 @@ if (!defined('ACCESS')) {
 		$this->setVar('ADMINLOG', $core->auth->isAdmin ? ' <a href="' . ADMIN . '">[Панель управления]</a>' : '');
 		$this->setVar('USER_AVATAR', avatar($core->auth->user_id));
 		$this->setVar('QUERIES', $db->numQueries);
+		$this->setVar('NEW_PM', $core->auth->newPmsNumb);
 		
 		$this->setVar('URL_LOGIN', 'profile/login');
+		$this->setVar('URL_ADD', '/news/addPost');
+		$this->setVar('URL_ADMIN', ADMIN);
 		$this->setVar('URL_REG', 'profile/register');
 		$this->setVar('URL_FORGOT', 'profile/forgot_pass');
 		$this->setVar('URL_LOGOUT', 'profile/logout');
+		$this->setVar('URL_PDA', 'index.php?phone_change');
 		$this->setVar('URL_PROFIL', 'profile');
 		$this->setVar('URL_PM', 'pm');
 		$this->setVar('URL_BLOG', 'blog');

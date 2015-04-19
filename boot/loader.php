@@ -117,6 +117,23 @@ if(($config['off'] == 0 OR $core->auth->isAdmin == 1 OR $url[0] == ADMIN) && $co
 		}
 	}
 	
+	if(isset($_GET['phone_change']))
+	{
+		if ($_COOKIE['smartphone'] == 1)
+		{
+			setcookie('smartphone', 0);
+			location('?nocache='.time());	
+		}
+		else
+		{
+			setcookie('smartphone', 1);
+			location('?nocache='.time());	
+		}
+		
+				
+				
+	}
+	
 	
 	if($config['reffer']) 
 	{

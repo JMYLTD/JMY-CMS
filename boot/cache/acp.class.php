@@ -3,7 +3,7 @@
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
-* @copyright   Copyright (C) 2012-2014 JMY LTD
+* @copyright   Copyright (C) 2012-2015 JMY LTD
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
@@ -22,23 +22,18 @@ class cache_lib
 		else
 		{
 			$this->identifier = $identifier;
-		}
-		
-		unset( $identifier );
-		
+		}		
+		unset( $identifier );		
 	}
-	
 	
 	function disconnect()
 	{
 		return TRUE;
-	}
-	
+	}	
 	
 	function do_put( $key, $value, $ttl=0 )
 	{
-		$ttl = $ttl > 0 ? intval($ttl) : 0;
-		
+		$ttl = $ttl > 0 ? intval($ttl) : 0;		
 		apc_store($this->identifier . md5( $key ),
 							$value,
 							$ttl );
@@ -46,10 +41,8 @@ class cache_lib
 	
 	function do_get( $key )
 	{
-		$return_val = "";
-		
-		$return_val = apc_fetch($this->identifier . md5( $key ) );
-		
+		$return_val = "";		
+		$return_val = apc_fetch($this->identifier . md5( $key ) );		
 		return $return_val;
 	}
 	

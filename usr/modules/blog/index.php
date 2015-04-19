@@ -454,6 +454,7 @@ switch(isset($url[1]) ? $url[1] : null)
 						$core->tpl->setVar('POST_TITLE', '<a href="blog/read/' . $posts['id'] . '" title="'._BLOG_READ_POST.'">'.$posts['title'].'</a>');
 						$core->tpl->setVar('TEXT', $core->bbDecode($posts['text']));
 						$core->tpl->setVar('STATUS', $status);
+						$core->tpl->setVar('VIEWS', $posts['views']);
 						$core->tpl->setVar('RATING', '<a href="javascript:void(0)" title="'._BLOG_POST_VOTE.'" onclick="' . ($core->auth->isUser ? ($core->auth->user_info['id'] != $posts['uid'] ? (!eregStrt(','.$core->auth->user_info['id'].',', $posts['ratingUsers']) ? 'blogRating(\'' . $posts['id'] . '\', \'rate_' . $posts['id'] . '\')' : 'alert(\''._BLOG_ALREADY_VOTED.'\')') : 'alert(\''._BLOG_YOURSELF_VOTED.'\');') : 'alert(\''._BLOG_AUTHORIZED_VOTING_ONLY.'\');') . '">Рэйтинг</a> <span id="rate_' . $posts['id'] . '" class="blog_postRating">' . ($posts['rating'] > 0 ? '+' : '') . $posts['rating'] . '</span>');
 						$core->tpl->setVar('TAGS', implode(', ', $tags));
 						$core->tpl->setVar('ADMIN', $isAdmin ? '<a href="blog/editPost/' . $posts['id'] . '" title="'._BLOG_EDIT_POST.'">Редактировать</a>' : '');
@@ -547,6 +548,7 @@ switch(isset($url[1]) ? $url[1] : null)
 				$core->tpl->setVar('POST_TITLE', '<a href="blog/read/' . $posts['id'] . '" title="'._BLOG_READ_POST.'">'.$posts['title'].'</a>');
 				$core->tpl->setVar('TEXT', $core->bbDecode($posts['text']));
 				$core->tpl->setVar('STATUS', $status);
+				$core->tpl->setVar('VIEWS', $posts['views']);
 				$core->tpl->setVar('RATING', '<a href="javascript:void(0)" title="'._BLOG_POST_VOTE.'" onclick="' . ($core->auth->isUser ? ($core->auth->user_info['id'] != $posts['uid'] ? (!eregStrt(','.$core->auth->user_info['id'].',', $posts['ratingUsers']) ? 'blogRating(\'' . $posts['id'] . '\', \'rate_' . $posts['id'] . '\')' : 'alert(\''._BLOG_ALREADY_VOTED.'\')') : 'alert(\''._BLOG_YOURSELF_VOTED.'\');') : 'alert(\''._BLOG_AUTHORIZED_VOTING_ONLY.'\');') . '">Рэйтинг</a> <span id="rate_' . $posts['id'] . '" class="blog_postRating">' . ($posts['rating'] > 0 ? '+' : '') . $posts['rating'] . '</span>');
 				$core->tpl->setVar('TAGS', implode(', ', $tags));
 				$core->tpl->setVar('ADMIN', $isAdmin ? '<a href="blog/editPost/' . $posts['id'] . '" title="'._BLOG_EDIT_POST.'">Редактировать</a>' : '');
@@ -595,6 +597,7 @@ switch(isset($url[1]) ? $url[1] : null)
 			$core->tpl->setVar('POST_TITLE', '<a href="blog/read/' . $posts['id'] . '" title="'._BLOG_READ_POST.'">'.$posts['title'].'</a>');
 			$core->tpl->setVar('TEXT', $core->bbDecode($posts['text']));
 			$core->tpl->setVar('STATUS', $status);
+			$core->tpl->setVar('VIEWS', $posts['views']);
 			$core->tpl->setVar('RATING', '<a href="javascript:void(0)" title="'._BLOG_POST_VOTE.'" onclick="' . ($core->auth->isUser ? ($core->auth->user_info['id'] != $posts['uid'] ? (!eregStrt(','.$core->auth->user_info['id'].',', $posts['ratingUsers']) ? 'blogRating(\'' . $posts['id'] . '\', \'rate_' . $posts['id'] . '\')' : 'alert(\''._BLOG_ALREADY_VOTED.'\')') : 'alert(\''._BLOG_YOURSELF_VOTED.'\');') : 'alert(\''._BLOG_AUTHORIZED_VOTING_ONLY.'\');') . '">Рэйтинг</a> <span id="rate_' . $posts['id'] . '" class="blog_postRating">' . ($posts['rating'] > 0 ? '+' : '') . $posts['rating'] . '</span>');
 			$core->tpl->setVar('TAGS', implode(', ', $tags));
 			$core->tpl->setVar('ADMIN', $isAdmin ? '<a href="blog/editPost/' . $posts['id'] . '" title="'._BLOG_EDIT_POST.'">Редактировать</a>' : '');

@@ -1,5 +1,5 @@
 <div class="footer">
-<p class="center-text half-bottom">{%LICENSE%} {%D_YEAR%}. Все права защищены.</p>
+<p class="center-text half-bottom">{%LICENSE%} {%D_YEAR%}. Все права защищены. <br><a href="{%URL_PDA%}" title="Полная версия">Полная версия</a></p>
 <div class="footer-icons">
 <a href="#" class="facebook-color facebook-social"><i class="fa fa-facebook"></i></a>
 <a href="#" class="google-color google-social"><i class="fa fa-google-plus"></i></a>

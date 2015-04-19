@@ -135,7 +135,8 @@ global $db, $config, $core, $url, $user;
 			$core->tpl->setVar('NAME', $rows['name']);
 			$core->tpl->setVar('POINTS', $rows['points']);
 			$core->tpl->setVar('COUNTRICON', $flag != 'UN' ? '<img src="media/flags/' . $flag . '.gif" border="0" class="icon" title="' . $flag . '" alt="" />' : '');
-			$core->tpl->setVar('ICQ', $rows['icq'] ? $rows['icq'] : 'Не указано');
+			$core->tpl->setVar('COUNTRY', $rows['place']);
+			$core->tpl->setVar('ICQ', $rows['icq'] ? $rows['icq'] : 'Не указано');			
 			$core->tpl->setVar('SKYPE', $rows['skype'] ? $rows['skype'] : 'Не указано');
 			$core->tpl->setVar('HOBBY', $rows['hobby'] ? $rows['hobby'] : 'Не указано');
 			$core->tpl->setVar('SIG', $rows['signature'] ? $core->bbDecode($rows['signature']) : 'Не указано');
@@ -155,9 +156,10 @@ global $db, $config, $core, $url, $user;
 			$core->tpl->setVar('USER_WALL', $user_wall);
 			$core->tpl->setVar('PROFILE_LINK', $profile_link);
 			$core->tpl->setVar('USER_NEWS', $rows['user_news']);
+			$core->tpl->setVar('REGDATE', formatDate($rows['regdate']));
 			$core->tpl->setVar('CLEAN_GUESTS', $core->auth->user_info['nick'] == $nick ?  '<a href="profile/cleanGuests" title="Очистить список"><strong>Очистить список гостей</strong></a>' : '');
 			$core->tpl->setVar('NEWFRIENDSNUM', isset($nF) ? $db->numRows($newFriends) : '');
-			$core->tpl->setVar('ADD_FRIEND', ($core->auth->isUser && $user['userFriends'] == 1 && $core->auth->user_info['nick'] != $nick) ? (in_array($core->auth->user_id, $uFr[1]) ? '<div id="friendDo"><img src="media/edit/cross.png" alt="" border="0" class="icon" /><a href="javascript:void(0)" onclick="delFriend(' . $rows['id'] . ', \'friendDo\');">Удалить из друзей</a></div>' : '<div id="friendDo"><img src="media/edit/plus.png" alt="" border="0" class="icon" /> <a href="javascript:void(0)" onclick="addFriend(' . $rows['id'] . ');">Добавить в друзья</a></div>') : '');
+			$core->tpl->setVar('ADD_FRIEND', ($core->auth->isUser && $user['userFriends'] == 1 && $core->auth->user_info['nick'] != $nick) ? (in_array($core->auth->user_id, $uFr[1]) ? '<div id="friendDo"><a href="javascript:void(0)" onclick="delFriend(' . $rows['id'] . ', \'friendDo\');">Удалить из друзей</a></div>' : '<div id="friendDo"><a href="javascript:void(0)" onclick="addFriend(' . $rows['id'] . ');">Добавить в друзья</a></div>') : '');
 			$array_replace = array(
 				"#\\[exgroup\\](.*?)\\[/exgroup\\]#ies" => "if_set('" . (!empty($exgroup) ? 'yes' : '') . "', '\\1')",
 				"#\\[friends\\](.*?)\\[/friends\\]#ies" => "if_set('" . ($user['userFriends'] == 1 && $uFr[0] != '' ? 'yes' : '') . "', '\\1')",
@@ -166,6 +168,13 @@ global $db, $config, $core, $url, $user;
 				"#\\[blog\\](.*?)\\[/blog\\]#ies" => "if_set('" . (modAccess('blog') == 'groupOk' ? 'yes' : '') . "', '\\1')",
 				"#\\[blogRead\\](.*?)\\[/blogRead\\]#ies" => "if_set('" . ($user['readBlog'] == 1 && $readBlog != '' ? 'yes' : '') . "', '\\1')",
 				"#\\[gallery\\](.*?)\\[/gallery\\]#ies" => "if_set('" . (modAccess('gallery') == 'groupOk' ? 'yes' : '') . "', '\\1')",
+				"#\\[name\\](.*?)\\[/name\\]#ies" => "if_set('" . (!empty($rows['name']) ? 'yes' : '') . "', '\\1')",
+				"#\\[country\\](.*?)\\[/country\\]#ies" => "if_set('" . (!empty($flag) ? 'yes' : '') . "', '\\1')",
+				"#\\[online\\](.*?)\\[/online\\]#ies" => "if_set('" . (($rows['last_visit']+500>=time()) ? 'yes' : '') . "', '\\1')",
+				"#\\[isuser\\](.*?)\\[/isuser\\]#ies" => "if_set('" . (empty($url[1]) ? 'yes' : '') . "', '\\1')",
+				"#\\[nouser\\](.*?)\\[/nouser\\]#ies" => "if_set('" . (!empty($url[1]) ? 'yes' : '') . "', '\\1')",
+				"#\\[wall\\](.*?)\\[/wall\\]#ies" => "if_set('" . (($user['userWall'] == 1) ? 'yes' : '') . "', '\\1')",
+				
 			);
 			$xfield = '';
 			if(!empty($rows['fields']))

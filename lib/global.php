@@ -76,6 +76,8 @@ global $user;
 	}
 }
 
+
+
 function engine_encode($str = '')
 {
 	global $config;
@@ -1794,6 +1796,15 @@ global $core;
 	}
 }
 
+function checkAdmin($content)
+{
+global $core;
+	if($core->auth->isAdmin)
+	{
+		return stripslashes($content);
+	}
+}
+
 function checkGuest($content)
 {
 global $core;
@@ -1806,7 +1817,16 @@ global $core;
 function checkCaptcha($content)
 {
   global $core, $security;
-	if ($security[recaptcha]==0) 
+	if (($security[recaptcha]==0)&&($security[switch_cp]==1))
+	{
+		return stripslashes($content);
+	}
+}
+
+function checkReCaptcha($content)
+{
+  global $core, $security;
+	if (($security[recaptcha]==1)&&($security[switch_cp]==1))
 	{
 		return stripslashes($content);
 	}
@@ -1914,6 +1934,7 @@ function modulesShow($modules, $tag, $content)
 global $url;
 	$modulesArray = explode(',', $modules);
 	
+	
 	if(in_array($url[0], $modulesArray)) 
 	{
 		if($tag == 1) return stripslashes($content);
@@ -1921,6 +1942,59 @@ global $url;
 	else
 	{
 		if($tag == 0) return stripslashes($content);
+	}
+	
+}
+
+function categoryShow($category, $tag, $content)
+{
+global $url, $db;
+	$categoryArray = explode(',', $category);
+	if ($url[0]=='news'||$url[0]=='content')
+	{
+		$where = "altname='".$url[1]."'";
+		$query = $db->query("SELECT * FROM ".DB_PREFIX."_categories WHERE ".$where." LIMIT 1");
+		$row = $db->getRow($query);
+		$id_now = $row['id'];
+		if(in_array($id_now, $categoryArray)) 
+		{
+			if($tag == 1) return stripslashes($content);
+		}
+		else
+		{
+			if($tag == 0) return stripslashes($content);
+		}
+	}
+}
+
+function newsShow($news, $tag, $content)
+{
+global $url, $db;
+	$newsArray = explode(',', $news);
+	if ($url[0]=='news')
+	{
+		if (eregStrt('.html', $url[1]))
+		{
+			$altname=$url[1];
+			
+		}
+		else
+		{
+			$altname=$url[2];				
+		}
+		$altname  = str_replace(".html", "", $altname);		
+		$where = "altname='".$altname."'";
+		$query = $db->query("SELECT * FROM ".DB_PREFIX."_news WHERE ".$where." LIMIT 1");
+		$row = $db->getRow($query);
+		$id_now = $row['id'];		
+		if(in_array($id_now, $newsArray)) 
+		{
+			if($tag == 1) return stripslashes($content);
+		}
+		else
+		{
+			if($tag == 0) return stripslashes($content);
+		}
 	}
 }
 
