@@ -19,11 +19,12 @@
 				<label for="comment"><span class="screen-reader-text">Сообщения *</span></label>
 				<textarea id="comment" name="message" rows="8" aria-required="true" placeholder="Сообщения *"></textarea>
 			</p>
-			[guest]
+			[captcha]
 			<p class="comment-form-comment">
-				<td valign="top" >Код безопасности <font color="red">*</font>:</td><td><br>{%CAPTCHA%}<br><input type="text" name="securityCode" id="securityCode" size="15" maxlength="5"> </td>
+				<td valign="top" >Код безопасности <font color="red">*</font>:</td>
+				<td><br>{%CAPTCHA%}[recaptcha:0]<br><input type="text" name="securityCode" id="securityCode" size="15" maxlength="6">[/recaptcha]</td>
 			</p>
-			[/guest]			
+			[/captcha]			
 			<p class="form-allowed-tags" id="form-allowed-tags">Вы можете использовать <abbr title="HyperText Markup Language">HTML</abbr> теги и атрибуты:  <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;strike&gt; &lt;strong&gt; </code></p>					
 			<p class="form-submit">
 				<input name="submit" type="submit" id="submit" class="submit" value="Отправить">

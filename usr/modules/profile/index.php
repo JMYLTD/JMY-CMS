@@ -315,8 +315,28 @@ if(!$core->auth->isUser)
 			}
 			else
 			{
+				require ROOT . 'boot/sub_classes/socialauther/autoload.php';
+				require ROOT . 'etc/social.config.php';							
+				$adapters = array();
+				foreach ($adapterConfigs as $adapter => $settings)
+					{
+						$class = 'SocialAuther\Adapter\\' . ucfirst($adapter);
+						$adapters[$adapter] = new $class($settings);
+					}			
+				if (isset($_SESSION['user']))
+					{
+						echo '<p><a href="profile">Скрытый контент</a></p>';
+					}
+				else if (!isset($_GET['code']) && !isset($_SESSION['user']))
+					{
+						foreach ($adapters as $title => $adapter) 
+						{
+							$socila_lnk .= '<a href="' . $adapter->getAuthUrl() . '"><img  src="media/social/' . ucfirst($title) . '.png" alt="иконки соц сетей psd" width="32" height="32"> </a>';
+						}
+					}
 				set_title(array('Добро пожаловать в профиль'));
 				$core->tpl->loadFile('profile/login');
+				$core->tpl->setVar('SOCIAL', $socila_lnk);
 				$core->tpl->end();
 			}
 			break;
@@ -341,6 +361,19 @@ if(!$core->auth->isUser)
 			
 			break;
 	
+		case 'social_auth':	
+			require ROOT . 'boot/sub_classes/socialauther/autoload.php';
+			require ROOT . 'etc/social.config.php';			
+			if (isset($_SESSION['user'])) 
+			{
+				$user = $_SESSION['user'];				
+				$result =  $db->query("SELECT *  FROM `" . USER_PREFIX . "_users` WHERE `provider` = '{$user->provider}' AND `social_id` = '{$user->socialId}' LIMIT 1");
+				if (!$result) 
+				{
+					echo 'Пользователь ещё не зарегистрирован!';
+				}
+			}		
+		break;
 		case 'register':			
 			set_title(array('Регистрация'));
 			require ROOT . 'etc/user.config.php';

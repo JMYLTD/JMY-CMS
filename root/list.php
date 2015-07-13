@@ -99,6 +99,7 @@ $component_array = array(
 		'desc' => _AP_PUB_DESC,		
 		'shown' => 1
 	),	
+	
 );
 
 $services_array = array(	
@@ -113,7 +114,12 @@ $services_array = array(
 			_AP_DB_FIX => 'fix',
 		),
 		'shown' => 1
-	),		
+	),	
+	'fm' => array (
+		'name' => _AP_FM ,
+		'desc' => _AP_FM_DESC,		
+		'shown' => 1
+	),	
 	'smiles' => array (
 		'name' => _AP_SMILES,
 		'desc' => _AP_SMILES_DESC,			
@@ -133,9 +139,24 @@ $services_array = array(
 		'desc' => _AP_STATS_DESC,		
 		'shown' => 1
 	),	
+	'search' => array (
+		'name' => _AP_SEARCH,
+		'desc' => _AP_SEARCH_DESC,		
+		'shown' => 1
+	),	
 	'log' => array (
 		'name' => _AP_LOGS,
 		'desc' => _AP_LOGS_DESC,		
+		'shown' => 1
+	),
+	'update' => array (
+		'name' => _AP_UPDATE,
+		'desc' => _AP_UPDATE_DESC,
+		'subAct' => array(
+			_AP_UPDATE_MAIN => '',
+			_AP_UPDATE_CECK => 'panel',
+			_AP_UPDATE_HISTORY => 'modules',
+		),				
 		'shown' => 1
 	),
 	'lang' => array (

@@ -1,5 +1,11 @@
 var userMod = false;
 
+function shareWindow(e) {
+  var h = 500,
+      w = 500;
+  window.open(e, '', 'scrollbars=1,height='+Math.min(h, screen.availHeight)+',width='+Math.min(w, screen.availWidth)+',left='+Math.max(0, (screen.availWidth - w)/2)+',top='+Math.max(0, (screen.availHeight - h)/2));
+}
+
 function gid(elemid) 
 { 
 	return document.getElementById(elemid); 

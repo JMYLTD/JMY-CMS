@@ -129,11 +129,11 @@ global $adminTpl, $config, $core, $admin_conf, $db;
 		}
 		else if(val == 2)
 		{
-			gid(\'typeExp\').innerHTML = \'<div class="form-group"><label class="col-sm-3 control-label">'. _DOP_ADDDEF .'</label><div class="col-sm-4"><textarea name="default" class="form-control" rows="3">' . $default . '</textarea></div></div>\';
+			gid(\'typeExp\').innerHTML = \'<div class="form-group"><label class="col-sm-3 control-label">'. _DOP_ADD_DEF .'</label><div class="col-sm-4"><textarea name="default" class="form-control" rows="3">' . $default . '</textarea></div></div>\';
 		}
 		else if(val == 3)
 		{
-			gid(\'typeExp\').innerHTML = \'<div class="form-group"><label class="col-sm-3 control-label">'. _DOP_ADDDEF .'</label><div class="col-sm-4"><textarea name="default" class="form-control" rows="5">' . $default . '</textarea></div></div>\';
+			gid(\'typeExp\').innerHTML = \'<div class="form-group"><label class="col-sm-3 control-label">'. _DOP_ADD_DEF .'</label><div class="col-sm-4"><textarea name="default" class="form-control" rows="5">' . $default . '</textarea></div></div>\';
 		}
 	}	
 	

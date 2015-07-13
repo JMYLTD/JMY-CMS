@@ -79,7 +79,7 @@ class template
 		
 		$this->filesTpl = getcache('tplFiles');
 		
-		if(empty($this->filesTpl) || $this->filesTpl['theme'] != $this->file_dir)
+		if(empty($this->filesTpl) || $this->filesTpl['theme'] != $this->file_dir || ($config['tpl_change'] == '0' && 'usr/tpl/smartphone/'.$config['tpl'].'/' != $this->file_dir))
 		{
 			$this->filesTpl = listFiles($this->file_dir, $this->ext);
 			$this->filesTpl['theme'] = $this->file_dir;
@@ -231,6 +231,10 @@ class template
 		{
 			$loadUrl = $this->getThemeFile($file);
 		}
+		else if ($config['tpl_change'] == '0')
+		{
+			$loadUrl = 'usr/tpl/'.$config['tpl'].'/' . $file . $this->ext;
+		}
 		else
 		{
 			$loadUrl = $this->file_dir . $file . $this->ext;
@@ -302,7 +306,7 @@ class template
 			$in["#\\[user](.*?)\\[/user]#ies"] =  "checkUser('\\1')";
 			$in["#\\[admin](.*?)\\[/admin]#ies"] =  "checkAdmin('\\1')";
 			$in["#\\[captcha](.*?)\\[/captcha]#ies"] =  "checkCaptcha('\\1')";
-			$in["#\\[recaptcha](.*?)\\[/recaptcha]#ies"] =  "checkReCaptcha('\\1')";
+			$in["#\\[recaptcha:(.+?)\\](.*?)\\[/recaptcha]#ies"] =  "checkReCaptcha('\\1', '\\2')";
 			$in["#\\[title:(.*?)]#ies"] =  "\$this->preTitle('\\1');";
 			$in["#\\[open](.*?)\\[/open]#ies"] =  "\$this->preOpen('\\1');";
 			$in["#\\[userinfo:(.*?)]#ies"] =  "\$this->ustinf('\\1')";
@@ -431,10 +435,10 @@ class template
 	
 		$content = ob_get_contents();
 		ob_end_clean();		
-		$cat_keyword = $this->keywords ? ', ' .$this->keywords : false;		
-		$desc = $this->description ? $this->description : $config['description'];
-		
-		$meta = "<title>" . html_entity_decode((!empty($this->title) && !empty($_REQUEST['url']) ? $this->title . $config['name'] : $config['name'] . $config['divider'] . $config['slogan']), ENT_QUOTES) . "</title>" . "\n";
+		$cat_keyword = (isset($this->keywords) ? ', ' .$this->keywords : false);		
+		$desc = (isset($this->description) ? $this->description : $config['description']);
+		$title_now = html_entity_decode((!empty($this->title) && !empty($_REQUEST['url']) ? $this->title . $config['name'] : $config['name'] . $config['divider'] . $config['slogan']), ENT_QUOTES);
+		$meta  =  "<title>" . $title_now . "</title>" . "\n";
 		$meta .= "<meta http-equiv=\"content-type\" content=\"text/html; charset=" . $config['charset'] . "\" />" . "\n";
 		$meta .= "<meta name=\"keywords\" content=\"" . $config['keywords'] . $cat_keyword . "\" />" . "\n";
 		$meta .= "<meta name=\"description\" content=\"" . $desc . "\" />" . "\n";
@@ -473,18 +477,14 @@ class template
 		$this->loadFile('index');		
 			
 		
-		if ($core->auth->isAdmin && strpos($this->sources, "</body") !== false) 
-		{
-			$this->sources = preg_replace('#</body(.*)[^>]#i', adminBar() . '</body\\1', $this->sources);
-		}
+		
 		
 		if(!empty($this->endJs))
 		{
 			$this->sources = preg_replace('#</body(.*)[^>]#i', $this->endJs.'</body\\1', $this->sources);
 		}
 		
-		if($core->auth->isAdmin) adminBar();
-		
+				
 		if (strpos($this->sources, "{%FULL_AJAX:") !== false && $config['fullajax']) 
 		{
 			if(preg_match("#({%FULL_AJAX:start%}(.+){%FULL_AJAX:end%})#si", $this->sources, $fullAjax) && $subContent)
@@ -492,7 +492,7 @@ class template
 				$this->sources = $fullAjax[1];
 			}
 		}
-		$full_lnk = $config['url'].(!empty($url[0]) ? '/' : '').$url[0].(!empty($url[1]) ? '/' : '').$url[1].(!empty($url[2]) ? '/' : '').$url[2].(!empty($url[3]) ? '/' : '').$url[3];	
+		$full_lnk = $config['url'].(!empty($url[0]) ? '/'.$url[0] : '').(!empty($url[1]) ? '/'.$url[1] : '').(!empty($url[2]) ? '/'.$url[2] : '').(!empty($url[3]) ? '/'.$url[3] : '');	
 		
 		include(ROOT.'boot/vars.class.php');	
 		$this->end();

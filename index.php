@@ -1,5 +1,5 @@
 <?php
-
+//a:9:{s:4:"lang";s:2:"en";s:9:"auth_pass";s:32:"d41d8cd98f00b204e9800998ecf8427e";s:8:"quota_mb";i:0;s:17:"upload_ext_filter";a:0:{}s:19:"download_ext_filter";a:0:{}s:15:"error_reporting";i:1;s:7:"fm_root";s:0:"";s:17:"cookie_cache_time";i:2592000;s:7:"version";s:5:"0.9.8";}
 /**
 * @name        JMY CMS
 * @link        http://jmy.su/
@@ -17,11 +17,11 @@ define('PLUGINS', dirname(__FILE__) . '/usr/plugins/');
 define('COOKIE_AUTH', 'auth_jmy');
 define('COOKIE_PAUSE', 'pause_jmy');
 define('PAUSE_TIME', 120);
-define('VERSION_ID', '1.6.1'); 
+define('VERSION_ID', '1.7'); 
 define('COOKIE_TIME', 2592000);
 define('ADMIN', 'administration');
 define('HACK_SQL', '/SELECT|INSERT|ALTER|DROP|UNION|OUTFILE|WHERE/i');
-define('DEBUG', false);
+define('DEBUG', true);
 define('INDEX', isset($_GET['url']) ? false : true);
 @ini_set('allow_url_fopen', 1);
 header('Content-type: text/html; charset=utf-8');
@@ -30,9 +30,12 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modifie
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Pragma: no-cache"); // HTTP/1.0'
 
+
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', 1);
+
 mb_internal_encoding("UTF-8");
 
-error_reporting(DEBUG ? -1 : 1);
 require ROOT . 'etc/global.config.php';
 require ROOT . 'etc/admin.config.php';
 require ROOT . 'etc/security.config.php';

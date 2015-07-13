@@ -41,7 +41,7 @@ if(!empty($onn))
 		elseif($group == $user['botGroup'])
 			$bots[] = $info;
 	}
-	if ($online_conf[user]=="1") 
+	if ($online_conf['user']=="1") 
 	{
 		if(!empty($users))
 		{
@@ -69,7 +69,7 @@ if(!empty($onn))
 	}
 	
 	
-	if ($online_conf[bot]=="1") {
+	if ($online_conf['bot']=="1") {
 	if(!empty($bots))
 	{
 		$perColB = ceil(count($bots)/2);
@@ -89,17 +89,17 @@ if(!empty($onn))
 	}
 	}
 	
-	if ($online_conf[guest]=="1") {
+	if ($online_conf['guest']=="1") {
 	echo '<b>'._BLOCK_ONLINE_GUEST_ON.':</b> '.$guests;
 	}
 }
 
-if ($online_conf[top]=="1") 
+if ($online_conf['top']=="1") 
 {
-	$usr = $db->query("SELECT `nick`, `group` FROM `" . USER_DB . "`.`" . USER_PREFIX . "_users` WHERE last_visit > " . (time()-86400) . " LIMIT ".$online_conf[top_numb]);
+	$usr = $db->query("SELECT `nick`, `group` FROM `" . USER_DB . "`.`" . USER_PREFIX . "_users` WHERE last_visit > " . (time()-86400) . " LIMIT ".$online_conf['top_numb']);
 	if($db->numRows($usr) > 0) 
 	{
-		echo '<br /><br /><b>'.$online_conf[top_numb]._BLOCK_ONLINE_TOP_ON.':</b>';
+		echo '<br /><br /><b>'.$online_conf['top_numb']._BLOCK_ONLINE_TOP_ON.':</b>';
 		echo '<table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td valign="top">';
 		$y = 0;
 		$perColY = ceil($db->numRows($usr)/2);

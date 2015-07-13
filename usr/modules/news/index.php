@@ -154,6 +154,8 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag;
 				$core->tpl->setVar('BREADCUMB', $core->getCat('news', ($catId[1] != 0) ? $catId[1] : '', 'breadcrumb', 1));
 			}			
 			$core->tpl->sources = preg_replace(array_keys($array_replace), array_values($array_replace), $core->tpl->sources);
+			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?):(.*?)%\\}#is", (!empty($miniImg[(int)"\${1}"]) ? $miniImg[(int)"\${1}"] : "\${2}") , $core->tpl->sources);
+			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#is",  $miniImg[(int)"\${1}"], $core->tpl->sources);
 			$core->tpl->setVar('DATE', formatDate($news['date']));
 			$core->tpl->setVar('ID', $news['id']);
 			$core->tpl->setVar('RATING', $news['allow_rating'] ? draw_rating($news['id'], 'news', $news['score'], $news['votes']) : '');
@@ -192,7 +194,9 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag, $cache;
 		$textFull = $news['full'];
 		$pageContent = init_page('break');
 		$pageBreaks = explode('[pagebreak]', $textFull);
-		if(!isset($pageBreaks[$pageContent-1])) $pageContent = 1;		
+		if(!isset($pageBreaks[$pageContent-1])) $pageContent = 1;
+		$pagesBr = count($pageBreaks);
+		$breakNav = '';
 		$textFull = $pageBreaks[$pageContent-1];
 		$textShort = $news['short'];
 		$db->query("UPDATE `" . DB_PREFIX . "_news` SET views = views+1 WHERE " . $where . "='" . $db->safesql($translate) . "' LIMIT 1 ;");
@@ -231,7 +235,8 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag, $cache;
 		}		
 		$cat_id = str_replace(',', '', $news['cat']);
 		$query = $db->query("SELECT * FROM ".DB_PREFIX."_categories WHERE id = '" . $cat_id . "'");	
-		$cat_for = $db->getRow($query);			
+		$cat_for = $db->getRow($query);		
+	
 		if($pagesBr > 1 && $pageBreaks[1] !== '')
 		{
 			if(isset($pageBreaks[$pageContent-2]))
@@ -243,7 +248,7 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag, $cache;
 			{
 				$breakNav .= "<a href=\"" . $news_link . 'break/'. ($pageContent+1) . '/' . $news['altname'] . ".html\" title=\"" . _NEXT_PAGE . "\">" . _NEXT_PAGE . "</a>";
 			}
-		}			
+		}	
 		$core->tpl->uniqTag = 'view';
 		set_title(array(_NEWS, $news['name'], $news['title']));
 		$catInfo = $news['cat'] !== ',0,' ? $core->catInfo('news', $news['cat']) : '';
@@ -296,8 +301,8 @@ global $db, $config, $core, $tags, $news_conf, $url, $headTag, $cache;
 				$core->tpl->setVar('BREADCUMB', $core->getCat('news', ($catId[1] != 0) ? $catId[1] : '', 'breadcrumb', 1));
 			}			
 			$core->tpl->sources = preg_replace(array_keys($array_replace), array_values($array_replace), $core->tpl->sources);
-			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?):(.*?)%\\}#is", (!empty($miniImg[(int)${1}]) ? $miniImg[(int)${1}] : "\${2}") , $core->tpl->sources);
-			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#is",  $miniImg[(int)${1}], $core->tpl->sources);
+			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?):(.*?)%\\}#is", (!empty($miniImg[(int)"\${1}"]) ? $miniImg[(int)"\${1}"] : "\${2}") , $core->tpl->sources);
+			$core->tpl->sources = preg_replace("#\\{%IMG:(.*?)%\\}#is",  $miniImg[(int)"\${1}"], $core->tpl->sources);
 			$core->tpl->setVar('DATE', formatDate($news['date']));
 			$core->tpl->setVar('ID', $news['id']);
 			$core->tpl->setVar('RATING', $news['allow_rating'] ? draw_rating($news['id'], 'news', $news['score'], $news['votes']) : '');

@@ -7,7 +7,7 @@
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
-* @revision	   03.04.2015
+* @revision	   06.07.2015
 */
  
 class admin extends template
@@ -34,7 +34,7 @@ class admin extends template
 		
 	public function admin_foot($last_visit = null, $last_ip = null) 
 	{
-	global $config, $url, $db, $core, $errorClass;
+		global $config, $url, $db, $core, $errorClass;
 		$content = ob_get_contents();
 		ob_end_clean();
 		$array = explode(' | ', $this->admin_title);
@@ -45,19 +45,16 @@ class admin extends template
 		{
 			if($title) $admtitle .= filter($title) . $config['divider'];
 		}
-		
-		require ROOT . 'root/list.php';
-		
+
+		$module_array = array();
+		require ROOT . 'root/list.php';		
 		foreach(glob(ROOT.'usr/modules/*/admin/list.php') as $listed) 
 		{
 			include($listed);
 		}
 				
-		if(isset($toconfig)) $this->toConf = $toconfig;
-	
-		$subNav = '';
-		$jsNav = "<script type=\"text/javascript\">var _component = '" . $component_list . "';var _component_a = '" . $component_addition . "';var _modules = '" . $module_list . "';var _modules_a = '" . $module_addition . "';var _services = '" . $services_list . "';var _services_a = '" . $services_addition . "';</script>";
-				
+		if(isset($toconfig)) $this->toConf = $toconfig;	
+		$subNav = '';		
 		$meta = "<title>" . (!empty($admtitle) && !empty($_REQUEST['url']) ? $admtitle : $config['slogan']) . " "._APANEL."</title>" . "\n";
 		$meta .= "<meta http-equiv=\"content-type\" content=\"text/html; charset=" . $config['charset'] . "\">" . "\n";
 		$meta .= "<base href=\"" . $config['url'] . "/\">" . "\n";					
@@ -131,12 +128,12 @@ class admin extends template
 		}
 		if($count != 0)
 		{
-			$notifications .=  '<li style="cursor:pointer" onclick="location.href=\'/administration/publications/mod/news\';" class="list-group-item"><span class="pull-left mg-t-xs mg-r-md"><img src="usr/tpl/admin/assets/images/notifications/nn.png" class="avatar avatar-sm img-circle" alt=""></span><div class="m-body show pd-t-xs"><span>'._ONMODER.' ('.$count.') </span><br></div></li>';;
+			$notifications .=  '<li style="cursor:pointer" onclick="location.href=\'/' . ADMIN . '/publications/mod/news\';" class="list-group-item"><span class="pull-left mg-t-xs mg-r-md"><img src="usr/tpl/admin/assets/images/notifications/nn.png" class="avatar avatar-sm img-circle" alt=""></span><div class="m-body show pd-t-xs"><span>'._ONMODER.' ('.$count.') </span><br></div></li>';;
 			$i_n++;
 		}
 		if (file_exists('boot/update/lock.update'))
 		{
-			$notifications .=  '<li style="cursor:pointer" onclick="location.href=\'http://cms.jmy.su/\';" class="list-group-item"><span class="pull-left mg-t-xs mg-r-md"><img src="usr/tpl/admin/assets/images/notifications/update.png" class="avatar avatar-sm img-circle" alt=""></span><div class="m-body show pd-t-xs"><span>'. _UPDATE_JMY .'</span><br></div></li>';;
+			$notifications .=  '<li style="cursor:pointer" onclick="location.href=\'/' . ADMIN . '/update\';" class="list-group-item"><span class="pull-left mg-t-xs mg-r-md"><img src="usr/tpl/admin/assets/images/notifications/update.png" class="avatar avatar-sm img-circle" alt=""></span><div class="m-body show pd-t-xs"><span>'. _UPDATE_JMY .'</span><br></div></li>';;
 			$i_n++;
 		}
 		else
@@ -169,7 +166,7 @@ class admin extends template
 			$notifications='<div class="panel-footer no-border">'._NOT_NOTIF.'</div>';		
 		}
 		
-		$avatar =avatar($adminUser['id']);
+		$avatar = avatar($core->auth->user_info['id']);
 		$this->loadFile('main');
 		$this->setVar('META', $meta);
 		$this->setVar('AVATAR', $avatar);
@@ -181,12 +178,8 @@ class admin extends template
 		$this->setVar('VERSION', VERSION_ID);
 		$this->setVar('NAME', $core->auth->user_info['nick']);
 		$this->setVar('IP', getenv("REMOTE_ADDR"));
-		$this->setVar('ADMIN', ADMIN);
-		$this->setVar('MODULE_NAME', $module_array[$url[2]]['name']);
-		$this->setVar('SHOWN_TAB', $shown_tab);
-		$this->setVar('JS_NAV', $jsNav);
-		$this->setVar('VERT_MENU', isset($_COOKIE['_vertical_menu']) ? 'block' : 'none');	
-		$this->setVar('LICENSE', 'Powered by <a href="http://cms.jmy.su" title="JMY CMS">JMY CMS</a>');
+		$this->setVar('ADMIN', ADMIN);		
+		$this->setVar('LICENSE', 'Powered by <a href="http://jmy.su" title="JMY CMS">JMY CMS</a>');
 		$this->setVar('SUBNAV', isset($subNav) ? $subNav : $noSub);
 		$this->setVar('MOD_LINK', (isset($url[2]) && $url[1] == 'module') ? ADMIN . '/module/' . $url[2] : false);
 		$this->setVar('GENERATE', mb_substr(microtime(1) - TIMER, 0, 5));
@@ -217,7 +210,7 @@ class admin extends template
 		$nums = '';
 		$predel = 4;
 		$prevpage = $page-1;
-		if($prevpage != 0) $nums .= '<li><a href="' . str_replace('{page}', 'page/'.$prevpage, $link) . '" title="' . $prevpage . '" ' . ($onClick ? str_replace('{num}', $prevpage, $onClick) : '') . '>&lt; Назад</a></li>';
+		if($prevpage != 0) $nums .= '<li><a href="' . str_replace('{page}', 'page/'.$prevpage, $link) . '" title="' . $prevpage . '" ' . ($onClick ? str_replace('{num}', $prevpage, $onClick) : '') . '>&lt; '._BACK.'</a></li>';
 		for ($var = 1; $var < $numpages+1; $var++) 
 		{
 			if ($var == $page) 
@@ -240,7 +233,7 @@ class admin extends template
 			}
 		}
 		$nextpage = $page + 1;
-		if($numpages != $page) $nums .= '<li><a href="' . str_replace('{page}', 'page/'.$nextpage, $link) . '" title="' . $nextpage . '" ' . ($onClick ? str_replace('{num}', $nextpage, $onClick) : '') . '>Вперёд &gt;</a></li>';
+		if($numpages != $page) $nums .= '<li><a href="' . str_replace('{page}', 'page/'.$nextpage, $link) . '" title="' . $nextpage . '" ' . ($onClick ? str_replace('{num}', $nextpage, $onClick) : '') . '>'._FORWARD.' &gt;</a></li>';
 		
 		if($numpages != 1 && $numpages != 0) 
 		{			

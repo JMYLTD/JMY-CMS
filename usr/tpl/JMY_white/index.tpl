@@ -14,6 +14,11 @@
   <script type='text/javascript' src='{%THEME%}/assest/js/jquery-migrate.min.js'></script>  
 </head>
 <body class="home blog custom-background">
+  <div class="preloader">
+		<div class="preloaderInner">
+			<i class="fa fa-3x fa-circle-o-notch fa-spin"></i>
+		</div>
+  </div>
   <div id="page" class="hfeed site">    
     <header id="masthead" class="site-header" role="banner">
       <div class="theTop">
@@ -22,63 +27,71 @@
           <h2 class="site-description">{%SITE_SLOGAN%}</h2>
         </div>    
 		<div class="site-social">
-			<div class="socialLine">			
-				<a href="#" title="Facebook" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-facebook"></i></a>
-				<a href="#" title="Twitter" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-twitter"></i></a>
-				<a href="#" title="Google Plus" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-google-plus"></i></a>
-				<a href="#" title="Linkedin" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-linkedin"></i></a>
-				<a href="#" title="Instagram" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-instagram"></i></a>
-				<a href="#" title="YouTube" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-youtube"></i></a>
-				<a href="#" title="Pinterest" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-pinterest"></i></a>
-				<a href="#" title="Tumblr" target="_blank" rel="nofollow"><i class="fa spaceLeftDouble fa-tumblr"></i></a>
-				<a href="{%URL%}/feed/rss/" title="RSS"><i class="fa spaceLeftDouble fa-rss"></i></a>									
-			</div>			
-		</div>      
+			<div class="socialLine">
+				<a href="{%SHARE_VK%}" onclick="shareWindow(this.href); return false;" title="Вконтакте" rel="nofollow">
+					<i class="fa spaceLeftDouble fa-vk spaceLeftRight"></i>
+				</a>		
+				<a href="{%SHARE_FB%}" onclick="shareWindow(this.href); return false;" title="Facebook" rel="nofollow">
+					<i class="fa spaceLeftDouble fa-facebook spaceLeftRight"></i>
+				</a>
+				<a href="{%SHARE_TW%}" onclick="shareWindow(this.href); return false;" title="Twitter" rel="nofollow">
+					<i class="fa spaceLeftDouble fa-twitter spaceLeftRight"></i>
+				</a>					
+				<a href="{%SHARE_GP%}" onclick="shareWindow(this.href); return false;" title="Google Plus" rel="nofollow">
+					<i class="fa spaceLeftDouble fa-google-plus spaceLeftRight"></i>
+				</a>
+				<a href="{%SHARE_TB%}" onclick="shareWindow(this.href); return false;" title="Tumblr" rel="nofollow">
+					<i class="fa spaceLeftDouble fa-tumblr spaceLeftRight"></i>
+				</a>							
+				<a href="{%SHARE_LI%}" onclick="shareWindow(this.href); return false;" title="Linkedin" rel="nofollow">
+					<i class="fa spaceLeftDouble fa-linkedin spaceLeftRight"></i>
+				</a>				
+				<a href="{%SHARE_PT%}" title="Pinterest" rel="nofollow"><i class="fa spaceLeftDouble fa-pinterest spaceLeftRight"></i></a>
+				<a href="{%SHARE_MA%}" onclick="shareWindow(this.href); return false;" title="Почта" rel="nofollow"><i class="fa spaceLeftDouble fa-envelope-o spaceLeftRight"></i></a>
+			</div>
+		</div> 
       <nav id="site-navigation" class="main-navigation smallPart" role="navigation">
         <button class="menu-toggle">Меню<i class="fa fa-align-justify"></i></button>
         <div class="menu-menu-1-container">
           <ul class="menu">
-            <li class="menu-item">
+            <li class="menu-item [index:1]current_page_item[/index]">
               <a href="{%URL%}">Главная</a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item [index:0][modules:news,board,blog,guestbook,gallery,sitemap:1]current_page_item[/modules][/index]">
               <a href="#">Компоненты</a>
               <ul class="sub-menu">
-                <li class="menu-item">
+                <li class="menu-item [index:0][modules:news:1]current_page_item[/modules][/index]">
                   <a href="{%URL_NEWS%}">Новости</a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item [modules:board:1]current_page_item[/modules]">
                   <a href="{%URL_FORUM%}">Форум</a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item [modules:blog:1]current_page_item[/modules]">
                   <a href="{%URL_BLOG%}">Блоги</a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item [modules:guestbook:1]current_page_item[/modules]">
                   <a href="{%URL_GUEST%}">Гостевая книга</a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item [modules:gallery:1]current_page_item[/modules]">
                   <a href="{%URL_GALLERY%}">Галерея</a>              
                   <ul class="sub-menu">
                     <li class="menu-item">
                       <a href="{%URL_GALLERY%}/top">Лучшие фото</a>
                     </li>
                     <li class="menu-item">
-                      <a href="{%URL_GALLERY%}/album/primer-1">Пример 1</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{%URL_GALLERY%}/album/primer-2">Пример 2</a>
-                    </li>
+                      <a href="{%URL_GALLERY%}/search">Поиск фотографий</a>
+                    </li>                   
                   </ul>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item [modules:sitemap:1]current_page_item[/modules]">
                   <a href="{%URL_SITEMAP%}">Карта сайта</a>
                 </li>
               </ul>          
             </li>
-            <li class="menu-item">
-              <a href="content/primer_statichesko_straniy.html">Простая страница</a>
+            <li class="menu-item [modules:content:1]current_page_item[/modules]">
+              <a href="content/simple.html">Простая страница</a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item [modules:feedback:1]current_page_item[/modules]">
               <a href="{%URL_FEEDBACK%}">Контакты</a>
             </li>
           </ul>
@@ -88,7 +101,7 @@
     <div id="content" class="site-content">
       <div id="primary" class="content-area">
         <main id="main" class="site-main" role="main">		
-          {%MODULE%}          
+          {%MODULE%}         
         </main>
       </div>
       <div id="secondary" class="widget-area" role="complementary">
@@ -96,32 +109,78 @@
 		 {%BLOCKS:FILE:search%}           
         </aside>  
 		<aside class="widget">
-          <div class="widget-title">
-            <h2>Профиль</h2>
-          </div>
-          {%BLOCKS:FILE:auth%}   
+           <div class="widget-title"><h3>Профиль</h3></div>
+           [guest]
+		   <form action="profile/login" method="post" name="login" onkeypress="ctrlEnter(event, this);">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1" align="center" style=" border-spacing: 7px 6px;">
+					<tr>
+						<td>Логин:</td>
+						<td><input type="text" name="nick" size="10" maxlength="25" class="binput" /></td>
+					</tr>
+					<tr>
+						<td>Пароль:</td>
+						<td><input type="password" name="password" size="10" maxlength="25" class="binput" /></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="socialWidget">
+								<input type="submit" value="Войти"  class="socialWidget" />
+							</div>
+						</td>
+						<td>
+							<div class="socialWidget">
+								<a href="#" target="_blank" title="Авторизация через Вконтакте" rel="nofollow">
+									<i class="fa spaceLeftDouble fa-vk spaceLeftRight"></i>
+								</a>
+								<a href="#" target="_blank" title="Авторизация через Facebook"rel="nofollow">
+									&#160;<i class="fa spaceLeftDouble fa-facebook spaceLeftRight"></i>&#160;
+								</a>
+								<a href="#" target="_blank" title="Авторизация через Google+"rel="nofollow">
+									&#160;<i class="fa spaceLeftDouble fa-google-plus spaceLeftRight"></i>
+								</a>						
+							</div>
+						</td>
+					</tr>	
+					<tr>
+						<td colspan="2" align="center">
+							<a href="profile/register">Регистрация</a>
+						</td>
+					</tr>					
+				</table>				
+			</form>			
+		   [/guest]
+		   [user]
+		   <div align="center">
+				Привет, <b> {%USER_NAME%}</b>!<br/><br/>
+				<img src="{%USER_AVATAR%}" border="0" alt="" /><br/><br/>
+			</div>
+			<a href="{%URL_PROFILE%}">Профиль</a><br/>
+			<a href="{%URL_PM%}">Приватные сообщения</a> ({%NEW_PM%})<br/>
+			<a href="{%URL_LOGOUT%}">Выход</a>
+			[admin]<hr/><a href="{%URL_ADMIN%}">Панель управления</a>[/admin]
+		   [/user]
         </aside>		
         <aside id="calendar-2" class="widget widget_calendar">
           <div class="widget-title">
-            <h2>Календарь</h2>
+            <h3>Календарь</h3>
           </div>
           {%BLOCKS:FILE:calendar%}   
         </aside>
         <aside id="categories-2" class="widget widget_categories">
           <div class="widget-title">
-            <h2>Категории</h2>
+            <h3>Категории</h3>
           </div>
           {%BLOCKS:FILE:cats%}       
         </aside>
         <aside class="widget">
           <div class="widget-title">
-            <h2>Опрос</h2>
+            <h3>Опрос</h3>
           </div>
           {%BLOCKS:FILE:poll%}   
         </aside>
         <aside class="widget widget_tag_cloud">
           <div class="widget-title">
-            <h2>Облако тегов</h2>
+            <h3>Облако тегов</h3>
           </div>
           <div class="tagcloud">
           {%BLOCKS:FILE:tags%}          
@@ -129,13 +188,13 @@
         </aside>
         <aside class="widget">
           <div class="widget-title">
-            <h2>Кто онлайн?</h2>
+            <h3>Кто онлайн?</h3>
           </div>
           {%BLOCKS:FILE:online%}
         </aside>
         <aside class="widget">
           <div class="widget-title">
-            <h2>Выбор шаблона:</h2>
+            <h3>Выбор шаблона:</h3>
           </div>    
           {%BLOCKS:FILE:themes%}
         </aside>
@@ -146,7 +205,9 @@
     </footer>
   </div>
   <a href="#top" id="toTop"><i class="fa fa-angle-up fa-lg"></i></a>
-  <script type='text/javascript' src='{%THEME%}/assest/js/search.js'></script>
-  <script type='text/javascript' src='{%THEME%}/assest/js/theme.js'></script>
+  <script type='text/javascript' src='{%THEME%}/assest/js/jquery.semplicementepro.js?ver=1.0'></script>  
+  <script type='text/javascript' src='{%THEME%}/assest/js/navigation.js?ver=20120206'></script>
+  <script type='text/javascript' src='{%THEME%}/assest/js/jquery.powertip.min.js?ver=1.0'></script>
+  <script type='text/javascript' src='{%THEME%}/assest/js/owl.carousel.min.js?ver=1.0'></script>
 </body>
 </html>

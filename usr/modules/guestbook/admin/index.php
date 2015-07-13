@@ -46,8 +46,7 @@ global $adminTpl, $core, $db, $admin_conf;
 							</thead>
 							<tbody>';
 		while($guestbook = $db->getRow($query)) 
-		{				
-			$status_icon = ($content['active'] == 0) ? '<a href="{MOD_LINK}/activate/' . $content['id'] . '" onClick="return getConfirm(\'' . _N_ACTIV .' - ' . $content['title'] . '?\')"><button  type="button" class="btn btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="' . _N_ACTIVE .'">A</button></a>' : '<a href="{MOD_LINK}/deactivate/' . $content['id'] . '" onClick="return getConfirm(\'' . _N_DACTIV .' - ' . $content['title'] . '?\')" ><button  type="button" class="btn btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="' . _N_DEACTIVE .'">A</button></a>';
+		{			
 			echo '
 				<tr>
 				<td><span class="pd-l-sm"></span>' . $guestbook['id'] . '</td>

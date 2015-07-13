@@ -102,6 +102,11 @@ $configBox = array(
 						'description' => _GLOBAL_OTHER_TPLD,
 						'content' => changeTpl(),						
 					),
+					'tpl_change' => array(
+						'title' => _GLOBAL_OTHER_TPL_CHANGE,
+						'description' => _GLOBAL_OTHER_TPL_CHANGE_DESC,
+						'content' => conf_radio("tpl_change", $config['tpl_change']),						
+					),
 					'smartphone' => array(
 						'title' => _GLOBAL_OTHER_TPL_MOBI,
 						'description' => _GLOBAL_OTHER_TPL_MOBI_DESC,

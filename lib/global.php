@@ -973,63 +973,6 @@ function createThumb($fname, $thumb_fname, $max_x=99, $max_y=99, $resp = false)
 	}
 }
 
-function adminBar()
-{
-global $core, $admin_conf, $url;
-	if($core->auth->isAdmin)
-	{
-		if($admin_conf['bar'])
-		{
-			$core->loadLangFile('root/langs/{lang}.navigation.php');
-			$module_array = array();
-			require ROOT . 'root/list.php';
-			foreach(glob( ROOT.'usr/modules/*/admin/list.php') as $file)
-			{
-				require_once $file;
-			}
-			
-			$adm = ADMIN;
-			$cook = (isset($_COOKIE['fixAP']) && !empty($_COOKIE['fixAP'])) ? true : false;
-			$bar = '<style type="text/css" >._adminBar { z-index:4000; width:100%; height:42px; background:#4F9BCA url(\'usr/tpl/admin/images/barBg.gif\') repeat-x;  left:0; top:0px; right:0; } ._adminBar #_barTrans { opacity:0.5;filter:alpha(opacity=50); -moz-opacity:0.5; background-color:#ececec; width:100%; left:0px; z-index:-1; } ._adminBar #_barContent {position:relative; color:#666666;  padding-right:10px; height:25px;} ._adminBarC {float:right; width:24px; height:16px; margin-right:10px; background:url(\'/media/adminBar/open.png\') bottom;}.floatleft {float:left; z-index:5000;}.ddheader {height:42px; line-height:42px; padding-right:15px; padding-left:15px; background:url(\'usr/tpl/admin/images/barLi.gif\') right no-repeat; font-weight:bold;  cursor:pointer; color:#fff;} .ddheader:hover {text-decoration:underline;} .ddcontent {position:absolute; overflow:hidden; width:202px; display:none; z-index:5000;}.ddinner {width:200px; border:1px solid #3F6F8D; border-bottom:none;border-top:none; z-index:5000;}.ddinner ul {display:block; list-style:none; margin:0; padding:0; z-index:5000;}.ddinner li {height:26px; background:url(\'usr/tpl/admin/images/barUl.gif\'); margin:0; line-height:26px; z-index:5000; padding-left:5px;}.ddinner li:hover {background:#85B81D}.underline {border-bottom:1px solid #3F6F8D;} .underline a {font-size:11px; color:#fff; text-decoration:none; font-weight:bold;} .underline a:hover {font-size:11px; color:#fafafa; text-decoration:underline; font-weight:bold;} ._ablink a {color:#fff; text-decoration:none;} ._ablink a:hover {color:#fff; text-decoration:underline;}</style>';
-			$bar .= '<div class="_adminBar" id="_adminBar" style="' . ($cook ? 'position: fixed;' : 'position: absolute;') . '">';
-			$bar .= '<div id="_barContent"><div style="float:left;"><img src="usr/tpl/admin/images/barLogo.gif" width:150px; height:42px; border="0" title="Быстрая навигация" class="icon"></div>';
-			$bar .= "<script type=\"text/javascript\">var DDSPEED=5;var DDTIMER=7;function ddMenu(id,dir){var head=document.getElementById(id+'-ddheader');var cont=document.getElementById(id+'-ddcontent');clearInterval(cont.timer);if(dir==1){clearTimeout(head.timer);if(cont.maxh&&cont.maxh<=cont.offsetHeight){return}else if(!cont.maxh){cont.style.display='block';cont.style.height='auto';cont.maxh=cont.offsetHeight;cont.style.height='0px'}cont.timer=setInterval(\"ddSlide('\"+id+\"-ddcontent', 1)\",DDTIMER)}else{head.timer=setTimeout('ddCollapse(\''+id+'-ddcontent\')',50)}}function ddCollapse(id){var cont=document.getElementById(id);cont.timer=setInterval(\"ddSlide('\"+id+\"', -1)\",DDTIMER)}function cancelHide(id){var head=document.getElementById(id+'-ddheader');var cont=document.getElementById(id+'-ddcontent');clearTimeout(head.timer);clearInterval(cont.timer);if(cont.offsetHeight<cont.maxh){cont.timer=setInterval(\"ddSlide('\"+id+\"-ddcontent', 1)\",DDTIMER)}}function ddSlide(id,dir){var cont=document.getElementById(id);var currheight=cont.offsetHeight;var dist;if(dir==1){dist=(Math.round((cont.maxh-currheight)/DDSPEED))}else{dist=(Math.round(currheight/DDSPEED))}if(dist<=1){dist=1}cont.style.height=currheight+(dist*dir)+'px';cont.style.opacity=currheight/cont.maxh;cont.style.filter='alpha(opacity='+(currheight*100/cont.maxh)+')';if((currheight<2&&dir!=1)||(currheight>(cont.maxh-2)&&dir==1)){clearInterval(cont.timer)}}</script>";
-			$bar .= '<div class="floatleft"><div class="ddheader" onclick="window.open(\''.$adm.'\')">Админ панель</div></div><div class="floatleft"><div class="ddheader" id="one-ddheader" onmouseover="ddMenu(\'one\',1)" onmouseout="ddMenu(\'one\',-1)">' . _AP_COMPONENTS . '</div><div class="ddcontent" id="one-ddcontent" onmouseover="cancelHide(\'one\')" onmouseout="ddMenu(\'one\',-1)"><div class="ddinner"><ul>';
-			foreach($component_array as $component => $params) 
-			{
-				$bar .= "<li class=\"underline\"><a href='" . ADMIN . '/' . $component . "' title=\"" . $params['name'] . "\" class='menu' target=\"_blank\">" . $params['name'] . "</a></li>";
-			}	
-			$bar .= '</ul></div></div></div><div class="floatleft"><div class="ddheader" id="two-ddheader" onmouseover="ddMenu(\'two\',1)" onmouseout="ddMenu(\'two\',-1)">' . _AP_MODULES . '</div><div class="ddcontent" id="two-ddcontent" onmouseover="cancelHide(\'two\')" onmouseout="ddMenu(\'two\',-1)"><div class="ddinner"><ul>';
-			foreach($module_array as $module => $params) 
-			{
-				$bar .= "<li class=\"underline\"><a href='" . ADMIN . '/module/' . $module . "' title=\"" . $params['name'] . "\" class='menu' target=\"_blank\">" . $params['name'] . "</a></li>";
-			}
-			$bar .= '</ul></div></div></div><div class="floatleft"><div class="ddheader" id="tree-ddheader" onmouseover="ddMenu(\'tree\',1)" onmouseout="ddMenu(\'tree\',-1)">' . _AP_SEVICES . '</div><div class="ddcontent" id="tree-ddcontent" onmouseover="cancelHide(\'tree\')" onmouseout="ddMenu(\'tree\',-1)"><div class="ddinner"><ul>';
-			foreach($services_array as $sevices => $params) 
-			{
-				$bar .= "<li class=\"underline\"><a href='" . ADMIN . '/' . $sevices . "' title=\"" . $params['name'] . "\" class='menu' target=\"_blank\">" . $params['name'] . "</a></li>";
-			}	
-			$bar .= '</ul></div></div></div>';
-			if(isset($module_array[$url[0]]) && isset($module_array[$url[0]]['subAct']))
-			{
-				$params = $module_array[$url[0]];
-				$bar .= '<div class="floatleft"><div class="ddheader" id="' . $url[0] . '-ddheader" onmouseover="ddMenu(\'' . $url[0] . '\',1)" onmouseout="ddMenu(\'' . $url[0] . '\',-1)">'."<img src='" . (isset($params['icon']) ? $params['icon'] : 'media/edit/li.png') . "' border='0' class='icon' alt=\"" . $params['name'] . "\" style=\"padding-right:3px; \">" . $module_array[$url[0]]['name'] . '</div><div class="ddcontent" id="' . $url[0] . '-ddcontent" onmouseover="cancelHide(\'' . $url[0] . '\')" onmouseout="ddMenu(\'' . $url[0] . '\',-1)"><div class="ddinner"><ul>';
-					foreach($module_array[$url[0]]['subAct'] as $comAct => $comActLink)
-					{
-						$bar .= "<li class=\"underline\"><a href='" . ADMIN . '/module/' . $url[0] . '/' . $comActLink . "' title=\"" . $comAct . "\" class='menu' target=\"_blank\">" . $comAct . "</a></li>";
-					}
-				$bar .= '</ul></div></div></div>';
-				$bar .= (!empty($core->tpl->adminBar) ? '<div class="floatleft _ablink" style="height:42px; line-height:42px; padding-left:10px;"><b>'.$core->tpl->adminBar.'</b></div>' : '');
-			}
-			
-			$bar .= '<div style="float:right; height:42px; line-height:42px; color:#fafafa;">' . _AB_HI . ', <b>' . $core->auth->user_info['nick'] . '</b>! [<span class="_ablink"><a href="' . ADMIN . '/do/logout">' . _AB_EXIT . '</a></span>] [<span class="_ablink"><a href="javascript:void(0)" onclick="fixAP();" id="fixAP">' . ($cook ? _AB_FIX : _AB_UNFIX) . '</a></span>]</div><br style="clear:both;" />';
-			$bar .= '</div>';
-			$bar .= "\n" . '</div>' . "\n";
-			
-			//return $bar;
-		}
-	}
-}
 
 function avatar($uid) {
     static $avatar = array();
@@ -1518,18 +1461,19 @@ function gencode($lenght)
 
 function captcha_image($button = true) 
 {
-    global $security;	
-	if ($security[switch_cp]!=0) 
+    global $security;
+	$captcha ='';	
+	if ($security['switch_cp']!=0) 
 	{
-	if ($security[recaptcha]==0) 
+	if ($security['recaptcha']==0) 
 	{
 		session_start();	
 		$captcha = "<style type=\"text/css\">/* <![CDATA[ */.captcha{width: " . $security['captcha_width'] . "px; height: " . $security['captcha_height'] . "px; background: url('captcha') top left no-repeat;}/* ]]> */</style><a href=\"javascript:reloadCaptcha();\" title=\"' . _REFRESH . '\"><div class=\"captcha\" id=\"captcha\"> </div></a>";
 	}
 	else
 	{
-		$publickey =$security[recaptcha_public];
-		$privatekey =$security[recaptcha_private];
+		$publickey =$security['recaptcha_public'];
+		$privatekey =$security['recaptcha_private'];
 		$captcha ='<div class="g-recaptcha" data-sitekey="'.$publickey.'"></div><script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>'; 
 	}
 	}
@@ -1539,9 +1483,9 @@ function captcha_image($button = true)
 function captcha_check($post_name) 
 {
     global $core, $security;
-	if ($security[switch_cp]!=0) 
+	if ($security['switch_cp']!=0) 
 	{
-	if ($security[recaptcha]==0) 
+	if ($security['recaptcha']==0) 
 	{
 		session_start();
 		if($core->auth->isUser) return true;
@@ -1563,8 +1507,8 @@ function captcha_check($post_name)
 	}
 	else
 	{
-		$publickey =$security[recaptcha_public];
-		$privatekey =$security[recaptcha_private];
+		$publickey =$security['recaptcha_public'];
+		$privatekey =$security['recaptcha_private'];
 		$recaptcha = new recaptcha($privatekey);
 		 $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 		if ($resp->isSuccess()) 
@@ -1612,7 +1556,7 @@ function loadConfig($file)
 global $config, $core;
 	$mainFile = ROOT.'etc/'.$file.'.config.php';
 	require_once($mainFile);
-	if($config['multiLang'] && $config['lang'] != $core->lang && file_exists(ROOT.'etc/' . $core->lang . '.'.$file.'.config.php'))
+	if($config['lang'] != $core->lang && file_exists(ROOT.'etc/' . $core->lang . '.'.$file.'.config.php'))
 	{
 		require ROOT.'etc/' . $core->lang . '.'.$file.'.config.php';
 	}
@@ -1626,7 +1570,7 @@ global $config, $core;
 	{
 		require_once($mainFile);
 	}
-	if($config['multiLang'] && $config['lang'] != $core->lang && file_exists(ROOT.'etc/blocks/' . $core->lang . '.'.$file.'.config.php'))
+	if($config['lang'] != $core->lang && file_exists(ROOT.'etc/blocks/' . $core->lang . '.'.$file.'.config.php'))
 	{
 		require ROOT.'etc/blocks/' . $core->lang . '.'.$file.'.config.php';
 	}
@@ -1817,18 +1761,28 @@ global $core;
 function checkCaptcha($content)
 {
   global $core, $security;
-	if (($security[recaptcha]==0)&&($security[switch_cp]==1))
+	if ($security['switch_cp']==1)
 	{
 		return stripslashes($content);
 	}
 }
 
-function checkReCaptcha($content)
+function checkReCaptcha($is, $content)
 {
   global $core, $security;
-	if (($security[recaptcha]==1)&&($security[switch_cp]==1))
+	if($is > 0)
 	{
-		return stripslashes($content);
+		if ($security['recaptcha']==1)
+		{
+			return stripslashes($content);
+		}
+	}
+	else
+	{
+		if ($security['recaptcha']==0)
+		{
+			return stripslashes($content);
+		}
 	}
 }
 

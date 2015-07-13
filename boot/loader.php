@@ -14,8 +14,8 @@ if (!defined('ACCESS')) {
     header('Location: /');
     exit;
 }
-
-if($config['multiLang'] && $config['lang'] != $core->lang)
+$config_multiLang = 0;
+if($config_multiLang && $config['lang'] != $core->lang)
 {
 	foreach(glob(ROOT . 'etc/' . $core->lang . '.*.config.php') as $confFile)
 	{
@@ -68,7 +68,7 @@ if(($config['off'] == 0 OR $core->auth->isAdmin == 1 OR $url[0] == ADMIN) && $co
 {
 	$core->LoadLang(false, true);
 	
-	if($config['multiLang'] == 1)
+	if($config_multiLang == 1)
 	{
 		if(isset($_GET['lang']) && isset($_GET['theme']))
 		{
@@ -133,12 +133,7 @@ if(($config['off'] == 0 OR $core->auth->isAdmin == 1 OR $url[0] == ADMIN) && $co
 				
 				
 	}
-	
-	
-	if($config['reffer']) 
-	{
-		init_reffer();
-	}
+		
 	
 	if($core->auth->isAdmin) 
 	{
@@ -171,8 +166,8 @@ if(($config['off'] == 0 OR $core->auth->isAdmin == 1 OR $url[0] == ADMIN) && $co
 		
 		$modAccess = modAccess($url[0]);
 		pmNew();
-		
-		if(!$config['fullajax']) 
+		$config_fullajax = 0;
+		if(!$config_fullajax) 
 		{
 			if(!isset($no_head)) 
 				$core->tpl->head();

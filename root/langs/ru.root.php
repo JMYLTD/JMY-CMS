@@ -39,6 +39,7 @@ define('_PANEL_MENU_NEWS', 'Материалы');
 define('_PANEL_MENU_NEWS_MANAGER', 'Менеджер материалов');
 define('_PANEL_MENU_NEWS_CAT', 'Менеджер категорий');
 define('_PANEL_MENU_NEWS_XFIELDS', 'Дополнительные поля');
+define('_PANEL_MENU_NEWS_FM', 'Менеджер файлов');
 define('_PANEL_MENU_USER', 'Пользователи');
 define('_PANEL_MENU_USER_MANAGER', 'Менеджер пользователей');
 define('_PANEL_MENU_USER_GROUP', 'Группы');
@@ -60,6 +61,7 @@ define('_PANEL_MENU_OTHER_MAP', 'Карта сайта');
 define('_PANEL_MENU_OTHER_SMILES', 'Смайлы');
 define('_PANEL_MENU_OTHER_BD', 'База данных');
 define('_PANEL_MENU_OTHER_LOG', 'Логи ошибок');
+define('_PANEL_MENU_OTHER_UPDATE', 'Обновления');
 define('_PANEL_SUNMENU_WELCOME', 'Добро пожаловать');
 define('_PANEL_SUNMENU_IP', 'Ваш IP:');
 define('_PANEL_SUNMENU_PROFILE', 'Настройки профиля');
@@ -68,6 +70,9 @@ define('_PANEL_SUNMENU_VIEW', 'Просмотр сайта');
 define('_PANEL_SUNMENU_HELP', 'Помощь');
 define('_PANEL_SUNMENU_EXIT', 'Выход');
 define('_PANEL_SUNMENU_NOTIF', 'Уведомления');
+define('_PANEL_SEARCH', 'Поиск');
+
+
 
 define('_THERE_IS', 'Есть');
 define('_DATE_PUB', 'Дата публикации');
@@ -96,6 +101,7 @@ define('_ALLNEWS', 'Всего новостей');
 define('_TIC', 'ТИЦ сайта');
 define('_PR', 'PR сайта');
 define('_PUBLICATIONS', 'Поступления');
+define('_FORWARD', 'Вперёд');
 
 define('_INSTALLEX', 'Удалите файл install.php - он угрожает безопасности вашего сайта!');
 define('_ONMODER', 'Внимание! Пользователи добавили свежие материалы!');
@@ -149,6 +155,8 @@ define('_MAIN_CACHE_INFO', 'У вас на сайте активирована �
 define('_MAIN_CLEARCACHE', 'Очистить кэш');
 
 define('_BBLOCK', 'блок');
+define('_BLOCK_ADD', 'Добавить блок');
+define('_BLOCK_EDIT', 'Редактировать блок');
 define('_BLOCK_ADDING', 'Добавление блока');
 define('_BLOCK_TITLE_TT', 'Заголовок блока отображаемый на сайте');
 define('_BLOCK_FILE', 'Файл');
@@ -171,6 +179,8 @@ define('_BLOCK_TYPE_TITLE', 'Заголовок типа');
 define('_BLOCK_TYPEF_TT', 'Тип для обработки в шаблонах');
 define('_BLOCK_TYPE_TITLE_TT', 'Заголовок типа отображаемый в АП');
 define('_BLOCK_ADD_TYPE', 'Добавить тип блока');
+define('_BLOCK_EDIT_TYPE', 'Редактировать тип блока');
+define('_BLOCK_TYPE_DEL', 'Вы действительно хотите удалить');
 define('_BLOCK_STANDART', 'Настройка стандартных блоков');
 
 define('_LOG_LOG', 'Логи системы');
@@ -455,4 +465,8 @@ define('_GROUP_CONFIG_VOTE_DESC', 'Если пользователь оцени�
 define('_CONFIG_KEYWORDS', 'Keywords модуля');
 define('_CONFIG_SEO_DESC', 'Для SEO оптимизации сайта');
 define('_CONFIG_DESC', 'Description модуля');
+
+define('_SEARCH_ERROR_0', 'Для поиска необходимо вести ключевое слово!');
+define('_SEARCH_ERROR_1', 'Поиск по данному запросу не дал результатов!');
+define('_SEARCH_REF', 'перейти');
 

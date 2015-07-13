@@ -33,7 +33,7 @@ if($db->numRows($queryDB) > 0)
 
 $core->loadModLang('blog');
 $core->tempModule = 'blog';
-
+$uid = '';
 $queryP = $db->query("SELECT * FROM ".DB_PREFIX."_blog_posts WHERE bid = '0' AND status='1' ORDER BY uid ASC");		
 if($db->numRows($queryP) > 0) 
 {	
@@ -45,9 +45,9 @@ if($db->numRows($queryP) > 0)
 			$user_q = $db->query("SELECT * FROM ".DB_PREFIX."_users WHERE id = '".$uid."' LIMIT 1");
 			if($db->numRows($user_q) == 1)
 			{
-				$user = $db->getRow($user_q);
+				$userbb = $db->getRow($user_q);
 			}
-			$db->query("INSERT INTO `" . DB_PREFIX . "_sitemap` ( `name` , `url`) VALUES ('"._BLOG_PERSONAL .": ". $user['nick']. "', '".$config['url']."/blog/user/".$uid."');");
+			$db->query("INSERT INTO `" . DB_PREFIX . "_sitemap` ( `name` , `url`) VALUES ('"._BLOG_PERSONAL .": ". $userbb['nick']. "', '".$config['url']."/blog/user/".$uid."');");
 		}
 		$db->query("INSERT INTO `" . DB_PREFIX . "_sitemap` ( `name` , `url`) VALUES ('". $blog_p['title']. "', '".$config['url']."/blog/view/".$blog_p['id']."');");
 	}

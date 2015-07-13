@@ -121,9 +121,8 @@ case 'create':
 	case 'update':
 		global $core, $config;
 		$adminTpl->admin_head(_MODULES .' | '. _SM_SITEMAP.' | '. _SM_SEARCH);		
-		$scheme=$sitemap_conf['scheme']; 
-		$host=substr($config['url'], strrpos($config['url'], '//')+2); 
-		$url_map=$scheme.$host.'sitemap.xml';
+		$url_map=$config['url'].'/sitemap.xml';
+		$content_map = '';
 			
 		if (strpos ( send_url("http://google.com/webmasters/sitemaps/ping?sitemap=", $url_map), "successfully added" ) !== false) 
 		{

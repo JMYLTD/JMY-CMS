@@ -212,7 +212,7 @@ switch(isset($url[2]) ? $url[2] : null)
 						$yes = true;
 					}
 				}
-			closedir($dh);
+			closedir($dh1);
 			}
 			if ($dh = opendir($dir)) 
 			{			

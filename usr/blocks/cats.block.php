@@ -13,8 +13,11 @@ if (!defined('ACCESS')) {
     header('Location: /');
     exit;
 }
-require (ROOT.'etc/blocks/cats.config.php');
-$module = $cats[module];
+loadConfigBLOCK('cats');
+
+global $core, $db, $cats;
+
+$module = $cats['module'];
 if(empty($core->catArray))
 {
 	$core->catArray = getcache('categories');

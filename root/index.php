@@ -86,7 +86,11 @@ function admin_main()
 							<h3 class="no-margin">' ._MAIN_MAIN . '</h3>
 							<small>version {VERSION}</small>
 						</div>
+						<div class="col-xs-6 text-right">
+<a href="javascript:;" class="fa fa-cog pull-right pd-sm toggle-sidebar" data-toggle="off-canvas" data-move="rtl"></a>
+</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<section style="cursor:pointer" class="panel" onclick="location.href=\'{ADMIN}/module/news/add\';">

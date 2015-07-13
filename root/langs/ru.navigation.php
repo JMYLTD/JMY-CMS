@@ -18,6 +18,9 @@ define('_AP_CONF_DESC', 'Настройка общих параметров си
 define('_AP_CONF_CONF', 'Настройки');
 define('_AP_CONF_COPY', 'Резервное копирование');
 
+define('_AP_SEARCH', 'Поиск');
+define('_AP_SEARCH_DESC', 'Данный модуль осуществляет поиск по разделам панели управления.');
+
 define('_AP_BLOCKS', 'Блоки');
 define('_AP_BLOCKS_C', 'Управление блоками');
 define('_AP_BLOCKS_ADD', 'Добавить блок');
@@ -101,3 +104,12 @@ define('_AP_LANG_MAIN', 'Основные');
 define('_AP_LANG_PANEL', 'Панель управления');
 define('_AP_LANG_MODULES', 'Модули');
 define('_AP_LANG_DESC', 'Создание и управление различными группами пользователей на сайте, назначение прав доступа');
+
+define('_AP_UPDATE', 'Обновления');
+define('_AP_UPDATE_DESC', 'В данном разделе вы можете проверить наличие новых версий движка, и установить их.');
+define('_AP_UPDATE_MAIN', 'Проверка обновлений');
+define('_AP_UPDATE_CECK', 'Проверка движка');
+define('_AP_UPDATE_HISTORY', 'История изменений');
+
+define('_AP_FM', 'Менеджер файлов');
+define('_AP_FM_DESC', 'История изменений');

@@ -34,15 +34,17 @@ if (!defined('ACCESS')) {
 		$this->setVar('THEME', 'usr/tpl/'.$this->tplDir);
 		$this->setVar('URL', $config['url']);
 		$this->setVar('FULL_LNK', $full_lnk);
-		$this->setVar('LICENSE', 'Powered by <a target="_blank" href="http://cms.jmy.su/">JMY CMS</a>');
+		$this->setVar('LICENSE', 'Powered by <a target="_blank" href="http://jmy.su/">JMY CMS</a>');
 		$this->setVar('D_YEAR', date("Y"));
 		$this->setVar('D_MOTH', date("M"));
 		$this->setVar('D_DAY',  date("d"));
 		$this->setVar('ADMINLOG', $core->auth->isAdmin ? ' <a href="' . ADMIN . '">[Панель управления]</a>' : '');
 		$this->setVar('USER_AVATAR', avatar($core->auth->user_id));
+		$this->setVar('USER_NAME',  $core->auth->user_info['nick']);
 		$this->setVar('QUERIES', $db->numQueries);
 		$this->setVar('NEW_PM', $core->auth->newPmsNumb);
-		
+		$this->setVar('TITLE_NOW', $title_now);
+		//ссылки модулей
 		$this->setVar('URL_LOGIN', 'profile/login');
 		$this->setVar('URL_ADD', '/news/addPost');
 		$this->setVar('URL_ADMIN', ADMIN);
@@ -59,4 +61,24 @@ if (!defined('ACCESS')) {
 		$this->setVar('URL_GALLERY', 'gallery');
 		$this->setVar('URL_SITEMAP', 'sitemap');
 		$this->setVar('URL_FEEDBACK', 'feedback');	
-		$this->setVar('SEARCH', 'search');	
+		$this->setVar('SEARCH', 'search');
+		//share
+		$this->setVar('SHARE_VK', 'https://vk.com/share.php?url='.$full_lnk.'&title='.$title_now);
+		$this->setVar('SHARE_FB', 'http://www.facebook.com/share.php?u='.$full_lnk);
+		$this->setVar('SHARE_TW', 'http://twitter.com/timeline/home?status='.$full_lnk.'%20'.$title_now);
+		$this->setVar('SHARE_GP', 'https://plus.google.com/share?url='.$full_lnk);
+		$this->setVar('SHARE_LJ', 'http://www.livejournal.com/update.bml?mode=full&subject=test&event='.$full_lnk);
+		$this->setVar('SHARE_BZ', 'http://www.google.com/buzz/post?message='.$title_now.'&url='.$full_lnk.'&hl=ru');
+		$this->setVar('SHARE_TB', 'http://www.tumblr.com/share/link?url='.$full_lnk.'&amp;title='.$title_now);
+		$this->setVar('SHARE_LI', 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$full_lnk);
+		$this->setVar('SHARE_PP', 'https://plus.google.com/share?url='.$full_lnk);
+		$this->setVar('SHARE_SB', 'https://plus.google.com/share?url='.$full_lnk);
+		$this->setVar('SHARE_YA', 'https://plus.google.com/share?url='.$full_lnk);
+		$this->setVar('SHARE_MM', 'http://connect.mail.ru/share?url='.$full_lnk.'&title='.$title_now.'&description=&imageurl=');
+		$this->setVar('SHARE_PR', 'javascript:window.print();');
+		$this->setVar('SHARE_MA', 'mailto:?Subject='.$title_now.'&amp;Body=Share%20from%20'.$config['name'].'%20'.$full_lnk);
+		$this->setVar('SHARE_PT', 'javascript:void((function()%7Bvar%20e=document.createElement(\'script\');e.setAttribute(\'type\',\'text/javascript\');e.setAttribute(\'charset\',\'UTF-8\');e.setAttribute(\'src\',\'http://assets.pinterest.com/js/pinmarklet.js?r=\'+Math.random()*99999999);document.body.appendChild(e)%7D)());');
+		
+		
+
+		

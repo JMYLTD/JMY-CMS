@@ -15,7 +15,13 @@ if (!defined('ADMIN_ACCESS')) {
     exit;
 }
 global $config;
-include(ROOT . 'usr/langs/'. $config[lang] . '.blocks.php');
+
+if(file_exists(ROOT . 'usr/langs/'. $config['lang'] . '.blocks.php'))
+{
+	include(ROOT . 'usr/langs/'. $config['lang'] . '.blocks.php');
+}
+		
+
 switch(isset($url[2]) ? $url[2] : null) {
 	default:
 		$adminTpl->admin_head(_AP_BLOCKS);
@@ -547,7 +553,7 @@ switch(isset($url[2]) ? $url[2] : null) {
 						<a href="{ADMIN}/blocks/typeAdd/' . $result['type'] .  '">
 						<button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="' . _EDIT .'">E</button>
 						</a>
-						<a href="{ADMIN}/blocks/delType/' . $result['type'] .  '" onClick="return getConfirm(\''._BLOCK_DEL.' - ' . $result['title'] . '?\')" title="' . _DELETE . '" class="delete">
+						<a href="{ADMIN}/blocks/delType/' . $result['type'] .  '" onClick="return getConfirm(\''._BLOCK_TYPE_DEL.' - ' . $result['title'] . '?\')" title="' . _DELETE . '" class="delete">
 						<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="' . _DELETE .'">X</button>
 						</a>			
 				</td>
@@ -594,13 +600,13 @@ echo'</section></div></div>';
 			{
 				location('/' . ADMIN . '/blocks');
 			}
-			$tit = _BLOCK_TYPE_EDIT;
+			$tit = _BLOCK_EDIT_TYPE;
 			$type = $t['type'];
 			$title = $t['title'];
 		}
 		else
 		{
-			$tit = _BLOCK_TYPE_ADD;
+			$tit = _BLOCK_ADD_TYPE;
 			$type = '';
 			$title = '';
 		}		

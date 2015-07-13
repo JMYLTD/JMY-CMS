@@ -30,14 +30,22 @@
 			<header class="header header-fixed navbar bg-white">
 				<div class="brand bg-success">
 					<a href="#" class="fa fa-bars off-left visible-xs" data-toggle="off-canvas" data-move="ltr"></a>
-					<a href="administration/" class="navbar-brand text-white">
+					<a href="{ADMIN}/" class="navbar-brand text-white">
 						<i class="fa fa-check-circle mg-r-xs"></i>
 						<span class="h5"> JMY <b>CMS</b></span>
 					</a>
 				</div>
-				<ul class="nav navbar-nav navbar-right off-right">						
+				<form class="navbar-form navbar-left hidden-xs" role="search" action="{ADMIN}/search" method="post">
+					<div class="form-group">
+						<button class="btn no-border no-margin bg-none no-pd-l" type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+						<input type="text" name="search" class="form-control no-border no-padding search" placeholder="[alang:_PANEL_SEARCH]">
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right off-right">					
 					<li class="notifications dropdown hidden-xs">
-						<a href="#" data-toggle="dropdown">
+						<a href="javascript:;" data-toggle="dropdown">
 							<i class="fa fa-bell"></i>
 							<div class="badge badge-top bg-danger animated flash">{NOTIF_NUMB}</div>
 						</a>
@@ -45,6 +53,9 @@
 							<div class="panel bg-white no-border no-margin">
 								<div class="panel-heading no-radius">
 									<small><b>[alang:_PANEL_SUNMENU_NOTIF]</b></small>
+									<small class="pull-right">
+										<a href="javascript:;" class="fa fa-cog mg-l-xs"></a>
+									</small>
 								</div>
 								<ul class="list-group">
 									{NOTIF}
@@ -60,14 +71,16 @@
 						<ul class="dropdown-menu dropdown-menu-right mg-r-xs">
 							<li>
 								<a  target="_blank" href="{URL}/profile">
-								<div class="pd-t-sm">[alang:_PANEL_SUNMENU_WELCOME], {NAME}!<br><small class="text-muted">[alang:_PANEL_SUNMENU_IP] {IP}</small></div>
+									<div class="pd-t-sm">
+										[alang:_PANEL_SUNMENU_WELCOME], {NAME}!<br><small class="text-muted">[alang:_PANEL_SUNMENU_IP] {IP}</small>
+									</div>
 								</a>							
 							</li>
 							<li>
-								<a href="administration/user/edit/1">[alang:_PANEL_SUNMENU_PROFILE]</a>
+								<a href="{ADMIN}/user/edit/1">[alang:_PANEL_SUNMENU_PROFILE]</a>
 							</li>
 							<li>
-								<a href="administration/statistic">[alang:_PANEL_SUNMENU_STATS]</a>
+								<a href="{ADMIN}/statistic">[alang:_PANEL_SUNMENU_STATS]</a>
 							</li>
 							<li>
 								<a target="_blank" href="{URL}">[alang:_PANEL_SUNMENU_VIEW]</a>
@@ -89,7 +102,7 @@
 					<nav class="main-navigation">
 						<ul>
 							<li class="active">
-								<a href="administration/">
+								<a href="{ADMIN}/">
 									<i class="fa fa-home"></i><span>[alang:_PANEL_MENU_MAIN]</span>
 								</a>
 							</li>							
@@ -100,12 +113,15 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="administration/module/news"><span>[alang:_PANEL_MENU_NEWS_MANAGER]</span></a></li>
+										<a href="{ADMIN}/module/news"><span>[alang:_PANEL_MENU_NEWS_MANAGER]</span></a></li>
 									<li>
-										<a href="administration/cats"><span>[alang:_PANEL_MENU_NEWS_CAT]</span></a>
+										<a href="{ADMIN}/cats"><span>[alang:_PANEL_MENU_NEWS_CAT]</span></a>
 									</li>
 									<li>
-										<a href="administration/xfields"><span>[alang:_PANEL_MENU_NEWS_XFIELDS]</span></a>
+										<a href="{ADMIN}/xfields"><span>[alang:_PANEL_MENU_NEWS_XFIELDS]</span></a>
+									</li>
+									<li>
+										<a href="{ADMIN}/fm"><span>[alang:_PANEL_MENU_NEWS_FM]</span></a>
 									</li>
 								</ul>
 							</li>							
@@ -116,16 +132,16 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="administration/user"><span>[alang:_PANEL_MENU_USER_MANAGER]</span></a>
+										<a href="{ADMIN}/user"><span>[alang:_PANEL_MENU_USER_MANAGER]</span></a>
 									</li>
 									<li>
-										<a href="administration/groups"><span>[alang:_PANEL_MENU_USER_GROUP]</span></a>
+										<a href="{ADMIN}/groups"><span>[alang:_PANEL_MENU_USER_GROUP]</span></a>
 									</li>
 									<li>
-										<a href="administration/comments"><span>[alang:_PANEL_MENU_USER_COMMENT]</span></a>
+										<a href="{ADMIN}/comments"><span>[alang:_PANEL_MENU_USER_COMMENT]</span></a>
 									</li>
 									<li>
-										<a href="administration/voting/"><span>[alang:_PANEL_MENU_USER_POLL]</span></a>										
+										<a href="{ADMIN}/voting/"><span>[alang:_PANEL_MENU_USER_POLL]</span></a>										
 									</li>
 								</ul>
 							</li>
@@ -136,21 +152,21 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="administration/module/board"><span>[alang:_PANEL_MENU_COM_FORUM]</span></a>
+										<a href="{ADMIN}/module/board"><span>[alang:_PANEL_MENU_COM_FORUM]</span></a>
 									</li>
 									<li>
-										<a href="administration/module/gallery"><span>[alang:_PANEL_MENU_COM_GALLERY]</span></a>
+										<a href="{ADMIN}/module/gallery"><span>[alang:_PANEL_MENU_COM_GALLERY]</span></a>
 									</li>
 									<li>
-										<a href="administration/module/guestbook"><span>[alang:_PANEL_MENU_COM_GUESTBOOK]</span></a>
+										<a href="{ADMIN}/module/guestbook"><span>[alang:_PANEL_MENU_COM_GUESTBOOK]</span></a>
 									</li>								
 									<li>
-										<a href="administration/module/content"><span>[alang:_PANEL_MENU_COM_STATIC]</span></a>
+										<a href="{ADMIN}/module/content"><span>[alang:_PANEL_MENU_COM_STATIC]</span></a>
 									</li>
 								</ul>
 							</li>
 							<li class="show-on-hover">
-								<a href="administration/config" >
+								<a href="{ADMIN}/config" >
 									<i class="fa fa-cog"></i>
 									<span>[alang:_PANEL_MENU_CONFIG]</span>
 								</a>								
@@ -162,13 +178,13 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="administration/modules"><span>[alang:_PANEL_MENU_EXP_MODULES]</span></a>
+										<a href="{ADMIN}/modules"><span>[alang:_PANEL_MENU_EXP_MODULES]</span></a>
 									</li>
 									<li>
-										<a href="administration/blocks"><span>[alang:_PANEL_MENU_EXP_BLOCKS]</span></a>
+										<a href="{ADMIN}/blocks"><span>[alang:_PANEL_MENU_EXP_BLOCKS]</span></a>
 									</li>									
 									<li>
-										<a href="administration/templates"><span>[alang:_PANEL_MENU_EXP_TPL]</span></a>
+										<a href="{ADMIN}/templates"><span>[alang:_PANEL_MENU_EXP_TPL]</span></a>
 									</li>									
 								</ul>
 							</li>
@@ -179,19 +195,22 @@
 								</a>
 								<ul class="dropdown-menu">	
 									<li>
-										<a href="administration/module/sitemap"><span>[alang:_PANEL_MENU_OTHER_MAP]</span></a>
+										<a href="{ADMIN}/module/sitemap"><span>[alang:_PANEL_MENU_OTHER_MAP]</span></a>
 									</li>									
 									<li>
-										<a href="administration/smiles"><span>[alang:_PANEL_MENU_OTHER_SMILES]</span></a>
+										<a href="{ADMIN}/smiles"><span>[alang:_PANEL_MENU_OTHER_SMILES]</span></a>
 									</li>									
 									<li>
-										<a href="administration/db"><span>[alang:_PANEL_MENU_OTHER_BD]</span></a>
+										<a href="{ADMIN}/db"><span>[alang:_PANEL_MENU_OTHER_BD]</span></a>
 									</li>
 									<li>
-										<a href="administration/log"><span>[alang:_PANEL_MENU_OTHER_LOG]</span></a>
+										<a href="{ADMIN}/log"><span>[alang:_PANEL_MENU_OTHER_LOG]</span></a>
+									</li>
+									<li>
+										<a href="{ADMIN}/update"><span>[alang:_PANEL_MENU_OTHER_UPDATE]</span></a>
 									</li>
 								</ul>
-							</li>
+							</li>						
 						</ul>
 					</nav>
 					<footer>						
@@ -201,7 +220,7 @@
 							</a>
 						</div>
 					</footer>
-				</aside>
+				</aside>			
 				<section class="main-content">
 				<div class="content-wrap">
 						{SUBNAV}
@@ -214,34 +233,34 @@
 				<div class="offline-ui-content" data-retry-in="" data-retry-in-abbr=""></div>
 				<a class="offline-ui-retry"></a>
 				</div>
-<script src="{ADM_THEME}/assets/js/jquery-1.11.0.min.js"></script>
-<script src="{ADM_THEME}/assets/js/bootstrap.js"></script>
-<script src="{ADM_THEME}/assets/js/bootstrap-select.js"></script>
-<script src="{ADM_THEME}/assets/js/bootstrap-slider.js"></script>
-<script src="{ADM_THEME}/assets/js/bootstrap-datepicker.js"></script>
-<script src="{ADM_THEME}/assets/js/toastr.js"></script>
-<script src="{ADM_THEME}/assets/js/jquery.blockUI.js"></script>
-<script src="{ADM_THEME}/assets/js/off-canvas.js"></script>
-<script src="{ADM_THEME}/assets/js/jquery.placeholder.js"></script>
-<script src="{ADM_THEME}/assets/js/offline.min.js"></script>
-<script src="{ADM_THEME}/assets/js/pace.min.js"></script>
-<script src="{ADM_THEME}/assets/js/components.js"></script>
-<script src="{ADM_THEME}/assets/js/dropzone.js"></script>
-<script src="{ADM_THEME}/assets/js/parsley.min.js"></script>
-<script src="{ADM_THEME}/assets/js/jquery.maskedinput.min.js"></script>
-<script src="{ADM_THEME}/assets/js/checkbox.js"></script>
-<script src="{ADM_THEME}/assets/js/radio.js"></script>
-<script src="{ADM_THEME}/assets/js/wizard.js"></script>
-<script src="{ADM_THEME}/assets/js/pillbox.js"></script>
-<script src="{ADM_THEME}/assets/js/spinner.js"></script>
-<script src="{ADM_THEME}/assets/js/jquery.hotkeys.js"></script>
-<script src="{ADM_THEME}/assets/js/bootstrap-wysiwyg.js"></script>
-<script src="{ADM_THEME}/assets/js/switchery.js"></script>
-<script src="{ADM_THEME}/assets/js/moment.js"></script>
-<script src="{ADM_THEME}/assets/js/skycons.js"></script>
-<script src="{ADM_THEME}/assets/js/morris.js"></script>
-<script src="{ADM_THEME}/assets/js/main.js"></script>
-<script src="{ADM_THEME}/assets/js/jquery.slimscroll.js"></script>
-<script src="{ADM_THEME}/assets/js/dashboard.js"></script>
-<script src="{ADM_THEME}/assets/js/forms.js"></script>
+				<script src="{ADM_THEME}/assets/js/jquery-1.11.0.min.js"></script>
+				<script src="{ADM_THEME}/assets/js/bootstrap.js"></script>
+				<script src="{ADM_THEME}/assets/js/bootstrap-select.js"></script>
+				<script src="{ADM_THEME}/assets/js/bootstrap-slider.js"></script>
+				<script src="{ADM_THEME}/assets/js/bootstrap-datepicker.js"></script>
+				<script src="{ADM_THEME}/assets/js/toastr.js"></script>
+				<script src="{ADM_THEME}/assets/js/jquery.blockUI.js"></script>
+				<script src="{ADM_THEME}/assets/js/off-canvas.js"></script>
+				<script src="{ADM_THEME}/assets/js/jquery.placeholder.js"></script>
+				<script src="{ADM_THEME}/assets/js/offline.min.js"></script>
+				<script src="{ADM_THEME}/assets/js/pace.min.js"></script>
+				<script src="{ADM_THEME}/assets/js/components.js"></script>
+				<script src="{ADM_THEME}/assets/js/dropzone.js"></script>
+				<script src="{ADM_THEME}/assets/js/parsley.min.js"></script>
+				<script src="{ADM_THEME}/assets/js/jquery.maskedinput.min.js"></script>
+				<script src="{ADM_THEME}/assets/js/checkbox.js"></script>
+				<script src="{ADM_THEME}/assets/js/radio.js"></script>
+				<script src="{ADM_THEME}/assets/js/wizard.js"></script>
+				<script src="{ADM_THEME}/assets/js/pillbox.js"></script>
+				<script src="{ADM_THEME}/assets/js/spinner.js"></script>
+				<script src="{ADM_THEME}/assets/js/jquery.hotkeys.js"></script>
+				<script src="{ADM_THEME}/assets/js/bootstrap-wysiwyg.js"></script>
+				<script src="{ADM_THEME}/assets/js/switchery.js"></script>
+				<script src="{ADM_THEME}/assets/js/moment.js"></script>
+				<script src="{ADM_THEME}/assets/js/skycons.js"></script>
+				<script src="{ADM_THEME}/assets/js/morris.js"></script>
+				<script src="{ADM_THEME}/assets/js/main.js"></script>
+				<script src="{ADM_THEME}/assets/js/jquery.slimscroll.js"></script>
+				<script src="{ADM_THEME}/assets/js/dashboard.js"></script>
+				<script src="{ADM_THEME}/assets/js/forms.js"></script>
 </body></html>

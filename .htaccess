@@ -1,3 +1,6 @@
+php_value display_errors 1
+php_value display_startup_errors 1
+php_value error_reporting E_ALL
 RewriteEngine on
 
 #RewriteBase /
@@ -6,6 +9,8 @@ RewriteRule ^captcha$ ajax.php?do=captcha [L]
 RewriteRule ^ajax/(.*)$ ajax.php?$1 [L]
 RewriteRule ^index(.html|.htm)$ index.php [L]
 RewriteRule ^sitemap.xml$ files/sitemap.xml [L]
+RewriteRule ^admin$ administration [L]
+RewriteRule ^administrator$ administration [L]
 
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d

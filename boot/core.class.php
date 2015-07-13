@@ -133,6 +133,15 @@ class core
 		}
 	}
 	
+	function loadModLangADM($mod)
+	{
+		if(!isset($this->loadedLangs[$mod]) && file_exists(ROOT . 'usr/modules/' . $mod . '/admin/lang/'. $this->lang . '.admin.php'))
+		{
+			$this->loadedLangs[$mod] = true;
+			require_once(ROOT . 'usr/modules/' . $mod . '/admin/lang/'. $this->lang . '.admin.php');
+		}
+	}
+	
 	function getLang($const)
 	{
 		return constant($const);
@@ -179,7 +188,8 @@ class core
 	function InitLang()
 	{
 	global $url, $config;
-		if($config['multiLang'] == 0) return $this->lang = $config['lang'];
+		$config_multiLang = 0;
+		if($config_multiLang == 0) return $this->lang = $config['lang'];
 		
 		if((isset($url[0]) && $url[0] != ADMIN) OR !isset($url[0]))
 		{
