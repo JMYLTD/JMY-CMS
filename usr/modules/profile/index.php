@@ -314,29 +314,9 @@ if(!$core->auth->isUser)
 				main();
 			}
 			else
-			{
-				require ROOT . 'boot/sub_classes/socialauther/autoload.php';
-				require ROOT . 'etc/social.config.php';							
-				$adapters = array();
-				foreach ($adapterConfigs as $adapter => $settings)
-					{
-						$class = 'SocialAuther\Adapter\\' . ucfirst($adapter);
-						$adapters[$adapter] = new $class($settings);
-					}			
-				if (isset($_SESSION['user']))
-					{
-						echo '<p><a href="profile">Скрытый контент</a></p>';
-					}
-				else if (!isset($_GET['code']) && !isset($_SESSION['user']))
-					{
-						foreach ($adapters as $title => $adapter) 
-						{
-							$socila_lnk .= '<a href="' . $adapter->getAuthUrl() . '"><img  src="media/social/' . ucfirst($title) . '.png" alt="иконки соц сетей psd" width="32" height="32"> </a>';
-						}
-					}
+			{			
 				set_title(array('Добро пожаловать в профиль'));
 				$core->tpl->loadFile('profile/login');
-				$core->tpl->setVar('SOCIAL', $socila_lnk);
 				$core->tpl->end();
 			}
 			break;
@@ -362,17 +342,79 @@ if(!$core->auth->isUser)
 			break;
 	
 		case 'social_auth':	
-			require ROOT . 'boot/sub_classes/socialauther/autoload.php';
 			require ROOT . 'etc/social.config.php';			
-			if (isset($_SESSION['user'])) 
+			$user_auth = loadUserAuth();
+			if (!($user_auth==false))
 			{
-				$user = $_SESSION['user'];				
-				$result =  $db->query("SELECT *  FROM `" . USER_PREFIX . "_users` WHERE `provider` = '{$user->provider}' AND `social_id` = '{$user->socialId}' LIMIT 1");
-				if (!$result) 
-				{
-					echo 'Пользователь ещё не зарегистрирован!';
+				$result =  $db->query("SELECT *  FROM `" . USER_PREFIX . "_users` WHERE `provider` = '".$user_auth->provider."' AND `social_id` = '".$user_auth->socialId."' LIMIT 1");
+				$record = mysql_fetch_array($result);
+				if (!$record) 
+				{					
+					$core->tpl->info('Пользователь ещё не зарегистрирован!');
+					$core->tpl->loadFile('profile/register_social');
+					$core->tpl->setVar('CAPTCHA', captcha_image());
+					$core->tpl->setVar('NAME', !is_null($user_auth->name) ? $user_auth->name : '');
+					$core->tpl->setVar('AVATAR', $user_auth->avatar);
+					$core->tpl->setVar('BDAY', $user_auth->birthday);
+					$core->tpl->setVar('SOCIAL_ID', $user_auth->socialId);
+					$core->tpl->setVar('PROVIDER', $user_auth->provider);
+					$core->tpl->setVar('NAME', $user_auth->name);
+					$core->tpl->setVar('EMAIL', $user_auth->email);
+					$core->tpl->setVar('SEX_1', (($user_auth->sex == 'male') ? 'selected' : ''));
+					$core->tpl->setVar('SEX_2', (($user_auth->sex == 'famale') ? 'selected' : ''));
+					$array_replace = array(
+						"#\\[email\\](.*?)\\[/email\\]#ies" => (empty($user_auth->email) ? '"\\1"' : ''),					
+					);					
+					$core->tpl->sources = preg_replace(array_keys($array_replace), array_values($array_replace), $core->tpl->sources);
+					$core->tpl->end();					
 				}
-			}		
+				else
+				{					
+					if ($social['switch'] == '0')					
+					{
+						if ($core->auth->login_social($user_auth->provider, $user_auth->socialId)) 
+						{
+							header('Location: /profile');					
+						} 
+						else
+						{
+							$no_head = true;
+							$core->tpl->redicret('Вход не выполнен! Что-то пошло не так! Попробуйте снова!', $_SERVER['HTTP_REFERER'], 'Ошибка!');
+						}
+					}
+					else
+					{
+						if (empty($_POST['password']))						
+						{
+							set_title(array('Добро пожаловать в профиль'));
+							$core->tpl->loadFile('profile/login_social');
+							$core->tpl->setVar('NAME', $user_auth->name);
+							$core->tpl->end();
+								
+						} 
+						else
+						{
+							$no_head = true;
+							$access_auth = $db->getRow($db->query("SELECT nick FROM `" . USER_DB . "`.`" . USER_PREFIX . "_users` WHERE provider = '" . $db->safesql($user_auth->provider) . "' AND social_id = '" . $db->safesql($user_auth->socialId) . "'"));								
+							if ($core->auth->login($access_auth['nick'], $_POST['password'])) 
+							{
+								$core->tpl->redicret('Вы успешно вошли сейчас вас переместит обратно!', '/profile');
+								if($config['plugin']) $plugin->login($access_auth['nick'], $_POST['password']);
+							} 
+							else 
+							{
+								$core->tpl->redicret('Вход не выполнен! Проверьте, пароль и попробуйте снова!', '/profile', 'Ошибка!');
+							}
+						}					
+					}
+				}
+			}
+			else
+			{
+				$no_head = true;
+				$core->tpl->redicret('Вход не выполнен! Что-то пошло не так! Попробуйте снова!', '/profile', 'Ошибка!');
+			}
+		
 		break;
 		case 'register':			
 			set_title(array('Регистрация'));
@@ -391,6 +433,10 @@ if(!$core->auth->isUser)
 				$password = !empty($_POST['password']) ? $_POST['password'] : '';
 				$repassword = !empty($_POST['repassword']) ? $_POST['repassword'] : '';
 				$email = !empty($_POST['email']) ? filter($_POST['email'], 'mail') : '';
+				$avatar_auth = !empty($_POST['avatar']) ? $_POST['avatar'] : '';
+				$birthday = !empty($_POST['birthday']) ? intval($_POST['birthday']) : '';
+				$social_id = !empty($_POST['social_id']) ? intval($_POST['social_id']) : '';
+				$provider = !empty($_POST['provider']) ? filter($_POST['provider'], 'provider') : '';
 				$icq = !empty($_POST['icq']) ? filter($_POST['icq'], 'a') : '';
 				$skype = !empty($_POST['skype']) ? filter($_POST['skype'], 'a') : '';
 				$family = !empty($_POST['family']) ? filter($_POST['family'], 'a') : '';
@@ -421,13 +467,20 @@ if(!$core->auth->isUser)
 						{
 							$tail = gencode(rand(6, 11));
 							
-							$core->auth->register($user_login, $password, $tail, $email, $icq, $skype, $family, $name, $ochestvo, $age, $sex, $about, $signature, $activate, filter($_SERVER['REMOTE_ADDR']));
+							if (empty($social_id))
+							{
+								$core->auth->register($user_login, $password, $tail, $email, $icq, $skype, $family, $name, $ochestvo, $age, $sex, $about, $signature, $activate, filter($_SERVER['REMOTE_ADDR']));
+							}
+							else
+							{
+								$core->auth->register_social($user_login, $password, $tail, $email, $social_id, $provider, $birthday, $avatar_auth, $icq, $skype, $family, $name, $ochestvo, $age, $sex, $about, $signature, '1', filter($_SERVER['REMOTE_ADDR']));
+							}
 							
 							if($config['plugin']) $plugin->registration($user_login, $password, $tail, $email, $icq, $skype, $family, $name, $ochestvo, $age, $sex, $about, $signature, $activate, filter($_SERVER['REMOTE_ADDR']));
 							
 							$info = '<b>Благодарим Вас!</b><br />Теперь вы можете войти на сайт используя своё имя и пароль.';
 							
-							if($user['with_activate'] == 1)
+							if(($user['with_activate'] == 1)&&(empty($social_id)))
 							{
 								$formatemail = str_replace(array('@', '.'), array('[gav]', '[dot]'), $email);
 								$regMsg = 'Здравствуйте, <b>' . $user_login . '</b>!' . "<br /><br />";
@@ -465,7 +518,7 @@ if(!$core->auth->isUser)
 										$foo->Clean();
 									}
 								}
-							}
+							}				
 						}
 					} 
 					else 
@@ -876,14 +929,13 @@ if(!$core->auth->isUser)
 		
 		case 'logout':
 			$core->auth->logout();
-			
+			session_start();
+			unset($_SESSION['user_auth']);			
 			if($config['plugin']) 
 			{
 				$plugin->logout();
-			}
-			
-			$no_head = true;
-			
+			}			
+			$no_head = true;			
 			$core->tpl->redicret('Вы успешно вышли сейчас вас переместит обратно!', $_SERVER['HTTP_REFERER']);
 		break;
 		

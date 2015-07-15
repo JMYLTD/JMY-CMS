@@ -129,13 +129,13 @@
 						</td>
 						<td>
 							<div class="socialWidget">
-								<a href="#" target="_blank" title="Авторизация через Вконтакте" rel="nofollow">
+								<a href="{%AUTH_VK%}" title="Авторизация через Вконтакте" rel="nofollow">
 									<i class="fa spaceLeftDouble fa-vk spaceLeftRight"></i>
 								</a>
-								<a href="#" target="_blank" title="Авторизация через Facebook"rel="nofollow">
+								<a href="{%AUTH_FB%}" title="Авторизация через Facebook"rel="nofollow">
 									&#160;<i class="fa spaceLeftDouble fa-facebook spaceLeftRight"></i>&#160;
 								</a>
-								<a href="#" target="_blank" title="Авторизация через Google+"rel="nofollow">
+								<a href="{%AUTH_GP%}" title="Авторизация через Google+"rel="nofollow">
 									&#160;<i class="fa spaceLeftDouble fa-google-plus spaceLeftRight"></i>
 								</a>						
 							</div>
@@ -154,7 +154,7 @@
 				Привет, <b> {%USER_NAME%}</b>!<br/><br/>
 				<img src="{%USER_AVATAR%}" border="0" alt="" /><br/><br/>
 			</div>
-			<a href="{%URL_PROFILE%}">Профиль</a><br/>
+			<a href="{%URL_PROFIL%}">Профиль</a><br/>
 			<a href="{%URL_PM%}">Приватные сообщения</a> ({%NEW_PM%})<br/>
 			<a href="{%URL_LOGOUT%}">Выход</a>
 			[admin]<hr/><a href="{%URL_ADMIN%}">Панель управления</a>[/admin]

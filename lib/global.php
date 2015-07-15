@@ -1576,6 +1576,25 @@ global $config, $core;
 	}
 }
 
+function loadUserAuth()
+{
+global $config, $core;	
+	session_start();
+	if (isset($_SESSION['user_auth'])) 
+			{
+				$user_auth = $_SESSION['user_auth'];
+				return $user_auth;
+			}
+	else
+			{
+			
+				return false;
+				
+			}		
+}
+
+
+
 function loadLang($file)
 {
 global $config, $core;
@@ -1646,6 +1665,15 @@ global $core, $security;
 			
 		case 'no_html':
 			$text = (htmlspecialchars(strip_tags(urldecode(strval($text)))));
+			break;
+			
+		case 'provider':
+			
+			if (!($text == 'vk' || $text='yandex' || $text='mailru' || $text='google' || $text='facebook' || $text='odnoklassniki'))
+			{
+				$text = '';
+			}
+			
 			break;
 			
 		

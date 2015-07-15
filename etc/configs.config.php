@@ -33,6 +33,14 @@ $configs['security'] = array
 'file' => 'security'
 );
 
+$configs['social'] = array
+(
+'name' => 'Настройки авторизации',
+'description' => 'Настройки авторизации через социальные сети.',
+'param' => 'social',
+'file' => 'social'
+);
+
 $configs['files'] = array
 (
 'name' => 'Управление файлами',

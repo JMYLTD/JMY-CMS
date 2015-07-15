@@ -264,3 +264,33 @@ define('_BACKUP_RESTORE_DESC', 'Восстановить из резервной
 define('_BACKUP_RESTORE_NAME', 'Восстановление резервной копии');
 define('_BACKUP_RESTORE_LOG_1', 'Сохранение конфигураций в');
 define('_BACKUP_RESTORE_LOG_2', 'успешно');
+
+define('_SOCIAL_NAME', 'Настройка авторизации через социальные сети');
+define('_SOCIAL_SW', 'Основное');
+define('_SOCIAL_SWITCH', 'Авторизация через соц сети');
+define('_SOCIAL_SWITCH_DESC', 'Разрешить авторизацию через социальные сети?');
+define('_SOCIAL_PASS', 'Пароль при входе');
+define('_SOCIAL_PASS_DESC', 'Запрашивать пароль при входе? (Рекомендуемая опция, повышает безопасность!)');
+define('_SOCIAL_ADMIN', 'Авторизация администратора');
+define('_SOCIAL_ADMIN_DESC', 'Разрешить авторизацию через социальные сети администратору сайта?');
+define('_SOCIAL_IS', 'Разрешить авторизацию');
+define('_SOCIAL_IS_DESC', 'Разрешить авторизацию через эту социальную сеть?');
+define('_SOCIAL_ID', 'ID сайта');
+define('_SOCIAL_ID_DESC', 'ID сайта который вы можете получить по следующему адресу');
+define('_SOCIAL_SECRET', 'Секретный ключ');
+define('_SOCIAL_SECRET_DESC', 'Секретный ключ который вы можете получить по следующему адресу');
+define('_SOCIAL_PUBLIC', 'Публичный ключ');
+define('_SOCIAL_PUBLIC_DESC', 'Публичный ключ который вы можете получить по следующему адресу');
+
+define('_SOCIAL_CONFIG_VK', 'Настройки от Вконтакте');
+define('_SOCIAL_CONFIG_VK_URL', 'https://vk.com/editapp?act=create');
+define('_SOCIAL_CONFIG_OK', 'Настройки от Одноклассников');
+define('_SOCIAL_CONFIG_OK_URL', 'http://ok.ru/devaccess');
+define('_SOCIAL_CONFIG_FB', 'Настройки от Facebook');
+define('_SOCIAL_CONFIG_FB_URL', 'https://developers.facebook.com/apps');
+define('_SOCIAL_CONFIG_GG', 'Настройки от Google+');
+define('_SOCIAL_CONFIG_GG_URL', 'https://code.google.com/apis/console/');
+define('_SOCIAL_CONFIG_YA', 'Настройки от Яндекс');
+define('_SOCIAL_CONFIG_YA_URL', 'https://oauth.yandex.ru/client/new');
+define('_SOCIAL_CONFIG_MM', 'Настройки от Mail.ru');
+define('_SOCIAL_CONFIG_MM_URL', 'http://api.mail.ru/sites/my/add');

@@ -62,6 +62,13 @@ if (!defined('ACCESS')) {
 		$this->setVar('URL_SITEMAP', 'sitemap');
 		$this->setVar('URL_FEEDBACK', 'feedback');	
 		$this->setVar('SEARCH', 'search');
+		//auth
+		$this->setVar('AUTH_VK', $config['url'].'/auth.php?url=vk');
+		$this->setVar('AUTH_OK', $config['url'].'/auth.php?url=odnoklassniki');
+		$this->setVar('AUTH_FB', $config['url'].'/auth.php?url=facebook');
+		$this->setVar('AUTH_GP', $config['url'].'/auth.php?url=google');
+		$this->setVar('AUTH_YA', $config['url'].'/auth.php?url=yandex');
+		$this->setVar('AUTH_MM', $config['url'].'/auth.php?url=mailru');
 		//share
 		$this->setVar('SHARE_VK', 'https://vk.com/share.php?url='.$full_lnk.'&title='.$title_now);
 		$this->setVar('SHARE_FB', 'http://www.facebook.com/share.php?u='.$full_lnk);

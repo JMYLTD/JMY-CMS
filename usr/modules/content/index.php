@@ -71,12 +71,12 @@ global $db, $config, $core, $url, $headTag, $content_conf;
 		}
 		else
 		{
-			location();
+				$core->tpl->info('Страница не найдена!');
 		}
 	}
 	else
 	{
-		location();
+		include(ROOT . 'usr/tpl/404.tpl');
 	}
 }
  

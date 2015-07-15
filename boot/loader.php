@@ -7,7 +7,6 @@
 * @license     LICENSE.txt (see attached file)
 * @version     VERSION.txt (see attached file)
 * @author      Komarov Ivan
-* @outside     Youshi
 */
  
 if (!defined('ACCESS')) {
@@ -297,7 +296,7 @@ if(($config['off'] == 0 OR $core->auth->isAdmin == 1 OR $url[0] == ADMIN) && $co
 		} 
 		else 
 		{
-			location();
+				include(ROOT . 'usr/tpl/404.tpl');
 		}
 	}
 

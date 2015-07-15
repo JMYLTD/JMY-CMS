@@ -1,10 +1,20 @@
 <?php
+
+/**
+* @name        JMY CMS
+* @link        http://jmy.su/
+* @copyright   Copyright (C) 2012-2015 JMY LTD
+* @license     LICENSE.txt (see attached file)
+* @version     VERSION.txt (see attached file)
+* @author      Komarov Ivan
+*/
+
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 define('ACCESS', true);
-define('VERSION_ID', '1.6'); 
+define('VERSION_ID', '1.7'); 
 define('TIMER', microtime(1));
 define('ROOT', dirname(__FILE__) . '/');
 define('PLUGINS', dirname(__FILE__) . '/usr/plugins/');
@@ -19,105 +29,114 @@ define('DENIED_HTML', '/<.*?(script|meta|body|object|iframe|frame|applet|style|f
 
 define('INDEX', isset($_GET['url']) ? false : true);
 
-
-
 session_start();
+
 require ROOT . 'boot/sub_classes/socialauther/autoload.php';
 require ROOT . 'etc/social.config.php';	
-require ROOT . 'etc/db.config.php';	
 
 
-$db = mysql_connect($dbhost, $dbuser, $dbpass);
-mysql_select_db($dbname);
-mysql_query("SET NAMES utf8");
+$adapterConfigs = array(
+    'vk' => array(
+        'client_id'     => $social['vk_client_id'],
+        'client_secret' => $social['vk_client_secret'],
+        'redirect_uri'  => 'http://jmy.com/auth.php?provider=vk'
+    ),
+    'odnoklassniki' => array(
+        'client_id'     => '168635560',
+        'client_secret' => 'C342554C028C0A76605C7C0F',
+        'redirect_uri'  => 'http://localhost/auth?provider=odnoklassniki',
+        'public_key'    => 'CBADCBMKABABABABA'
+    ),
+    'mailru' => array(
+        'client_id'     => '770076',
+        'client_secret' => '5b8f8906167229feccd2a7320dd6e140',
+        'redirect_uri'  => 'http://jmy.com/auth.php?provider=mailru'
+    ),
+    'yandex' => array(
+        'client_id'     => '8a9cf6f8b9f24f5eba493cdac7a60097',
+        'client_secret' => 'c79c0b3f98ac45b99d9a67216b251d4b',
+        'redirect_uri'  => 'http://jmy.com/auth.php?provider=yandex'
+    ),
+    'google' => array(
+        'client_id'     => '333193735318.apps.googleusercontent.com',
+        'client_secret' => 'lZB3aW8gDjIEUG8I6WVcidt5',
+        'redirect_uri'  => 'http://jmy.com/auth.php?provider=google'
+    ),
+    'facebook' => array(
+        'client_id'     => '613418539539988',
+        'client_secret' => '2deab137cc1d254d167720095ac0b386',
+        'redirect_uri'  => 'http://jmy.com/auth.php?provider=facebook'
+    )
+);
 
+function redicret($message, $url = 'news', $text = 'Спасибо') 
+			{
+				$full_url = $url;
+				include(ROOT . 'usr/tpl/redirect.tpl');	
+			}	
+			
 $adapters = array();
 foreach ($adapterConfigs as $adapter => $settings) {
     $class = 'SocialAuther\Adapter\\' . ucfirst($adapter);
     $adapters[$adapter] = new $class($settings);
 }
-
-if (isset($_GET['provider']) && array_key_exists($_GET['provider'], $adapters) && !isset($_SESSION['user'])) {
+if (isset($_GET['provider']) && array_key_exists($_GET['provider'], $adapters) && !isset($_SESSION['user_auth'])) 
+{
     $auther = new SocialAuther\SocialAuther($adapters[$_GET['provider']]);
-
-    if ($auther->authenticate()) {
-        $result = mysql_query("SELECT *  FROM `".$user_db."_users` WHERE `provider` = '{$auther->getProvider()}' AND `social_id` = '{$auther->getSocialId()}' LIMIT 1");
-        $record = mysql_fetch_array($result);
-        if (!$record) {
-		
-			if ($auther->getSex()=='male')
-			{
-				$sex='0';
-			}
-			else 
-			{
-				$sex='1';
-			}
-			
+    if ($auther->authenticate()) 
+	{      
             $values = array(
                 $auther->getProvider(),
                 $auther->getSocialId(),
                 $auther->getName(),
                 $auther->getEmail(),
-				$sex,
-                date('Y-m-d', strtotime($auther->getBirthday()))
+                $auther->getSocialPage(),
+                $auther->getSex(),
+                date('Y-m-d', strtotime($auther->getBirthday())),
+                $auther->getAvatar()
             );
-			echo '<br>';
-			echo $auther->getProvider();
-			echo '<br>';
-			echo $auther->getSocialId();
-			echo '<br>';
-			echo  $auther->getName();
-			echo '<br>';
-			echo $auther->getEmail();
-			echo '<br>';
-			echo  $sex;
-			echo '<br>';
-			echo date('Y-m-d', strtotime($auther->getBirthday()));
-			echo '<br>';
-            $query = "INSERT INTO `".$user_db."_users` (`provider`, `social_id`, `name`, `email`, `sex`, `birthday`) VALUES ('";
-            $query .= implode("', '", $values) . "')";
-            $db = mysql_query($query);
-			echo mysql_errno($result) . ": " . mysql_error($result) . "\n";
-			echo 'gh';
 			
-        }
-		else 		
-		{
-			echo 'gh2';
-            $userFromDb = new stdClass();
-            $userFromDb->provider   = $record['provider'];
-            $userFromDb->socialId   = $record['social_id'];
-            $userFromDb->name       = $record['name'];
-            $userFromDb->email      = $record['email'];
-            $userFromDb->sex        = $record['sex'];
-            $userFromDb->birthday   = date('m.d.Y', strtotime($record['birthday']));          
-        }
-
-        $user = new stdClass();
-        $user->provider   = $auther->getProvider();
-        $user->socialId   = $auther->getSocialId();
-        $user->name       = $auther->getName();
-        $user->email      = $auther->getEmail();
-        $user->sex        = $auther->getSex();
-        $user->birthday   = $auther->getBirthday();
-
-        if (isset($userFromDb) && $userFromDb != $user) {
-            $idToUpdate = $record['id'];
-            $birthday = date('Y-m-d', strtotime($user->birthday));
-
-            mysql_query(
-                "UPDATE `users` SET " .
-                "`social_id` = '{$user->socialId}', `name` = '{$user->name}', `email` = '{$user->email}', " .               
-                "`birthday` = '{$birthday}'" .
-                "WHERE `id`='{$idToUpdate}'"
-            );
-        }
-
-        $_SESSION['user'] = $user;
+			$user = new stdClass();
+			$user->provider   = $auther->getProvider();
+			$user->socialId   = $auther->getSocialId();
+			$user->name       = $auther->getName();
+			$user->email      = $auther->getEmail();
+			$user->sex        = $auther->getSex();
+			$user->birthday   = $auther->getBirthday(); 
+			$user->avatar     = $auther->getAvatar();
+			
+			$_SESSION['user_auth'] = $user;
+			
+			redicret('Вы успешно вышли сейчас вас переместит обратно!', '/profile/social_auth');
+			
     }
-
-  
+	else
+	{
+			redicret('Вы успешно вышли сейчас вас переместит обратно!', '');
+	}  
+}
+else if (isset($_GET['url']) && array_key_exists($_GET['url'], $adapters) && !isset($_SESSION['user_auvth'])) 
+{	
+	$url=ucfirst($_GET['url']);	
+	foreach ($adapters as $title => $adapter) 
+	{
+		if (ucfirst($title)==$url)
+		{
+			header('Location: '.$adapter->getAuthUrl());			
+		}
+    }
+	
+}
+else
+{
+	if (isset($_SESSION['user_auth']))
+	{
+		header('Location: /profile/social_auth');
+	}
+	else
+	{
+		header('Location: /index.php');
+	}   
 }
 
 ?>
@@ -131,17 +150,6 @@ if (isset($_GET['provider']) && array_key_exists($_GET['provider'], $adapters) &
 </head>
 <body>
 
-<?php
-if (isset($_SESSION['user'])) {
-
-	   header('Location: /profile/social_auth');
-    echo '<p><a href="info.php">Скрытый контент</a></p>';
-} else if (!isset($_GET['code']) && !isset($_SESSION['user'])) {
-    foreach ($adapters as $title => $adapter) {
-        echo '<p><a href="' . $adapter->getAuthUrl() . '">Аутентификация через ' . ucfirst($title) . '</a></p>';
-    }
-}
-?>
 
 </body>
 </html>

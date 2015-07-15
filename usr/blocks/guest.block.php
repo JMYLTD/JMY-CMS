@@ -28,7 +28,7 @@ if($db->numRows($query) > 0)
 	while($row = $db->getRow($query))
 	{
 		echo '<li>
-		<img src="' .'media/avatar/'. (($guestbook['gender']==0) ? 'male.jpg' : 'female.jpg') . '">
+		<img src="' .'media/avatar/'. (($row['gender']==0) ? 'male.jpg' : 'female.jpg') . '">
 		<a href="/guestbook/"><strong>' . $row['name']  .' Пишет:</strong> ' . $row['comment']  .'</a>
         <div class="date-like-comment">
 		<span class="date"><time datetime="2014-02-17">' . formatDate($row['date']) . '</time></span>

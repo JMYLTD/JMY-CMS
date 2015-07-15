@@ -276,7 +276,159 @@ $configBox = array(
 			),
 			
 		)
-	),
+	),		
+	'social' => array(
+		'varName' => 'social',
+		'title' => _SOCIAL_NAME,
+		'groups' => array(
+			'main' => array(
+				'title' => _SOCIAL_SW,
+				'vars' => array(
+					'switch' => array(
+						'title' => _SOCIAL_SWITCH,
+						'description' => _SOCIAL_SWITCH_DESC,
+						'content' => conf_radio("switch", $social['switch']),
+					),
+					'pass' => array(
+						'title' => _SOCIAL_PASS,
+						'description' => _SOCIAL_PASS_DESC,
+						'content' => conf_radio("pass", $social['pass']),
+					),
+					'admin' => array(
+						'title' => _SOCIAL_ADMIN,
+						'description' => _SOCIAL_ADMIN_DESC,
+						'content' => conf_radio("admin", $social['admin']),
+					),
+										
+				)
+			),		
+			'social_vk' => array(
+				'title' => _SOCIAL_CONFIG_VK,
+				'vars' => array(
+					'vk_is' => array(
+						'title' => _SOCIAL_IS,
+						'description' => _SOCIAL_IS_DESC,
+						'content' => conf_radio("vk_is", $social['vk_is']),
+					),
+					'vk_client_id' => array(
+						'title' => _SOCIAL_ID,
+						'description' => _SOCIAL_ID_DESC .': '. _SOCIAL_CONFIG_VK_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+					'vk_client_secret' => array(
+						'title' => _SOCIAL_SECRET,
+						'description' => _SOCIAL_SECRET_DESC .': '. _SOCIAL_CONFIG_VK_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),										
+				)
+			),	
+			'social_ok' => array(
+				'title' => _SOCIAL_CONFIG_OK,
+				'vars' => array(
+					'ok_is' => array(
+						'title' => _SOCIAL_IS,
+						'description' => _SOCIAL_IS_DESC,
+						'content' => conf_radio("ok_is", $social['ok_is']),
+					),
+					'ok_client_id' => array(
+						'title' => _SOCIAL_ID,
+						'description' => _SOCIAL_ID_DESC .': '. _SOCIAL_CONFIG_OK_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+					'ok_client_secret' => array(
+						'title' => _SOCIAL_SECRET,
+						'description' => _SOCIAL_SECRET_DESC .': '. _SOCIAL_CONFIG_OK_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),		
+					'ok_public_key' => array(
+						'title' => _SOCIAL_PUBLIC,
+						'description' => _SOCIAL_PUBLIC_DESC .': '. _SOCIAL_CONFIG_OK_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),	
+				)
+			),	
+			'social_fb' => array(
+				'title' => _SOCIAL_CONFIG_FB,
+				'vars' => array(
+					'fb_is' => array(
+						'title' => _SOCIAL_IS,
+						'description' => _SOCIAL_IS_DESC,
+						'content' => conf_radio("fb_is", $social['fb_is']),
+					),
+					'fb_client_id' => array(
+						'title' => _SOCIAL_ID,
+						'description' => _SOCIAL_ID_DESC .': '. _SOCIAL_CONFIG_FB_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+					'fb_client_secret' => array(
+						'title' => _SOCIAL_SECRET,
+						'description' => _SOCIAL_SECRET_DESC .': '. _SOCIAL_CONFIG_FB_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+				)
+			),
+			'social_gg' => array(
+				'title' => _SOCIAL_CONFIG_GG,
+				'vars' => array(
+					'gg_is' => array(
+						'title' => _SOCIAL_IS,
+						'description' => _SOCIAL_IS_DESC,
+						'content' => conf_radio("gg_is", $social['gg_is']),
+					),
+					'gg_client_id' => array(
+						'title' => _SOCIAL_ID,
+						'description' => _SOCIAL_ID_DESC .': '. _SOCIAL_CONFIG_GG_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+					'gg_client_secret' => array(
+						'title' => _SOCIAL_SECRET,
+						'description' => _SOCIAL_SECRET_DESC .': '. _SOCIAL_CONFIG_GG_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+				)
+			),
+			'social_ya' => array(
+				'title' => _SOCIAL_CONFIG_YA,
+				'vars' => array(
+					'ya_is' => array(
+						'title' => _SOCIAL_IS,
+						'description' => _SOCIAL_IS_DESC,
+						'content' => conf_radio("ya_is", $social['ya_is']),
+					),
+					'ya_client_id' => array(
+						'title' => _SOCIAL_ID,
+						'description' => _SOCIAL_ID_DESC .': '. _SOCIAL_CONFIG_YA_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+					'ya_client_secret' => array(
+						'title' => _SOCIAL_SECRET,
+						'description' => _SOCIAL_SECRET_DESC .': '. _SOCIAL_CONFIG_YA_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+				)
+			),
+			'social_mm' => array(
+				'title' => _SOCIAL_CONFIG_MM,
+				'vars' => array(
+					'mm_is' => array(
+						'title' => _SOCIAL_IS,
+						'description' => _SOCIAL_IS_DESC,
+						'content' => conf_radio("mm_is", $social['mm_is']),
+					),
+					'mm_client_id' => array(
+						'title' => _SOCIAL_ID,
+						'description' => _SOCIAL_ID_DESC .': '. _SOCIAL_CONFIG_MM_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+					'mm_client_secret' => array(
+						'title' => _SOCIAL_SECRET,
+						'description' => _SOCIAL_SECRET_DESC .': '. _SOCIAL_CONFIG_MM_URL,
+						'content' => '<input type="text" size="20" name="{varName}" class="form-control" value="{var}" />',
+					),
+				)
+			),
+		)
+	),	
 	'files' => array(
 		'varName' => 'files_conf',
 		'title' => _FILES,

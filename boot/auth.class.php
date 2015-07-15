@@ -231,6 +231,28 @@ class auth
 		}
 	}
 	
+	function login_social($provider, $social_id)
+	{
+	global $db, $config;
+		$db->query("DELETE FROM " . DB_PREFIX . "_online WHERE ip = '" . getRealIpAddr() . "'");
+		setcookie(COOKIE_PAUSE, false, time(), '/');		
+		$provider = filter($provider, 'provider');
+		$social_id = intval($social_id);		
+		$access = $db->getRow($db->query("SELECT id, nick, password, tail FROM `" . USER_DB . "`.`" . USER_PREFIX . "_users` WHERE provider = '" . $db->safesql($provider) . "' AND social_id = '" . $db->safesql($social_id) . "' AND  active='1'"));	
+		if (!empty($access['id'])) 
+		{
+			delcache('userInfo_'.$this->user_id);
+			$newHash = md5(@$_SERVER['HTTP_USER_AGENT'].$config['uniqKey']);
+			setcookie(COOKIE_AUTH, engine_encode(serialize(array('id' => $access['id'], 'nick' => $access['nick'], 'password' => $access['password'], 'hash' => $newHash))), time() + COOKIE_TIME, '/');
+			return true;
+		} 
+		else 
+		{
+			setcookie(COOKIE_AUTH, '', time(), '/');
+			return false;
+		}
+	}
+	
 	function logout()
 	{
 	global $db;
@@ -275,5 +297,49 @@ class auth
 	{
 	global $db;
 		$db->query("INSERT INTO `" . USER_DB . "`.`" . USER_PREFIX . "_users` ( `id` , `nick` , `password` , `tail` , `email` , `icq` , `skype` , `surname` , `name` , `ochestvo` , `place` , `age` , `sex` , `birthday` , `hobby` , `signature` , `points` , `user_comments` , `user_news` , `group` , `last_visit` , `regdate` , `active` , `ip` ) VALUES (NULL, '" . filter($user_login, 'a') . "', '" . md5(mb_substr(md5(md5($password)), 0, -mb_strlen($tail)) . $tail) . "', '" . filter($tail, 'a') . "', '" . filter($email, 'mail') . "', '" . filter($icq, 'a') . "', '" . filter($skype, 'a') . "', '" . filter($family, 'a') . "', '" . filter($name, 'a') . "', '" . filter($ochestvo, 'a') . "', '', '" . intval($age) . "', '" . intval($sex) . "', '', '" . filter($about, 'a') . "', '" . filter($signature) . "', '0', '0', '0', '" . intval($group) . "', '" . time() . "', '" . time() . "', '" . $activate . "', '" . filter($ip, 'ip') . "');");
+	}
+	
+	function register_social($user_login, $password, $tail, $email, $social_id, $provider, $birthday, $avatar_auth, $icq, $skype, $family, $name, $ochestvo, $age, $sex, $about, $signature, $activate, $ip, $group = '2')
+	{
+	global $db;
+		$db->query("INSERT INTO `" . USER_DB . "`.`" . USER_PREFIX . "_users` ( `id` , `nick` , `password` , `tail` , `email` , `provider` , `social_id`, `icq` , `skype` , `surname` , `name` , `ochestvo` , `place` , `age` , `sex` , `birthday` , `hobby` , `signature` , `points` , `user_comments` , `user_news` , `group` , `last_visit` , `regdate` , `active` , `ip` ) VALUES (NULL, '" . filter($user_login, 'a') . "', '" . md5(mb_substr(md5(md5($password)), 0, -mb_strlen($tail)) . $tail) . "', '" . filter($tail, 'a') . "', '" . filter($email, 'mail') . "', '" . filter($provider, 'provider') . "', '" . intval($social_id) . "', '" . filter($icq, 'a') . "', '" . filter($skype, 'a') . "', '" . filter($family, 'a') . "', '" . filter($name, 'a') . "', '" . filter($ochestvo, 'a') . "', '', '" . intval($age) . "', '" . intval($sex) . "', '', '" . filter($about, 'a') . "', '" . filter($signature) . "', '0', '0', '0', '" . intval($group) . "', '" . time() . "', '" . time() . "', '" . $activate . "', '" . filter($ip, 'ip') . "');");
+		
+		$query_user = $db->query("SELECT * FROM `" . DB_PREFIX . "_users` WHERE social_id = '" . $social_id . "' LIMIT 1");
+		$new_user_info = $db->getRow($query_user);
+	/*
+		if (!empty($_GET['url']))
+		 {
+		 $file = basename($_GET['url']);
+		 if (file_get_contents($_GET['url']))
+		  {
+		  $content = file_get_contents($_GET['url']);
+		  $f = fopen( "$file", "w" );
+		  if (fwrite( $f, $content ) === FALSE)
+		   {
+		   echo "Не могу произвести запись в файл.";
+		   exit;
+		   }else echo "Ура! Файл <font color='red'>" .$file ."</font> записан.";
+		  fclose( $f );
+		  }else echo "Не могу считать файл.";
+		 }
+*/
+		
+		
+		if($foo = new Upload($avatar_auth))
+								{
+									$foo->file_new_name_body = 'av' .$new_user_info['id'];
+									$foo->image_resize = true;
+									$foo->image_x = '60';
+									$foo->image_ratio_y = true;
+									$foo->file_overwrite = true;
+									$foo->file_auto_rename = false;
+									$foo->Process(ROOT.'files/avatars/users/');
+									$foo->allowed = array("image/*");
+										
+									if ($foo->processed) 
+									{
+										$foo->Clean();
+									}
+								}
 	}
 }

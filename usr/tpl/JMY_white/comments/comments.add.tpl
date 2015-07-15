@@ -19,14 +19,15 @@
 [/user]
 <div id="reply_comment"></div>
 <table width="500" border="0" cellspacing="0" cellpadding="0"><tr><td>{%BB_AREA%}</td></tr></table>
-[guest]
+[captcha]
 <table width="100%" border="0" cellpadding="6" cellspacing="0">
 <tr><td width="150"><strong>Картинка с кодом </strong><span class="must" title="Обязательный пункт">*</span><br/>
-{%CAPTCHA%}<br/></td><td align="left"><b>Повторите</b><span class="must" title="Обязательный пункт">*</span><br/>
+{%CAPTCHA%}</td>[recaptcha:0]<td align="left"><b>Повторите</b><span class="must" title="Обязательный пункт">*</span><br/>
 <input name="securityCode" id="securityCode" type="text" maxlength="255" value="" /><br/>
-<sup>Повторите код каптчи</sup></td>
+<sup>Повторите код каптчи</sup></td>[/recaptcha]
 </tr>
-</table>[/guest]
+</table>
+[/captcha]
 <input type="hidden" name="nid" value="{%ID%}" id="nid" />
 <input type="hidden" value="0" id="reply_to" />
 <input type="hidden" name="mod" value="{%MOD%}" id="mod" />

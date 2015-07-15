@@ -93,7 +93,7 @@
       </div>
       <div id="secondary" class="widget-area" role="complementary">
         <aside id="search-2" class="widget widget_search">
-		[custom category="all" template="guestbook-customs" aviable="all" limit="10" module="guestbook" order="date_reply" short="DESC"]         
+		{%BLOCKS:FILE:search%}           
         </aside>        
         <aside id="calendar-2" class="widget widget_calendar">
           <div class="widget-title">
